@@ -2,5 +2,5 @@
 
 Članovi tima:
 
-* ...
+* Nemanja Vojnic
 * ...
