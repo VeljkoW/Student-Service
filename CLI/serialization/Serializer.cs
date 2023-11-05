@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CLI.serialization
+namespace CLI
 {
     public class Serializer<T> where T : ISerializable, new()
     {

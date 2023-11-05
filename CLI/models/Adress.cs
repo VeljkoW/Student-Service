@@ -30,10 +30,10 @@ namespace CLI
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("Street: "+Street+", ");
-            sb.Append("Street number:"+StreetNumber.ToString()+", ");
-            sb.Append("City: "+City+", ");
-            sb.Append("State: "+State+", ");
+            sb.Append("Street: "+Street+",");
+            sb.Append("Street number:"+StreetNumber.ToString()+",");
+            sb.Append("City: "+City+",");
+            sb.Append("State: "+State+",");
             return sb.ToString();
         }
         public Adress(string a,int b,string c,string d)

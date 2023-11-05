@@ -26,7 +26,7 @@ namespace CLI
             string[] retString = { Name, Surname, BirthDate, StudentAdress.ToString(), Phone.ToString(), Email, IndexNumber.ToString(), StudentYear.ToString(), GradeAvg.ToString(), FinishedExams.ToString(), ToDoExams.ToString() };
             return retString;
         }
-        void FromCSV(string[] values)
+        public void FromCSV(string[] values)
         {
             Name = values[0];
             Surname = values[1];
@@ -38,11 +38,11 @@ namespace CLI
         public override string ToString()
         {
             StringBuilder x = new StringBuilder();
-            x.Append("Name: " + Name + ", ");
-            x.Append("Surname: " + Surname + ", ");
-            x.Append("Surname: " + Surname + ", ");
-            x.Append("BirthDate: " + BirthDate + ", ");
-            x.Append("Adress: " + StudentAdress.ToString() + ", ");
+            x.Append("Name: " + Name + ",");
+            x.Append("Surname: " + Surname + ",");
+            x.Append("Surname: " + Surname + ",");
+            x.Append("BirthDate: " + BirthDate + ",");
+            x.Append("Adress: " + StudentAdress.ToString() + ",");
             return x.ToString();
         }
     }
