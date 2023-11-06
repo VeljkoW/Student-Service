@@ -13,3 +13,4 @@ namespace CLI
         void FromCSV(string[] values);
     }
 }
+//kopirano sa vezbi
