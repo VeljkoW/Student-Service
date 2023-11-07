@@ -47,11 +47,11 @@ namespace CLI
 
         public string[] ToCSV()
         {
-            string[] retString =
+            List<string> retString = new List<string>
                 {
-                Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()
+                Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString()
             };
-            return retString;
+            return retString.ToArray();
 
         }
         public void FromCSV(string[] vals)

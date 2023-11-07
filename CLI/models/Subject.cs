@@ -29,6 +29,18 @@ namespace CLI
             StudentsWhoPassed = studentsWhoPassed;
             StudentsWhoDidntPass = studentsWhoDidntPass;
         }
+        public Subject()
+        {
+            SubjectID = 1;
+            SubjectName = "Analiza";
+            Semester = Semester.ZIMSKI;
+            Year = 2023;
+            Professor = new Professor();
+            ESPBPoints = 8;
+            StudentsWhoPassed = new List<Student>();
+            StudentsWhoDidntPass= new List<Student>();
+        }
+
         public void FromCSV(string[] val)
         {
             SubjectID = int.Parse(val[0]);
