@@ -47,10 +47,7 @@ namespace CLI
 
         public string[] ToCSV()
         {
-            string[] retString =
-                {
-                Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()
-            };
+            string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()};
             return retString;
 
         }

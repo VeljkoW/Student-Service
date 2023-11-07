@@ -8,7 +8,7 @@ namespace CLI
 {
     public class BirthDate
     {
-            private static readonly string shape = "dd/MM/yyyy";
+            private static readonly string shape = "dd.MM.yyyy.";
 
             public static string ToString(DateOnly date)
             {

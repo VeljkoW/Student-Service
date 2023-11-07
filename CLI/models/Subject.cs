@@ -48,7 +48,6 @@ namespace CLI
             //StudentsWhoPassed = new List<Student>();
             //StudentsWhoDidntPass = new List<Student>();
         }
-
         public string[] ToCSV()
         {
             string[] retString =
@@ -57,7 +56,5 @@ namespace CLI
             };
             return retString;
         }
-        
-
     }
 }
