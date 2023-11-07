@@ -19,11 +19,15 @@ namespace CLI
         public Index? StudentIndex { get; set; }
         public int StudentYear { get; set; }
         public float GradeAvg { get; set; }
-        public int[]? FinishedExams { get; set; }
-        public List<string>? ToDoExams { get; set; }
+        //public int[]? FinishedExams { get; set; }
+        //public List<int>? ToDoExams { get; set; }
+        Student()
+        {
+
+        }
         public string[] ToCSV()
         {
-            string[] retString = { Id.ToString(),Name, Surname, DateOfBirth.ToString(), AdressId.ToString(), Phone.ToString(), Email, StudentIndex.ToString(), StudentYear.ToString(), GradeAvg.ToString(), FinishedExams.ToString(), ToDoExams.ToString() };
+            string[] retString = { Id.ToString(),Name, Surname, DateOfBirth.ToString(), AdressId.ToString(), Phone.ToString(), Email, StudentIndex.ToString(), StudentYear.ToString(), GradeAvg.ToString()};
             return retString;
         }
         public void FromCSV(string[] values)
@@ -31,7 +35,7 @@ namespace CLI
             Id = int.Parse(values[0]);
             Name = values[1];
             Surname = values[2];
-            DateOfBirth = BirthDate.Parse(values[3]);
+            DateOfBirth = DateOnly.Parse(values[3]);
             AdressId = int.Parse(values[4]);
             Phone = int.Parse(values[5]);
             Email = values[6];
@@ -48,6 +52,19 @@ namespace CLI
             x.Append("BirthDate: " + DateOfBirth + ",");
             x.Append("Adress: " + AdressId.ToString() + ",");
             return x.ToString();
+        }
+        Student(int id, string? name, string? surname, DateOnly dateOfBirth, int adressId, int? phone, string? email, Index? studentIndex, int studentYear, float gradeAvg)
+        {
+            Id = id;
+            Name = name;
+            Surname = surname;
+            DateOfBirth = dateOfBirth;
+            AdressId = adressId;
+            Phone = phone;
+            Email = email;
+            StudentIndex = studentIndex;
+            StudentYear = studentYear;
+            GradeAvg = gradeAvg;
         }
     }
 }

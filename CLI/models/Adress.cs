@@ -9,6 +9,7 @@ namespace CLI
 {
     public class Adress: ISerializable
     {
+        public int Id { get; set; }
         public string Street { get; set; }
         public int StreetNumber{ get; set; }
         public string City { get; set; }
@@ -20,7 +21,6 @@ namespace CLI
             };
             return sb;
         }
-
         public void FromCSV(string[] values) {
             Street= values[0];
             StreetNumber= int.Parse(values[1]);
@@ -29,19 +29,15 @@ namespace CLI
         }
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Street: "+Street+",");
-            sb.Append("Street number:"+StreetNumber.ToString()+",");
-            sb.Append("City: "+City+",");
-            sb.Append("State: "+State+",");
-            return sb.ToString();
+            string s = $"ID:{Id,3}| Street: {Street,21} | StreetNum: {StreetNumber,4} | City: {City,15} |State:{State,17}|";
+            return s;
         }
-        public Adress(string a,int b,string c,string d)
+        public Adress(string b,int c,string d,string e)
         {
-            Street = a;
-            StreetNumber= b;
-            City= c;
-            State = d;
+            Street = b;
+            StreetNumber= c;
+            City= d;
+            State = e;
         }
         public Adress()
         {
