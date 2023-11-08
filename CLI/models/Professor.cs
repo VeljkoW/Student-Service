@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,62 +9,72 @@ namespace CLI
 {
     public class Professor : ISerializable
     {
-        public string? Name { get; set; }
-        public string? Surname { get; set; }
+        public int Id {  get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public DateOnly DateOfBirth {  get; set; }
         public int ProfessorAdressId {  get; set; }
-        public string? PhoneNumber {  get; set; }
-        public string? EmailAdress {  get; set; }
-        public string? IDNumber {  get; set; }
-        public string? Title { get; set; }
-        public int? YearsOfService { get; set; }
+        public string PhoneNumber {  get; set; }
+        public string EmailAdress {  get; set; }
+        public string IDCardNumber {  get; set; }
+        public string Title { get; set; }
+        public int YearsOfService { get; set; }
         public List<int> Subjects { get; set; }
 
-        public Professor(string name,string surname,DateOnly dateofbirth,int adresa,string phone,string email,string id,string title,int years,List<int> subjects)
+        public Professor(int id,string name,string surname,DateOnly dateofbirth,int adresa,string phone,string email,string idcard,string title,int years)
         {
+            Id = id;
             Name = name;
             Surname=surname;
             DateOfBirth = dateofbirth;
             ProfessorAdressId = adresa;
             PhoneNumber = phone;
             EmailAdress = email;
-            IDNumber = id;
+            IDCardNumber = idcard;
             Title = title;
             YearsOfService = years;
-            Subjects = subjects;
+            Subjects = new List<int>();
 
         }
         public Professor() {
+            Id=0;
+            Name = "Petar";
+            Surname = "Peric";
+            DateOfBirth = new DateOnly();
+            ProfessorAdressId =0;
+            PhoneNumber = "43214523";
+            EmailAdress = "profesor@gmail.com";
+            IDCardNumber = "235423";
+            Title = "Profesor";
+            YearsOfService = 13;
+            Subjects = new List<int>();
         }
 
         public string[] ToCSV()
         {
-            string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()};
+            string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDCardNumber,Title,YearsOfService.ToString()};
             return retString;
 
 
         }
         public void FromCSV(string[] vals)
         {
-            Name = vals[0];
-            Surname = vals[1];
-            DateOfBirth = DateOnly.Parse(vals[2]);
-            ProfessorAdressId = int.Parse(vals[3]);
-            PhoneNumber = vals[4];
-            EmailAdress = vals[5];
-            IDNumber = vals[6];
-            Title = vals[7];
-            YearsOfService = int.Parse(vals[8]);
-            //Subjects = new List<Subject>()
+            Id = int.Parse(vals[0]);
+            Name = vals[1];
+            Surname = vals[2];
+            DateOfBirth = DateOnly.Parse(vals[3]);
+            ProfessorAdressId = int.Parse(vals[4]);
+            PhoneNumber = vals[5];
+            EmailAdress = vals[6];
+            IDCardNumber = vals[7];
+            Title = vals[8];
+            YearsOfService = int.Parse(vals[9]);
 
         }
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("Name:" + Name + ", ");
-            sb.Append("Surname: " +  Surname + ", ");
-            sb.Append("Subjects: ");
-            return sb.ToString(); 
+            string s = $"ID:{Id,3}| Name: {Name,20} | Surname: {Surname,25} | Date of bitrh: {DateOfBirth,15} | Adress ID:{ProfessorAdressId,3}| Phone: {PhoneNumber,13} | E-mail: {EmailAdress,64} | ID card number: {IDCardNumber,10} | Title: {Title,10} | Years of service: {YearsOfService,2}";
+            return s;
         }
 
 

@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CLI
 {
@@ -18,7 +20,7 @@ namespace CLI
         public List<int> StudentsWhoPassed { get; set; }
         public List<int> StudentsWhoDidntPass { get; set; }
 
-        public Subject(int subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints, List<int> studentsWhoPassed, List<int> studentsWhoDidntPass)
+        public Subject(int subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints)
         {
             SubjectID = subjectID;
             SubjectName = subjectName;
@@ -26,8 +28,8 @@ namespace CLI
             Year = year;
             ProfessorId = professor;
             ESPBPoints = eSPBPoints;
-            StudentsWhoPassed = studentsWhoPassed;
-            StudentsWhoDidntPass = studentsWhoDidntPass;
+            StudentsWhoPassed = new List<int>();
+            StudentsWhoDidntPass = new List<int>();
         }
         public Subject()
         {
@@ -35,10 +37,10 @@ namespace CLI
             SubjectName = "Analiza";
             Semester = Semester.ZIMSKI;
             Year = 2023;
-            Professor = new Professor();
+            ProfessorId =0;
             ESPBPoints = 8;
-            StudentsWhoPassed = new List<Student>();
-            StudentsWhoDidntPass= new List<Student>();
+            StudentsWhoPassed = new List<int>();
+            StudentsWhoDidntPass = new List<int>();
         }
 
         public void FromCSV(string[] val)
@@ -55,18 +57,21 @@ namespace CLI
                 Semester = Semester.LETNJI;
             }
             Year = int.Parse(val[3]);
-            //Professor = new Professor(val[4], val[5], val[6],  , val[8], val[9], val[10], val[11], int.Parse(val[12]), val[13]);
-            ESPBPoints= int.Parse(val[12]);
-            //StudentsWhoPassed = new List<Student>();
-            //StudentsWhoDidntPass = new List<Student>();
+            ProfessorId = int.Parse(val[4]);
+            ESPBPoints= int.Parse(val[5]);
         }
         public string[] ToCSV()
         {
             string[] retString =
             {
-                SubjectID.ToString(), SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString(),StudentsWhoPassed.ToString(),StudentsWhoDidntPass.ToString()
+                SubjectID.ToString(), SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString()
             };
             return retString;
+        }
+        public override string ToString()
+        {
+            string s = $"ID:{SubjectID,3}| Name: {SubjectName,20} | Semester: {Semester,6} | Year: {Year,4} | Professor ID:{ProfessorId,3}| ESPB Points: {ESPBPoints,1}";
+            return s;
         }
     }
 }

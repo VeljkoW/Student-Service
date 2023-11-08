@@ -20,7 +20,7 @@ namespace CLI
             StudentId = int.Parse(values[1]);
             SubjectId = int.Parse(values[2]);
             Grade = int.Parse(values[3]);
-            Date = BirthDate.Parse(values[4]);
+            Date = DateOnly.Parse(values[4]);
         }
         public string[] ToCSV()
         {

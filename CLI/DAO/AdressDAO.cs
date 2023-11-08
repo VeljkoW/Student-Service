@@ -12,7 +12,7 @@ namespace CLI
         private readonly Storage<Adress> storage;
         public AdressDAO()
         {
-            storage = new Storage<Adress>("Adresses.txt");
+            storage = new Storage<Adress>("Adresses.csv");
             Adresses = storage.Load();
         }
         private int GenerateId()
@@ -51,7 +51,7 @@ namespace CLI
         {
             return Adresses.Find(v => v.Id == id);
         }
-        public List<Adress> GetAllVehicles()
+        public List<Adress> GetAllAdresses()
         {
             return Adresses;
         }
