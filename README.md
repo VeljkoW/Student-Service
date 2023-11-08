@@ -1,4 +1,4 @@
-# Predmetni projekat iz predmeta OISISI 
+# Predmetni projekat iz predmeta OISISI (GRUPA 7 TEAM 4) (Pogresili smo)
 
 Članovi tima:
 
