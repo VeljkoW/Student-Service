@@ -56,7 +56,7 @@ namespace CLI
             System.Console.WriteLine("Enter Year: ");
             int year = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter Professor ID: ");
-            //ispisati profesore dodati
+            PrintProfessors(professorDao.GetAllProfessors());
             int professorid = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter ESPB Points: ");
             int espb = ConsoleViewUtils.SafeInputInt();
