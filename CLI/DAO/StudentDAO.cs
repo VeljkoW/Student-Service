@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CLI.models;
 
-namespace CLI.DAO
+namespace CLI
 {
     public class StudentDAO
     {
@@ -13,10 +13,10 @@ namespace CLI.DAO
         private readonly Storage<Student> storage;
         public StudentDAO()
         {
-            storage = new Storage<Student>("Students.txt");
+            storage = new Storage<Student>("Students.csv");
             students = storage.Load();
         }
-        private int GenerateId()
+        public int GenerateId()
         {
             if (students.Count == 0) return 0;
             return students[^1].Id + 1;
@@ -28,7 +28,7 @@ namespace CLI.DAO
             storage.Save(students);
             return stud;
         }
-        public Student? UpdateVehicle(Student stud)
+        public Student? UpdateStudent(Student stud)
         {
                 Student? old = GetStudentById(stud.Id);
                 if (old is null) return null;
@@ -38,17 +38,19 @@ namespace CLI.DAO
                 old.Email = stud.Email;
                 old.DateOfBirth = stud.DateOfBirth;
                 old.AdressId = stud.AdressId;
+                old.ToDoExams = stud.ToDoExams;
+                old.FinishedExams = stud.FinishedExams;
                 storage.Save(students);
                 return old;
         }
         public Student? RemoveStudent(int id)
         {
-            Student? vehicle = GetStudentById(id);
-            if (vehicle == null) return null;
+            Student? student = GetStudentById(id);
+            if (student == null) return null;
 
-            students.Remove(vehicle);
+            students.Remove(student);
             storage.Save(students);
-            return vehicle;
+            return student;
         }
         public List<Student> GetAllStudent()
         {

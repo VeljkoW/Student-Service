@@ -22,12 +22,12 @@ namespace CLI
             Professors= new List<int>();
         }
 
-        public Katedra(string id, string name, int head, List<int> professors)
+        public Katedra(string id, string name, int head)
         {
             Id = id;
             Name = name;
             Head = head;
-            Professors = professors;
+            Professors = new List<int>();
         }
 
         public string[] ToCSV()

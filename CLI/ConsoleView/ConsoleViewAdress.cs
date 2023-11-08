@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CLI
 {
-    public class ConsoleView
+    public class ConsoleViewAdress
     {
         private readonly AdressDAO adressesDao;
- /// ////////////////////////////////////////////////////////// Adress
-        public ConsoleView(AdressDAO adressDao)
+        
+ 
+        public ConsoleViewAdress(AdressDAO adressDao)
         {
             adressesDao = adressDao;
         }
-
         private void PrintAdresses(List<Adress> adresses)
         {
             System.Console.WriteLine("Adresses: ");
@@ -29,7 +29,7 @@ namespace CLI
 
         private Adress InputAdress()
         {
-            System.Console.WriteLine("Enter  street: ");
+            System.Console.WriteLine("Enter street: ");
             string street = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter street number: ");
             int streetnumber = ConsoleViewUtils.SafeInputInt();
@@ -51,7 +51,7 @@ namespace CLI
             Adress adress= InputAdress();
             adress.Id = id;
             Adress? updateAdress = adressesDao.UpdateAdress(adress);
-            if(updateAdress != null)
+            if(updateAdress == null)
             {
                 System.Console.WriteLine($"Adress not found");
                 return;
@@ -64,6 +64,8 @@ namespace CLI
             adressesDao.AddAdress(adress);
             System.Console.WriteLine("Adress added");
         }
+
+        
 
     }
 }

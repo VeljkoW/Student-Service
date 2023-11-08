@@ -12,7 +12,7 @@ namespace CLI
     public class Index : ISerializable
     {
         public int Id { get; set; }
-        public string? Usm { get; set; }
+        public string Usm { get; set; }
         public int Number { get; set; }
         public int Year { get; set; }
         public void FromCSV(string[] values)
