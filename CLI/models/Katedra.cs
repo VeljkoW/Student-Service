@@ -11,18 +11,18 @@ namespace CLI
     {
         public string Id {  get; set; }
         public string Name { get; set; }
-        public Professor Head { get; set; }
-        public List<Professor> Professors { get; set;}
+        public int Head { get; set; }
+        public List<int> Professors { get; set;}
 
         public Katedra() 
         {
             Id = "1";
             Name = "Katedra1";
-            Head = new Professor();
-            Professors= new List<Professor>();
+            Head = 1;
+            Professors= new List<int>();
         }
 
-        public Katedra(string id, string name, Professor head, List<Professor> professors)
+        public Katedra(string id, string name, int head, List<int> professors)
         {
             Id = id;
             Name = name;
@@ -37,12 +37,8 @@ namespace CLI
               Id,
               Name,
               Head.ToString()
-              };
 
-            foreach (Professor p in Professors)
-            {
-                retString.Add(p.ToString());
-            }
+              };
 
             return retString.ToArray();
         }

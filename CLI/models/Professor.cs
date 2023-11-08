@@ -11,20 +11,20 @@ namespace CLI
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public DateOnly DateOfBirth {  get; set; }
-        public Adress? ProfessorAdress {  get; set; }
+        public int ProfessorAdressId {  get; set; }
         public string? PhoneNumber {  get; set; }
         public string? EmailAdress {  get; set; }
         public string? IDNumber {  get; set; }
         public string? Title { get; set; }
         public int? YearsOfService { get; set; }
-        public List<Subject> Subjects { get; set; }
+        public List<int> Subjects { get; set; }
 
-        public Professor(string name,string surname,DateOnly dateofbirth,Adress adresa,string phone,string email,string id,string title,int years,List<Subject> subjects)
+        public Professor(string name,string surname,DateOnly dateofbirth,int adresa,string phone,string email,string id,string title,int years,List<int> subjects)
         {
             Name = name;
             Surname=surname;
             DateOfBirth = dateofbirth;
-            this.ProfessorAdress = adresa;
+            ProfessorAdressId = adresa;
             PhoneNumber = phone;
             EmailAdress = email;
             IDNumber = id;
@@ -34,37 +34,26 @@ namespace CLI
 
         }
         public Professor() {
-            Name = "Petar";
-            Surname = "Peric";
-            DateOfBirth = BirthDate.Parse("29.09.1945.");
-            PhoneNumber = "064213214";
-            EmailAdress = "petarperic@gmail.com";
-            IDNumber = "124321432";
-            Title = "Profesor";
-            YearsOfService = 20;
-            Subjects = new List<Subject>();
         }
 
         public string[] ToCSV()
         {
-            List<string> retString = new List<string>
-                {
-                Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString()
-            };
-            return retString.ToArray();
+            string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()};
+            return retString;
+
 
         }
         public void FromCSV(string[] vals)
         {
             Name = vals[0];
             Surname = vals[1];
-            DateOfBirth = BirthDate.Parse(vals[2]);
-            ProfessorAdress = new Adress(vals[3], int.Parse(vals[4]), vals[5], vals[6]);
-            PhoneNumber = vals[7];
-            EmailAdress = vals[8];
-            IDNumber = vals[9];
-            Title = vals[10];
-            YearsOfService = int.Parse(vals[11]);
+            DateOfBirth = DateOnly.Parse(vals[2]);
+            ProfessorAdressId = int.Parse(vals[3]);
+            PhoneNumber = vals[4];
+            EmailAdress = vals[5];
+            IDNumber = vals[6];
+            Title = vals[7];
+            YearsOfService = int.Parse(vals[8]);
             //Subjects = new List<Subject>()
 
         }
@@ -74,8 +63,6 @@ namespace CLI
             sb.Append("Name:" + Name + ", ");
             sb.Append("Surname: " +  Surname + ", ");
             sb.Append("Subjects: ");
-            sb.AppendJoin(", ",Subjects.Select(Subject => Subject.SubjectName));
-
             return sb.ToString(); 
         }
 

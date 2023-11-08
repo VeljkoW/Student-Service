@@ -13,18 +13,18 @@ namespace CLI
         public string SubjectName { get; set; }
         public Semester Semester { get; set; }
         public int Year { get; set; }
-        public Professor Professor { get; set; }
+        public int ProfessorId { get; set; }
         public int ESPBPoints { get; set; }
-        public List<Student> StudentsWhoPassed { get; set; }
-        public List<Student> StudentsWhoDidntPass { get; set; }
+        public List<int> StudentsWhoPassed { get; set; }
+        public List<int> StudentsWhoDidntPass { get; set; }
 
-        public Subject(int subjectID, string subjectName, Semester sem, int year, Professor professor, int eSPBPoints, List<Student> studentsWhoPassed, List<Student> studentsWhoDidntPass)
+        public Subject(int subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints, List<int> studentsWhoPassed, List<int> studentsWhoDidntPass)
         {
             SubjectID = subjectID;
             SubjectName = subjectName;
             Semester = sem;
             Year = year;
-            this.Professor = professor;
+            ProfessorId = professor;
             ESPBPoints = eSPBPoints;
             StudentsWhoPassed = studentsWhoPassed;
             StudentsWhoDidntPass = studentsWhoDidntPass;
@@ -60,16 +60,13 @@ namespace CLI
             //StudentsWhoPassed = new List<Student>();
             //StudentsWhoDidntPass = new List<Student>();
         }
-
         public string[] ToCSV()
         {
             string[] retString =
             {
-                SubjectID.ToString(), SubjectName, Semester.ToString(),Year.ToString(),Professor.ToString(),ESPBPoints.ToString(),StudentsWhoPassed.ToString(),StudentsWhoDidntPass.ToString()
+                SubjectID.ToString(), SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString(),StudentsWhoPassed.ToString(),StudentsWhoDidntPass.ToString()
             };
             return retString;
         }
-        
-
     }
 }

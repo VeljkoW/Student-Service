@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CLI;
-
 public class Storage<T> where T : ISerializable, new()
 {
     private readonly string _fileName = @"../../../Data/{0}";
