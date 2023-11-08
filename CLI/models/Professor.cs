@@ -41,6 +41,7 @@ namespace CLI
             string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDNumber,Title,YearsOfService.ToString(),Subjects.ToString()};
             return retString;
 
+
         }
         public void FromCSV(string[] vals)
         {
