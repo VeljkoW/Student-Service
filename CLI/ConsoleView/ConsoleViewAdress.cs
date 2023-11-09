@@ -64,8 +64,59 @@ namespace CLI
             adressesDao.AddAdress(adress);
             System.Console.WriteLine("Adress added");
         }
+        private void RemoveAdress()
+        {
+            int id = InputId();
+            Adress? removedAdress = adressesDao.RemoveAdress(id);
+            if (removedAdress is null)
+            {
+                System.Console.WriteLine("Adress not found");
+                return;
+            }
 
-        
+            System.Console.WriteLine("Adress removed");
+        }
+        private void ShowAllAdresses()
+        {
+            PrintAdresses(adressesDao.GetAllAdresses());
+        }
+        private void ShowMenuAdress()
+        {
+            System.Console.WriteLine("\nChoose an option: ");
+            System.Console.WriteLine("1: Show All adresses");
+            System.Console.WriteLine("2: Add adress");
+            System.Console.WriteLine("3: Update adress");
+            System.Console.WriteLine("4: Remove adress");
+            System.Console.WriteLine("0: Close");
+        }
+        public void RunMenuAdress()
+        {
+            while (true)
+            {
+                ShowMenuAdress();
+                string userInput = System.Console.ReadLine() ?? "0";
+                if (userInput == "0") break;
+                HandleMenuInput(userInput);
+            }
+        }
+        private void HandleMenuInput(string input)
+        {
+            switch (input)
+            {
+                case "1":
+                    ShowAllAdresses();
+                    break;
+                case "2":
+                    AddAdress();
+                    break;
+                case "3":
+                    UpdateAdress();
+                    break;
+                case "4":
+                    RemoveAdress();
+                    break;
+            }
+        }
 
     }
 }

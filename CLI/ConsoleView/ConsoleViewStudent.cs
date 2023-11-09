@@ -59,7 +59,7 @@ namespace CLI
             Index indeks = new Index(index);
             System.Console.WriteLine("Enter student year: ");
             int studentyear = ConsoleViewUtils.SafeInputInt();
-            Student s = new Student(studentDao.GenerateId(), name, surname, birthdate, adressid, phone, email, indeks , studentyear, (float) 0);
+            Student s = new Student(studentDao.GenerateID(), name, surname, birthdate, adressid, phone, email, indeks , studentyear, (float) 0);
 
             return s;
         }
@@ -87,7 +87,59 @@ namespace CLI
             studentDao.AddStudent(student);
             System.Console.WriteLine("Student added");
         }
+        private void RemoveStudent()
+        {
+            int id = InputId();
+            Student? removedStudent = studentDao.RemoveStudent(id);
+            if (removedStudent is null)
+            {
+                System.Console.WriteLine("Student not found");
+                return;
+            }
 
+            System.Console.WriteLine("Student removed");
+        }
+        private void ShowAllStudents()
+        {
+            PrintStudents(studentDao.GetAllStudents());
+        }
+        private void ShowMenuStudent()
+        {
+            System.Console.WriteLine("\nChoose an option: ");
+            System.Console.WriteLine("1: Show All students");
+            System.Console.WriteLine("2: Add student");
+            System.Console.WriteLine("3: Update student");
+            System.Console.WriteLine("4: Remove student");
+            System.Console.WriteLine("0: Close");
+        }
+        public void RunMenuStudent()
+        {
+            while (true)
+            {
+                ShowMenuStudent();
+                string userInput = System.Console.ReadLine() ?? "0";
+                if (userInput == "0") break;
+                HandleMenuInput(userInput);
+            }
+        }
+        private void HandleMenuInput(string input)
+        {
+            switch (input)
+            {
+                case "1":
+                    ShowAllStudents();
+                    break;
+                case "2":
+                    AddStudent();
+                    break;
+                case "3":
+                    UpdateStudent();
+                    break;
+                case "4":
+                    RemoveStudent();
+                    break;
+            }
+        }
 
     }
 }
