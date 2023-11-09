@@ -84,6 +84,58 @@ namespace CLI
             professorDao.AddProfessor(professor);
             System.Console.WriteLine("Professor added");
         }
+        private void RemoveProfessor()
+        {
+            int id = InputId();
+            Professor? removedProfessor = professorDao.RemoveProfessor(id);
+            if (removedProfessor is null)
+            {
+                System.Console.WriteLine("Professor not found");
+                return;
+            }
 
+            System.Console.WriteLine("Professor removed");
+        }
+        private void ShowAllProfessors()
+        {
+            PrintProfessors(professorDao.GetAllProfessors());
+        }
+        private void ShowMenuProfessor()
+        {
+            System.Console.WriteLine("\nChoose an option: ");
+            System.Console.WriteLine("1: Show All professors");
+            System.Console.WriteLine("2: Add professor");
+            System.Console.WriteLine("3: Update professor");
+            System.Console.WriteLine("4: Remove professor");
+            System.Console.WriteLine("0: Close");
+        }
+        public void RunMenuProfessor()
+        {
+            while (true)
+            {
+                ShowMenuProfessor();
+                string userInput = System.Console.ReadLine() ?? "0";
+                if (userInput == "0") break;
+                HandleMenuInput(userInput);
+            }
+        }
+        private void HandleMenuInput(string input)
+        {
+            switch (input)
+            {
+                case "1":
+                    ShowAllProfessors();
+                    break;
+                case "2":
+                    AddProfessor();
+                    break;
+                case "3":
+                    UpdateProfessor();
+                    break;
+                case "4":
+                    RemoveProfessor();
+                    break;
+            }
+        }
     }
 }

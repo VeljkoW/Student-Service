@@ -87,6 +87,58 @@ namespace CLI
             subjectDao.AddSubject(subject);
             System.Console.WriteLine("Subject added");
         }
+        private void RemoveSubject()
+        {
+            int id = InputId();
+            Subject? removedSubject = subjectDao.RemoveSubject(id);
+            if (removedSubject is null)
+            {
+                System.Console.WriteLine("Subject not found");
+                return;
+            }
 
+            System.Console.WriteLine("Subject removed");
+        }
+        private void ShowAllSubjects()
+        {
+            PrintSubjects(subjectDao.GetAllSubjects());
+        }
+        private void ShowMenuSubject()
+        {
+            System.Console.WriteLine("\nChoose an option: ");
+            System.Console.WriteLine("1: Show All subjects");
+            System.Console.WriteLine("2: Add subjects");
+            System.Console.WriteLine("3: Update subjects");
+            System.Console.WriteLine("4: Remove subjects");
+            System.Console.WriteLine("0: Close");
+        }
+        public void RunMenuSubject()
+        {
+            while (true)
+            {
+                ShowMenuSubject();
+                string userInput = System.Console.ReadLine() ?? "0";
+                if (userInput == "0") break;
+                HandleMenuInput(userInput);
+            }
+        }
+        private void HandleMenuInput(string input)
+        {
+            switch (input)
+            {
+                case "1":
+                    ShowAllSubjects();
+                    break;
+                case "2":
+                    AddSubject();
+                    break;
+                case "3":
+                    UpdateSubject();
+                    break;
+                case "4":
+                    RemoveSubject();
+                    break;
+            }
+        }
     }
 }

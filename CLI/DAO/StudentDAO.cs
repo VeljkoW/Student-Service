@@ -16,14 +16,14 @@ namespace CLI
             storage = new Storage<Student>("Students.csv");
             students = storage.Load();
         }
-        public int GenerateId()
+        public int GenerateID()
         {
             if (students.Count == 0) return 0;
             return students[^1].Id + 1;
         }
         public Student AddStudent(Student stud)
         {
-            stud.Id = GenerateId();
+            stud.Id = GenerateID();
             students.Add(stud);
             storage.Save(students);
             return stud;
@@ -52,7 +52,7 @@ namespace CLI
             storage.Save(students);
             return student;
         }
-        public List<Student> GetAllStudent()
+        public List<Student> GetAllStudents()
         {
             return students;
         }
