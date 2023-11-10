@@ -29,7 +29,7 @@ namespace CLI
         private void PrintSubjects(List<Subject> subjects)
         {
             System.Console.WriteLine("Subjects: ");
-            System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Semester: {"",6} | Year: {"",4} | Professor ID:{"",3}| ESPB Points: {"",1}");
+            //System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Semester: {"",6} | Year: {"",4} | Professor ID:{"",3}| ESPB Points: {"",1}");
             foreach (Subject s in subjects)
             {
                 System.Console.WriteLine(s);

@@ -46,17 +46,18 @@ namespace CLI
             string pattern = @"^(?<Usm>[A-Z]{2})(?<number>\d{1,3})-(?<year>\d{4})$";
 
             Match match = Regex.Match(input, pattern);
-            if (!match.Success)
-            {
-                Console.WriteLine("Invalid input format. Format should be like 'RA206-2021'.");
-               
-            }
-            else
+            if(match.Success)
             {
                 Usm = match.Groups["Usm"].Value;
                 Number = int.Parse(match.Groups["number"].Value);
                 Year = int.Parse(match.Groups["year"].Value);
-                
+            }
+            else
+            {
+                Usm = null;
+                Number = 0;
+                Year= 0;
+                Console.WriteLine("Invalid index");
             }
         }
     }

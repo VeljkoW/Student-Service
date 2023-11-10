@@ -6,7 +6,6 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace CLI
 {
     public class Student : ISerializable
@@ -59,7 +58,7 @@ namespace CLI
         }
         public override string ToString()
         {
-            string s = $"ID:{Id,3}| Name: {Name,20} | Surname: {Surname,25} | Date of bitrh: {DateOfBirth,15} |Adress ID:{AdressId,3}| Phone: {Phone,13} | E-mail: {Email,64} | Index: {StudentIndex,10} | Student Year: {StudentYear,2} | Grade Average: {GradeAvg,4}";
+            string s = $"ID:{Id,3}| Name: {Name} | Surname: {Surname} | Date of bitrh: {DateOfBirth} |Adress ID:{AdressId,3}| Phone: {Phone} | E-mail: {Email} | Index: {StudentIndex} | Student Year: {StudentYear} | Grade Average: {GradeAvg}";
             return s;
         }
         public Student(int id,string name, string surname, DateOnly dateOfBirth, int adressId, string phone, string email, Index studentIndex, int studentYear, float gradeAvg)

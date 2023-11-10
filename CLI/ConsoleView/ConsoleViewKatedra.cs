@@ -28,7 +28,7 @@ namespace CLI
         private void PrintKatedras(List<Katedra> katedras)
         {
             System.Console.WriteLine("Departments: ");
-            System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Head professor ID: {"",3}");
+            //System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Head professor ID: {"",3}");
             foreach (Katedra k in katedras)
             {
                 System.Console.WriteLine(k);
