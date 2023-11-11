@@ -16,16 +16,18 @@ namespace CLI
         public string State { get; set; }
         public string[] ToCSV() {
             string[] sb = {
+                Id.ToString(),
                 Street,
                 StreetNumber.ToString(),City, State
             };
             return sb;
         }
         public void FromCSV(string[] values) {
-            Street= values[0];
-            StreetNumber= int.Parse(values[1]);
-            City= values[2];
-            State= values[3];
+            Id = int.Parse(values[0]);
+            Street= values[1];
+            StreetNumber= int.Parse(values[2]);
+            City= values[3];
+            State= values[4];
         }
         public override string ToString()
         {
