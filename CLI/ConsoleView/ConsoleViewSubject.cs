@@ -29,7 +29,7 @@ namespace CLI
         private void PrintSubjects(List<Subject> subjects)
         {
             System.Console.WriteLine("Subjects: ");
-            System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Semester: {"",6} | Year: {"",4} | Professor ID:{"",3}| ESPB Points: {"",1}");
+            //System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Semester: {"",6} | Year: {"",4} | Professor ID:{"",3}| ESPB Points: {"",1}");
             foreach (Subject s in subjects)
             {
                 System.Console.WriteLine(s);
@@ -41,9 +41,10 @@ namespace CLI
             System.Console.WriteLine("Enter subject Name: ");
             string name = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter semester (0 - LETNJI, 1 - ZIMSKI): ");
+            int x;
             Semester semester = new Semester();
             do {
-                int x = ConsoleViewUtils.SafeInputInt();
+                x = ConsoleViewUtils.SafeInputInt();
                 if (x == 0)
                 {
                     semester = Semester.LETNJI;
@@ -52,7 +53,7 @@ namespace CLI
                 {
                     semester = Semester.ZIMSKI;
                 }
-            } while(ConsoleViewUtils.SafeInputInt() != 0 || ConsoleViewUtils.SafeInputInt() != 1);
+            } while(x != 0 && x != 1);
             System.Console.WriteLine("Enter Year: ");
             int year = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter Professor ID: ");

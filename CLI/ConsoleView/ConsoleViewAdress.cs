@@ -19,8 +19,7 @@ namespace CLI
         private void PrintAdresses(List<Adress> adresses)
         {
             System.Console.WriteLine("Adresses: ");
-            System.Console.WriteLine($"ID:{"",3}| Street: {"",21} | StreetNum: {"",4} | City: {"",15} |State:{"",17}|");
-            string s = $"ID:{"",3}| Street: {"",21} | StreetNum: {"",4} | City: {"",15} |State:{"",17}|";
+            //System.Console.WriteLine($"ID:{"",3}| Street: {"",21} | StreetNum: {"",4} | City: {"",15} |State:{"",17}|");
             foreach (Adress v in adresses)
             {
                 System.Console.WriteLine(v);

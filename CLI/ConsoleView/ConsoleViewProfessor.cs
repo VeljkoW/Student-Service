@@ -29,7 +29,7 @@ namespace CLI
         private void PrintProfessors(List<Professor> professors)
         {
             System.Console.WriteLine("Professors: ");
-            System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Surname: {"",25} | Date of bitrh: {"",15} | Adress ID:{"",3}| Phone: {"",13} | E-mail: {"",64} | ID card number: {"",10} | Title: {"",10} | Years of service: {"",2}");
+            //System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Surname: {"",25} | Date of bitrh: {"",15} | Adress ID:{"",3}| Phone: {"",13} | E-mail: {"",64} | ID card number: {"",10} | Title: {"",10} | Years of service: {"",2}");
             foreach (Professor p in professors)
             {
                 System.Console.WriteLine(p);

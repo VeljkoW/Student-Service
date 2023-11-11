@@ -38,7 +38,7 @@ namespace CLI
         private void PrintExamGrades(List<ExamGrade> examgrades)
         {
             System.Console.WriteLine("Exam grades: ");
-            System.Console.WriteLine($"ID:{"",3}| Student ID: {"",3} | Subject ID: {"",3} | Grade: {"",2} | Date:{"",11}");
+            //System.Console.WriteLine($"ID:{"",3}| Student ID: {"",3} | Subject ID: {"",3} | Grade: {"",2} | Date:{"",11}");
             foreach (ExamGrade eg in examgrades)
             {
                 System.Console.WriteLine(eg);

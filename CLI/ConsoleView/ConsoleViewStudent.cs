@@ -32,7 +32,7 @@ namespace CLI
         private void PrintStudents(List<Student> students)
         {
             System.Console.WriteLine("Students: ");
-            System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Surname: {"",25} | Date of bitrh: {"",15} |Adress ID:{"",3}| Phone: {"",13} | E-mail: {"",64} | Index: {"",10} | Student Year: {"",2} | Grade Average: {"",4}");
+            //System.Console.WriteLine($"ID:{"",3}| Name: {"",20} | Surname: {"",25} | Date of bitrh: {"",15} |Adress ID:{"",3}| Phone: {"",13} | E-mail: {"",64} | Index: {"",10} | Student Year: {"",2} | Grade Average: {"",4}");
             foreach (Student v in students)
             {
                 System.Console.WriteLine(v);
@@ -54,9 +54,13 @@ namespace CLI
             string phone = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter E-mail: ");
             string email = System.Console.ReadLine() ?? string.Empty;
-            System.Console.WriteLine("Enter Index: ");
-            string index = System.Console.ReadLine() ?? string.Empty;
-            Index indeks = new Index(index);
+            Index indeks;
+            do {
+                System.Console.WriteLine("Enter Index: ");
+                string index = System.Console.ReadLine() ?? string.Empty;
+                indeks = new Index(index);
+            }
+            while (indeks.Usm==null);
             System.Console.WriteLine("Enter student year: ");
             int studentyear = ConsoleViewUtils.SafeInputInt();
             Student s = new Student(studentDao.GenerateID(), name, surname, birthdate, adressid, phone, email, indeks , studentyear, (float) 0);

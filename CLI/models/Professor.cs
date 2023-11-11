@@ -52,7 +52,7 @@ namespace CLI
 
         public string[] ToCSV()
         {
-            string[] retString = {Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDCardNumber,Title,YearsOfService.ToString()};
+            string[] retString = {Id.ToString(),Name,Surname,DateOfBirth.ToString(),ProfessorAdressId.ToString(),PhoneNumber,EmailAdress,IDCardNumber,Title,YearsOfService.ToString()};
             return retString;
 
 
@@ -73,7 +73,7 @@ namespace CLI
         }
         public override string ToString()
         {
-            string s = $"ID:{Id,3}| Name: {Name,20} | Surname: {Surname,25} | Date of bitrh: {DateOfBirth,15} | Adress ID:{ProfessorAdressId,3}| Phone: {PhoneNumber,13} | E-mail: {EmailAdress,64} | ID card number: {IDCardNumber,10} | Title: {Title,10} | Years of service: {YearsOfService,2}";
+            string s = $"ID:{Id,3}| Name: {Name,15} | Surname: {Surname,20} | Date of bitrh: {DateOfBirth,15} | Adress ID:{ProfessorAdressId,3}| Phone: {PhoneNumber,13} | E-mail: {EmailAdress,30} | ID card number: {IDCardNumber,10} | Title: {Title,10} | Years of service: {YearsOfService,2}";
             return s;
         }
 
