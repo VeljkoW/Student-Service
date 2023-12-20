@@ -8,16 +8,14 @@ namespace CLI
 {
     public class ConsoleView
     {
-        private readonly ConsoleViewAdress consoleviewadress;
         private readonly ConsoleViewExamGrade consoleviewexamgrade;
         private readonly ConsoleViewKatedra consoleviewkatedra;
         private readonly ConsoleViewProfessor consoleviewprofessor;
         private readonly ConsoleViewStudent consoleviewstudent;
         private readonly ConsoleViewSubject consoleviewsubject;
 
-        public ConsoleView(ConsoleViewAdress consoleviewadress, ConsoleViewExamGrade consoleviewexamgrade, ConsoleViewKatedra consoleviewkatedra, ConsoleViewProfessor consoleviewprofessor, ConsoleViewStudent consoleviewstudent, ConsoleViewSubject consoleviewsubject)
+        public ConsoleView( ConsoleViewExamGrade consoleviewexamgrade, ConsoleViewKatedra consoleviewkatedra, ConsoleViewProfessor consoleviewprofessor, ConsoleViewStudent consoleviewstudent, ConsoleViewSubject consoleviewsubject)
         {
-            this.consoleviewadress = consoleviewadress;
             this.consoleviewexamgrade = consoleviewexamgrade;
             this.consoleviewkatedra = consoleviewkatedra;
             this.consoleviewprofessor = consoleviewprofessor;
@@ -39,12 +37,11 @@ namespace CLI
         private void ShowMenu()
         {
             System.Console.WriteLine("\nChoose an option: ");
-            System.Console.WriteLine("1: Adress options");
-            System.Console.WriteLine("2: Student options");
-            System.Console.WriteLine("3: Professor options");
-            System.Console.WriteLine("4: Subject options");
-            System.Console.WriteLine("5: Exam grade options");
-            System.Console.WriteLine("6: Department options");
+            System.Console.WriteLine("1: Student options");
+            System.Console.WriteLine("2: Professor options");
+            System.Console.WriteLine("3: Subject options");
+            System.Console.WriteLine("4: Exam grade options");
+            System.Console.WriteLine("5: Department options");
             System.Console.WriteLine("0: Close");
         }
         private void HandleMenuInput(string input)
@@ -52,21 +49,18 @@ namespace CLI
             switch (input)
             {
                 case "1":
-                    consoleviewadress.RunMenuAdress();
-                    break;
-                case "2":
                     consoleviewstudent.RunMenuStudent();
                     break;
-                case "3":
+                case "2":
                     consoleviewprofessor.RunMenuProfessor();
                     break;
-                case "4":
+                case "3":
                     consoleviewsubject.RunMenuSubject();
                     break;
-                case "5":
+                case "4":
                     consoleviewexamgrade.RunMenuExamGrade();
                     break;
-                case "6":
+                case "5":
                     consoleviewkatedra.RunMenuKatedra();
                     break;
             }

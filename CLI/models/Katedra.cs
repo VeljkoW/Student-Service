@@ -12,23 +12,23 @@ namespace CLI
     {
         public int Id {  get; set; }
         public string Name { get; set; }
-        public int Head { get; set; }
-        public List<int> Professors { get; set;}
+        public Professor Head { get; set; }
+        public List<Professor> Professors { get; set;}
 
         public Katedra() 
         {
             Id = 1;
             Name = "Katedra1";
-            Head = 1;
-            Professors= new List<int>();
+            Head = new Professor();
+            Professors= new List<Professor>();
         }
 
-        public Katedra(int id, string name, int head)
+        public Katedra(int id, string name, Professor head)
         {
             Id = id;
             Name = name;
             Head = head;
-            Professors = new List<int>();
+            Professors = new List<Professor>();
         }
 
         public string[] ToCSV()
@@ -48,12 +48,11 @@ namespace CLI
         {
             Id = int.Parse(values[0]);
             Name = values[1];
-            Head = int.Parse(values[2]);
+            Head = new Professor();
         }
-
         public override string ToString()
         {
-            string s = $"ID:{Id,3}| Name: {Name,20} | Head professor ID: {Head,3}";
+            string s = $"ID:{Id,3}| Name: {Name,20} | Head professor ID: {Head}";
             return s;
         }
 

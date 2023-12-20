@@ -36,7 +36,7 @@ namespace CLI
             oldProfessor.Name = professor.Name;
             oldProfessor.Surname = professor.Surname;
             oldProfessor.DateOfBirth = professor.DateOfBirth;
-            oldProfessor.ProfessorAdressId = professor.ProfessorAdressId;
+            oldProfessor.ProfessorAdress = professor.ProfessorAdress;
             oldProfessor.PhoneNumber= professor.PhoneNumber;
             oldProfessor.EmailAdress = professor.EmailAdress;
             oldProfessor.IDCardNumber = professor.IDCardNumber;
@@ -57,7 +57,7 @@ namespace CLI
             return professor;
         }
 
-        private Professor? GetProfessorById(int id)
+        public Professor? GetProfessorById(int id)
         {
             return professors.Find(p => p.Id == id);
         }

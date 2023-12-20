@@ -11,12 +11,10 @@ namespace CLI
     public class ConsoleViewProfessor
     {
         private readonly ProfessorDAO professorDao;
-        private readonly AdressDAO adressDao;
 
-        public ConsoleViewProfessor(ProfessorDAO professorDao, AdressDAO adressDao)
+        public ConsoleViewProfessor(ProfessorDAO professorDao)
         {
             this.professorDao = professorDao;
-            this.adressDao = adressDao;
         }
 
         private void PrintAdresses(List<Adress> adresses)
@@ -42,10 +40,9 @@ namespace CLI
             System.Console.WriteLine("Enter surname: ");
             string surname = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter birth date: ");
-            DateOnly birthdate = ConsoleViewUtils.SafeInputDate();
-            System.Console.WriteLine("Choose Adress ID: ");
-            PrintAdresses(adressDao.GetAllAdresses());
-            int adressid = InputId();
+            DateOnly birthdate = DateOnly.Parse(System.Console.ReadLine());
+            System.Console.WriteLine("Enter adress: 'Street , City , State'");
+            Adress adress = new Adress(System.Console.ReadLine() ?? string.Empty);
             System.Console.WriteLine("Enter phone number: ");
             string phone = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter E-mail: ");
@@ -57,7 +54,7 @@ namespace CLI
             System.Console.WriteLine("Enter years of service: ");
             int yearsofservice = ConsoleViewUtils.SafeInputInt();
 
-            Professor p = new Professor(professorDao.GenerateID(),name,surname,birthdate,adressid,phone,email,idcard,title,yearsofservice);
+            Professor p = new Professor(professorDao.GenerateID(),name,surname,birthdate, adress, phone,email,idcard,title,yearsofservice);
             return p;
         }
         private int InputId()

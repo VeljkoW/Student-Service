@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.models.Enums;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,33 +15,34 @@ namespace CLI
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateOnly DateOfBirth { get; set; }
-        public int AdressId { get; set; }
+        public Adress Adress { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public Index StudentIndex { get; set; }
         public int StudentYear { get; set; }
+        public Status Status { get; set; }
         public float GradeAvg { get; set; }
-        public List<int> FinishedExams { get; set; }
-        public List<int> ToDoExams { get; set; }
+        public List<ExamGrade> FinishedExams { get; set; }
+        public List<Subject> ToDoExams { get; set; }
         public Student()
         {
             Id = 0;
             Name = "Nemanja";
             Surname = "Vojnic";
             DateOfBirth = new DateOnly();
-            AdressId = 0;
+            Adress=new Adress();
             Phone = "34325435";
             Email = "NemanjaV@gmail.com";
             StudentIndex = new Index("RA",214,2021);
             StudentYear = 3;
-            GradeAvg = 0;
-            ToDoExams = new List<int>();
-            FinishedExams = new List<int>();
-
+            GradeAvg = 10;
+            Status = Status.BUDZET;
+            ToDoExams = new List<Subject>();
+            FinishedExams = new List<ExamGrade>();
         }
         public string[] ToCSV()
         {
-            string[] retString = { Id.ToString(),Name, Surname, DateOfBirth.ToString(), AdressId.ToString(), Phone.ToString(), Email, StudentIndex.ToString(), StudentYear.ToString(), GradeAvg.ToString()};
+            string[] retString = { Id.ToString(),Name, Surname, DateOfBirth.ToString(), Adress.ToString(), Phone.ToString(), Email, StudentIndex.ToString(), StudentYear.ToString(), GradeAvg.ToString(),Status.ToString()};
             return retString;
         }
         public void FromCSV(string[] values)
@@ -49,32 +51,40 @@ namespace CLI
             Name = values[1];
             Surname = values[2];
             DateOfBirth = DateOnly.Parse(values[3]);
-            AdressId = int.Parse(values[4]);
-            Phone = values[5];
-            Email = values[6];
-            StudentIndex=new Index(values[7]);
-            StudentYear= int.Parse(values[8]);
-            GradeAvg= int.Parse(values[9]);
-        }
+            Adress = new Adress(values[4], int.Parse(values[5]), values[6], values[7]);
+            Phone = values[8];
+            Email = values[9];
+            StudentIndex=new Index(values[10]);
+            StudentYear= int.Parse(values[11]);
+            GradeAvg= int.Parse(values[12]);
+            if (values[13] == "1")
+            {
+                Status = Status.SAMOFINANSIRANJE;
+            }
+            else
+            {
+                Status = Status.BUDZET;
+            }
+            }
         public override string ToString()
         {
-            string s = $"ID:{Id,3}| Name: {Name} | Surname: {Surname} | Date of bitrh: {DateOfBirth} |Adress ID:{AdressId,3}| Phone: {Phone} | E-mail: {Email} | Index: {StudentIndex} | Student Year: {StudentYear} | Grade Average: {GradeAvg}";
+            string s = $"ID:{Id,3}| Name: {Name} | Surname: {Surname} | Date of bitrh: {DateOfBirth} |Adress ID:{Adress}| Phone: {Phone} | E-mail: {Email} | Index: {StudentIndex} | Student Year: {StudentYear} | Grade Average: {GradeAvg}| Status: {Status}";
             return s;
         }
-        public Student(int id,string name, string surname, DateOnly dateOfBirth, int adressId, string phone, string email, Index studentIndex, int studentYear, float gradeAvg)
+        public Student(int id,string name, string surname, DateOnly dateOfBirth, Adress adress, string phone, string email, Index studentIndex, int studentYear,Status status)
         {
             Id = id;
             Name = name;
             Surname = surname;
             DateOfBirth = dateOfBirth;
-            AdressId = adressId;
+            Adress = adress;
             Phone = phone;
             Email = email;
             StudentIndex = studentIndex;
             StudentYear = studentYear;
-            GradeAvg = gradeAvg;
-            ToDoExams = new List<int>();
-            FinishedExams = new List<int>();
+            Status = status;
+            ToDoExams = new List<Subject>();
+            FinishedExams = new List<ExamGrade>();
         }
     }
 }

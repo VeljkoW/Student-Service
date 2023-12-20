@@ -17,8 +17,8 @@ namespace CLI
         public int Year { get; set; }
         public int ProfessorId { get; set; }
         public int ESPBPoints { get; set; }
-        public List<int> StudentsWhoPassed { get; set; }
-        public List<int> StudentsWhoDidntPass { get; set; }
+        public List<Student> StudentsWhoPassed { get; set; }
+        public List<Student> StudentsWhoDidntPass { get; set; }
 
         public Subject(int subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints)
         {
@@ -28,8 +28,8 @@ namespace CLI
             Year = year;
             ProfessorId = professor;
             ESPBPoints = eSPBPoints;
-            StudentsWhoPassed = new List<int>();
-            StudentsWhoDidntPass = new List<int>();
+            StudentsWhoPassed = new List<Student>();
+            StudentsWhoDidntPass = new List<Student>();
         }
         public Subject()
         {
@@ -39,8 +39,8 @@ namespace CLI
             Year = 2023;
             ProfessorId =0;
             ESPBPoints = 8;
-            StudentsWhoPassed = new List<int>();
-            StudentsWhoDidntPass = new List<int>();
+            StudentsWhoPassed = new List<Student>();
+            StudentsWhoDidntPass = new List<Student>();
         }
 
         public void FromCSV(string[] val)
