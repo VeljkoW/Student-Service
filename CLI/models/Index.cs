@@ -11,7 +11,6 @@ namespace CLI
 {
     public class Index : ISerializable
     {
-        public int Id { get; set; }
         public string Usm { get; set; }
         public int Number { get; set; }
         public int Year { get; set; }
@@ -54,7 +53,7 @@ namespace CLI
             }
             else
             {
-                Usm = null;
+                Usm = "";
                 Number = 0;
                 Year= 0;
                 Console.WriteLine("Invalid index");

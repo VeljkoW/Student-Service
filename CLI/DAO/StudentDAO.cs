@@ -37,7 +37,7 @@ namespace CLI
                 old.Name = stud.Name;
                 old.Email = stud.Email;
                 old.DateOfBirth = stud.DateOfBirth;
-                old.AdressId = stud.AdressId;
+                old.Adress = stud.Adress;
                 old.ToDoExams = stud.ToDoExams;
                 old.FinishedExams = stud.FinishedExams;
                 storage.Save(students);

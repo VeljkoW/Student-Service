@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.models.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,12 +14,10 @@ namespace CLI
     {
 
         private readonly StudentDAO studentDao;
-        private readonly AdressDAO adressDao;
 
-        public ConsoleViewStudent(StudentDAO studentDao,AdressDAO adressDao)
+        public ConsoleViewStudent(StudentDAO studentDao)
         {
             this.studentDao = studentDao;
-            this.adressDao = adressDao;
         }
 
         private void PrintAdresses(List<Adress> adresses)
@@ -47,23 +46,33 @@ namespace CLI
             string surname = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter birth date: ");
             DateOnly birthdate = ConsoleViewUtils.SafeInputDate();
-            System.Console.WriteLine("Choose Adress ID: ");
-            PrintAdresses(adressDao.GetAllAdresses());
-            int adressid = InputId();
+            System.Console.WriteLine("Enter adress: 'Street , City , State'");
+            Adress adress = new Adress(System.Console.ReadLine() ?? string.Empty);
             System.Console.WriteLine("Enter phone number: ");
             string phone = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter E-mail: ");
             string email = System.Console.ReadLine() ?? string.Empty;
+            System.Console.WriteLine("Chose status type 1 for budzet or 0 for samofinansiranje: ");
+            int xd = int.Parse(System.Console.ReadLine() ?? string.Empty);
+            Status status=new Status();
+            if (xd == 1)
+            {
+                status = Status.BUDZET;
+            }
+            else
+            {
+               status = Status.SAMOFINANSIRANJE;
+            }
             Index indeks;
             do {
-                System.Console.WriteLine("Enter Index: ");
+                System.Console.WriteLine("Enter Index:  format:'RA111-2021'");
                 string index = System.Console.ReadLine() ?? string.Empty;
                 indeks = new Index(index);
             }
             while (indeks.Usm==null);
             System.Console.WriteLine("Enter student year: ");
             int studentyear = ConsoleViewUtils.SafeInputInt();
-            Student s = new Student(studentDao.GenerateID(), name, surname, birthdate, adressid, phone, email, indeks , studentyear, (float) 0);
+            Student s = new Student(studentDao.GenerateID(), name, surname, birthdate, adress, phone, email, indeks , studentyear, status);
 
             return s;
         }

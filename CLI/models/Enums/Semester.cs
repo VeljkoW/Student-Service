@@ -10,4 +10,9 @@ namespace CLI.models.Enums
         LETNJI,
         ZIMSKI 
     }
+    public enum Status
+    {
+        SAMOFINANSIRANJE,
+        BUDZET
+    }
 }

@@ -42,7 +42,8 @@ namespace CLI
             System.Console.WriteLine("Enter head id: ");
             PrintProfessors(professorDao.GetAllProfessors());
             int headid = ConsoleViewUtils.SafeInputInt();
-            Katedra k = new Katedra(katedraDao.GenerateID(), name, headid);
+            Professor professor = professorDao.GetProfessorById(headid);
+            Katedra k = new Katedra(katedraDao.GenerateID(), name, professor);
 
             return k;
         }
