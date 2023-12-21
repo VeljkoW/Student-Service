@@ -40,6 +40,13 @@ namespace CLI
             Number = b;
             Year = c;
         }
+        public Index()
+        {
+            Usm=string.Empty;
+            Number = 0;
+            Year = 0;
+        }
+
         public Index(string input)
         {
             string pattern = @"^(?<Usm>[A-Z]{2})(?<number>\d{1,3})-(?<year>\d{4})$";

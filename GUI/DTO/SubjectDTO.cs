@@ -107,11 +107,18 @@ namespace GUI.DTO
 
         public SubjectDTO()
         {
+            SubjectID = 0;
+            subjectName = string.Empty;
+            semestar = new Semester();
+            year = 0;
+            professorId = 0;
+            espbPoints = 0;
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

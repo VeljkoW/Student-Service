@@ -110,13 +110,80 @@ namespace GUI
         }
         private void OpenEditWindow(object sender, RoutedEventArgs e)
         {
-            Edit sle = new Edit();
-            sle.Show();
+            if (Tab.SelectedIndex == 0)
+            {
+                if (SelectedStudent == null)
+                {
+                    MessageBox.Show("Please choose a student you want to edit!");
+                }
+                else
+                {
+                    EditStudent sle = new EditStudent();
+                    sle.Show();
+                }
+            }
+            else if (Tab.SelectedIndex == 1)
+            {
+                if (SelectedExamGrade == null)
+                {
+                    MessageBox.Show("Please choose a grade you want to edit!");
+                }
+                else
+                {
+                    
+                }
+            }
+            else if (Tab.SelectedIndex == 2)
+            {
+                if (SelectedKatedra == null)
+                {
+                    MessageBox.Show("Please choose a Katedra you want to edit!");
+                }
+                else
+                {
+                   
+                }
+            }
         }
         private void OpenDeleteWindow(object sender, RoutedEventArgs e)
         {
-            Delete sle = new Delete();
-            sle.Show();
+            
+            if(Tab.SelectedIndex==0)
+            {
+                if(SelectedStudent == null)
+                {
+                    MessageBox.Show("Please choose a student you want to delete!");
+                }
+                else
+                {
+                    Delete del = new Delete(SelectedStudent,Students);
+                    del.Show();
+                }
+            }
+            else if(Tab.SelectedIndex==1)
+            {
+                if(SelectedExamGrade == null)
+                {
+                    MessageBox.Show("Please choose a grade you want to delete!");
+                }
+                else
+                {
+                    Delete del = new Delete(SelectedExamGrade,ExamGrades);
+                    del.Show();
+                }
+            }
+            else if(Tab.SelectedIndex==2)
+            {
+                if(SelectedKatedra == null)
+                {
+                    MessageBox.Show("Please choose a Katedra you want to delete!");
+                }
+                else
+                {
+                    Delete del = new Delete(SelectedKatedra,Katedras);
+                    del.Show();
+                }
+            }
         }
         private void OpenAboutWindow(object sender, RoutedEventArgs e)
         {

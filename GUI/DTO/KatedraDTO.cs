@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,7 @@ namespace GUI.DTO
                 }
             }
         }
+        /*
         private string imeProfesora;
         public string ImeProfesora
         {
@@ -64,6 +66,7 @@ namespace GUI.DTO
                 }
             }
         }
+        */
         public KatedraDTO(Katedra katedra)
         {
             Id=katedra.Id;
@@ -71,11 +74,16 @@ namespace GUI.DTO
             head=katedra.Head;
         }
 
-        public KatedraDTO() { }
+        public KatedraDTO() 
+        {
+            Id = 0;
+            name = "";
+            head = new Professor();
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
