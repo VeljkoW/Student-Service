@@ -25,9 +25,26 @@
         </Menu>
 
 
-        <DockPanel Margin="10,38,10,35">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="9,20,0,0">
+            <Button Click="OpenNewLayout">
+                <Image Source="Resources/Images/ADD.png" Width="16" Height="16"/>
+            </Button>
+            <Button Click="OpenEditWindow">
+                <Image Source="Resources/Images/EDIT.png" Width="16" Height="16"/>
+            </Button>
+            <Button Click="OpenDeleteWindow">
+                <Image Source="Resources/Images/DELETE.png" Width="16" Height="16"/>
+            </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <TextBox Width="150" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                    <Button>
+                    <Image Source="Resources/Images/SEARCH.png" Width="16" Height="16" HorizontalAlignment="Right" Margin="0,-1,0,0" />
+                </Button>
+            </StackPanel>
 
 
+            <DockPanel Margin="10,43,10,35">
             <TabControl x:Name="Tab">
                 <TabItem Header="Students">
                     <DataGrid Height="350"
@@ -47,7 +64,7 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-            
+
                 <TabItem Header="Grade">
                     <DataGrid Height="350"
                       BorderBrush="Black" BorderThickness="2"
@@ -64,25 +81,40 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-            
 
-            <TabItem Header="Departments">
-                <DataGrid Height="350"
+
+                <TabItem Header="Departments">
+                    <DataGrid Height="350"
                 BorderBrush="Black" BorderThickness="2"
                 AutoGenerateColumns="False"
                 x:Name="DepartmentsDataGrid"
                 ItemsSource="{Binding Katedras, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single" IsReadOnly="True">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Professor" Binding="{Binding Head}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Professor" Binding="{Binding Head}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Professors">
+                    <DataGrid Height="350"
+                    BorderBrush="Black" BorderThickness="2"
+                    AutoGenerateColumns="False"
+                    x:Name="ProfessorsDataGrid"
+                    ItemsSource="{Binding Professors, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedProfessor, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding ProfessorId}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding ProfessorName}"/>
+                            <DataGridTextColumn Header="Surname" Binding="{Binding ProfessorSurname}"/>
+                            <DataGridTextColumn Header="E-Mail" Binding="{Binding ProfessorEmail}"/>
+                            <DataGridTextColumn Header="Title" Binding="{Binding ProfessorTitle}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
             </TabControl>
-
-
         </DockPanel>
 
 
@@ -98,9 +130,7 @@
             </StatusBarItem>
 
         </StatusBar>
-
-        
-        
+        <StackPanel/>
     </Grid>
 
 

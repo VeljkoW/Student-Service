@@ -8,7 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\ADD.png" />
+    <None Remove="Resources\Images\DELETE.png" />
+    <None Remove="Resources\Images\EDIT.png" />
+    <None Remove="Resources\Images\SEARCH.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CLI\CLI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\ADD.png" />
+    <Resource Include="Resources\Images\DELETE.png" />
+    <Resource Include="Resources\Images\EDIT.png" />
+    <Resource Include="Resources\Images\SEARCH.png" />
   </ItemGroup>
 
 </Project>

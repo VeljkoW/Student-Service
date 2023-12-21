@@ -26,15 +26,17 @@ namespace GUI.MenuBar.Edit
         public StudentDTO? SelectedStudent { get; }
         public ExamGradeDTO? SelectedExamGrade { get; }
         public KatedraDTO? SelectedKatedra { get; }
+        public ProfessorDTO? SelectedProfessor { get; }
 
         public StudentController studentController = new StudentController();
         public ExamGradeController examGradeController = new ExamGradeController();
         public KatedraController katedraController = new KatedraController();
+        public ProfessorController professorController = new ProfessorController();
 
         public ObservableCollection<StudentDTO>? Students { get; set; }
         public ObservableCollection<ExamGradeDTO>? ExamGrades { get; set; }
-
         public ObservableCollection<KatedraDTO>? Katedras { get; set; }
+        public ObservableCollection<ProfessorDTO>? Professors { get; set; }
         public Delete()
         {
             InitializeComponent();
@@ -55,13 +57,19 @@ namespace GUI.MenuBar.Edit
             InitializeComponent();
         }
         //konstruktor za delete Katedra
-        public Delete(KatedraDTO katedra,ObservableCollection<KatedraDTO> katedras)
+        public Delete(KatedraDTO katedra, ObservableCollection<KatedraDTO> katedras)
         {
             this.SelectedKatedra = katedra;
             this.Katedras = katedras;
             InitializeComponent();
         }
-
+        //konstruktor za delete Professor
+        public Delete(ProfessorDTO professor, ObservableCollection<ProfessorDTO> professors)
+        {
+            this.SelectedProfessor = professor;
+            this.Professors = professors;
+            InitializeComponent();
+        }
         private void CenterWindow(object sender, RoutedEventArgs e)
         {
             CenterWindowFunction();
@@ -95,10 +103,16 @@ namespace GUI.MenuBar.Edit
                 ExamGrades.Remove(SelectedExamGrade);
                 this.Close();
             }
-            else if(SelectedKatedra != null && Katedras != null)
+            else if (SelectedKatedra != null && Katedras != null)
             {
                 katedraController.Delete(SelectedKatedra.Id);
                 Katedras.Remove(SelectedKatedra);
+                this.Close();
+            }
+            else if (SelectedProfessor != null && Professors!= null)
+            {
+                professorController.Delete(SelectedProfessor.ProfessorId);
+                Professors.Remove(SelectedProfessor);
                 this.Close();
             }
         }

@@ -33,18 +33,21 @@ namespace GUI
         public ObservableCollection<ExamGradeDTO> ExamGrades { get; set; }
 
         public ObservableCollection<KatedraDTO> Katedras { get; set; }
+        public ObservableCollection<ProfessorDTO> Professors { get; set; }
 
         public StudentDTO? SelectedStudent { get; set; }
 
         public ExamGradeDTO? SelectedExamGrade {  get; set; }
 
         public KatedraDTO? SelectedKatedra { get; set; }
+        public ProfessorDTO? SelectedProfessor { get; set; }
 
         private StudentController studentController {  get; set; }
 
         private ExamGradeController examGradeController { get; set; }
 
         private KatedraController katedraController { get; set; }
+        private ProfessorController professorController { get; set; }
 
         public MainWindow()
         {
@@ -53,15 +56,16 @@ namespace GUI
             Students = new ObservableCollection<StudentDTO>();
             ExamGrades = new ObservableCollection<ExamGradeDTO>();
             Katedras = new ObservableCollection<KatedraDTO>();
+            Professors = new ObservableCollection<ProfessorDTO>();
             studentController = new StudentController();
             examGradeController = new ExamGradeController();
             katedraController = new KatedraController();
+            professorController = new ProfessorController();
             katedraController.Subscribe(this);
             examGradeController.Subscribe(this);
             studentController.Subscribe(this);
+            professorController.Subscribe(this);
             Update();
-
-            
         }
 
         private void LoadFunctions(object sender, RoutedEventArgs e)
@@ -172,15 +176,27 @@ namespace GUI
                     del.Show();
                 }
             }
-            else if(Tab.SelectedIndex==2)
+            else if (Tab.SelectedIndex == 2)
             {
-                if(SelectedKatedra == null)
+                if (SelectedKatedra == null)
                 {
                     MessageBox.Show("Please choose a Katedra you want to delete!");
                 }
                 else
                 {
-                    Delete del = new Delete(SelectedKatedra,Katedras);
+                    Delete del = new Delete(SelectedKatedra, Katedras);
+                    del.Show();
+                }
+            }
+            else if (Tab.SelectedIndex == 3)
+            {
+                if (SelectedProfessor == null)
+                {
+                    MessageBox.Show("Please choose a Professor you want to delete!");
+                }
+                else
+                {
+                    Delete del = new Delete(SelectedProfessor, Professors);
                     del.Show();
                 }
             }
@@ -196,9 +212,11 @@ namespace GUI
             Students.Clear();
             ExamGrades.Clear();
             Katedras.Clear();
+            Professors.Clear();
             foreach (Student student in studentController.GetAllStudents()) Students.Add(new StudentDTO(student));
             foreach (ExamGrade examgrade in examGradeController.GetAllExamGrades()) ExamGrades.Add(new ExamGradeDTO(examgrade));
-            foreach (Katedra katedra in katedraController.GetAllKatedras()) Katedras.Add(new KatedraDTO(katedra)) ;
+            foreach (Katedra katedra in katedraController.GetAllKatedras()) Katedras.Add(new KatedraDTO(katedra));
+            foreach (Professor professor in professorController.GetAllProfessors()) Professors.Add(new ProfessorDTO(professor));
         }
     }
 }

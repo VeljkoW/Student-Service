@@ -33,7 +33,6 @@ namespace CLI
             Title = title;
             YearsOfService = years;
             Subjects = new List<Subject>();
-
         }
         public Professor() {
             Id=0;

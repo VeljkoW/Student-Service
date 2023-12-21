@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ namespace CLI
     {
         private readonly List<Professor> professors;
         private readonly Storage<Professor> storage;
+        public ObserverSubject professorSubject;
 
         public ProfessorDAO()
         {
             storage = new Storage<Professor>("Professors.csv");
             professors = storage.Load();
+            professorSubject = new ObserverSubject();
         }
         public int GenerateID()
         {
@@ -27,6 +30,7 @@ namespace CLI
             professor.Id = GenerateID();
             professors.Add(professor);
             storage.Save(professors);
+            professorSubject.NotifyObservers();
             return professor;
         }
         public Professor? UpdateProfessor(Professor professor)
@@ -44,6 +48,7 @@ namespace CLI
             oldProfessor.YearsOfService = professor.YearsOfService;
             oldProfessor.Subjects = professor.Subjects;
             storage.Save(professors);
+            professorSubject.NotifyObservers();
             return oldProfessor;
 
         }
@@ -54,6 +59,7 @@ namespace CLI
 
             professors.Remove(professor);
             storage.Save(professors);
+            professorSubject.NotifyObservers();
             return professor;
         }
 

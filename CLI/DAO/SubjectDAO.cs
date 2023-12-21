@@ -46,7 +46,6 @@ namespace CLI
 
             storage.Save(subjects);
             return oldSubject;
-
         }
         public Subject? RemoveSubject(int id)
         {
@@ -57,8 +56,7 @@ namespace CLI
             storage.Save(subjects);
             return subject;
         }
-
-        private Subject? GetSubjectById(int id)
+        public Subject? GetSubjectById(int id)
         {
             return subjects.Find(v => v.SubjectID == id);
         }

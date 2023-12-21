@@ -186,7 +186,6 @@ namespace GUI.DTO
             studentIndex = new CLI.Index();
             studentYear = 0;
             status = new Status();
-
         }
         public StudentDTO(Student student)
         {
