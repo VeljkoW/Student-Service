@@ -1,0 +1,18 @@
+﻿<Window x:Class="GUI.MenuBar.Edit.Delete"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.MenuBar.Edit"
+        mc:Ignorable="d"
+        Title="Delete" Height="200" Width="300"
+        Loaded="CenterWindow"
+        ResizeMode="NoResize"
+        >
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Da li ste sigurni da želite da obrišete?" VerticalAlignment="Top" RenderTransformOrigin="1.121,1.214" Height="67" Width="272" TextAlignment="Center" FontSize="20" Margin="0,39,0,0"/>
+        <Button Content="Da" HorizontalAlignment="Left" Margin="60,111,0,0" VerticalAlignment="Top" Height="35" Width="60" FontSize="20" FontWeight="Bold"/>
+        <Button Content="Ne" HorizontalAlignment="Left" Margin="180,111,0,0" VerticalAlignment="Top" Height="35" Width="60" FontSize="20" FontWeight="Bold"/>
+
+    </Grid>
+</Window>
