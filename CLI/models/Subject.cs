@@ -31,6 +31,18 @@ namespace CLI
             StudentsWhoPassed = new List<Student>();
             StudentsWhoDidntPass = new List<Student>();
         }
+        //Konstruktor bez Id-eva
+        public Subject( string subjectName, Semester sem, int year, int professor, int eSPBPoints)
+        {
+         
+            SubjectName = subjectName;
+            Semester = sem;
+            Year = year;
+            ProfessorId = professor;
+            ESPBPoints = eSPBPoints;
+            StudentsWhoPassed = new List<Student>();
+            StudentsWhoDidntPass = new List<Student>();
+        }
         public Subject()
         {
             SubjectID = 1;

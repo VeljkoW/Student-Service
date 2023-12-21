@@ -5,8 +5,103 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Studentska služba" Height="450" Width="800" BorderBrush="Black" BorderThickness="2"
+        Loaded="LoadFunctions">
     <Grid>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="OpenNewLayout" ></MenuItem>
+                <MenuItem Header="Save" Click="ClickSave"></MenuItem>
+                <MenuItem Header="Open" Click="OpenOpenLayout"></MenuItem>
+                <MenuItem Header="Close" Click="ClickClose"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Edit" Click="OpenEditWindow"></MenuItem>
+                <MenuItem Header="Delete" Click="OpenDeleteWindow"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help">
+                <MenuItem Header="About" Click="OpenAboutWindow"></MenuItem>
+            </MenuItem>
+        </Menu>
 
+
+        <DockPanel Margin="10,38,10,35">
+          
+
+            <TabControl>
+                <TabItem Header="Students">
+                    <DataGrid Height="350"
+                      BorderBrush="Black" BorderThickness="2"
+                      AutoGenerateColumns="False"
+                      x:Name="StudentsDataGrid"
+                      ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
+                      SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Index" Binding="{Binding StudentIndex}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
+                            <DataGridTextColumn Header="Student Year" Binding="{Binding StudentYear}"/>
+                            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                            <DataGridTextColumn Header="Address" Binding="{Binding Adress}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            
+                <TabItem Header="Grade">
+                    <DataGrid Height="350"
+                      BorderBrush="Black" BorderThickness="2"
+                      AutoGenerateColumns="False"
+                      x:Name="GradesDataGrid"
+                      ItemsSource="{Binding ExamGrades, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedExamGrade, UpdateSourceTrigger=PropertyChanged}"
+                      SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Student Id" Binding="{Binding StudentId}"/>
+                            <DataGridTextColumn Header="Subject Id" Binding="{Binding SubjectId}"/>
+                            <DataGridTextColumn Header="Grade" Binding="{Binding Grade}"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+            
+
+            <TabItem Header="Departments">
+                <DataGrid Height="350"
+                BorderBrush="Black" BorderThickness="2"
+                AutoGenerateColumns="False"
+                x:Name="DepartmentsDataGrid"
+                ItemsSource="{Binding Katedras, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
+                SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Professor" Binding="{Binding Head}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            </TabControl>
+
+
+        </DockPanel>
+
+
+        <StatusBar VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="2">
+
+            <StatusBarItem>
+                <TextBlock>Studentska služba</TextBlock>
+            </StatusBarItem>
+
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="statusBarDateAndTime"/>
+            </StatusBarItem>
+
+        </StatusBar>
+
+        
+        
     </Grid>
+
+
 </Window>

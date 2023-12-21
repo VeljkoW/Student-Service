@@ -32,6 +32,12 @@ namespace CLI
             Grade = grade;
             Date = date;
         }
+        //Konstruktor bez Id-eva
+        public ExamGrade(int grade, DateOnly date)
+        {
+            Grade = grade;
+            Date = date;
+        }
 
         public void FromCSV(string[] values)
         {

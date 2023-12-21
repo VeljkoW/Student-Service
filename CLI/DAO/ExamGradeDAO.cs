@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,12 @@ namespace CLI
     {
         private readonly List<ExamGrade> examgrades;
         private readonly Storage<ExamGrade> storage;
+        public ObserverSubject examGradeSubject;
         public ExamGradeDAO()
         {
             storage = new Storage<ExamGrade>("ExamGrades.csv");
             examgrades = storage.Load();
+            examGradeSubject = new ObserverSubject();
         }
         public int GenerateID()
         {
@@ -25,6 +28,7 @@ namespace CLI
             examgrade.Id = GenerateID();
             examgrades.Add(examgrade);
             storage.Save(examgrades);
+            examGradeSubject.NotifyObservers();
             return examgrade;
         }
         public ExamGrade? UpdateExamGrade(ExamGrade examgrade)
@@ -36,6 +40,7 @@ namespace CLI
             oldExamGrade.Grade = examgrade.Grade;
             oldExamGrade.Date = examgrade.Date;
             storage.Save(examgrades);
+            examGradeSubject.NotifyObservers();
             return oldExamGrade;
 
         }
@@ -50,6 +55,7 @@ namespace CLI
 
             examgrades.Remove(examgrade);
             storage.Save(examgrades);
+            examGradeSubject.NotifyObservers();
             return examgrade;
         }
         public List<ExamGrade> GetAllExamGrades()

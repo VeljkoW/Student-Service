@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,13 @@ namespace CLI
     {
         private readonly List<Katedra> katedras;  //katedra nije na engleskom ali gg
         private readonly Storage<Katedra> storage;
+        public ObserverSubject katedraSubject;
 
         public KatedraDAO()
         {
             storage = new Storage<Katedra>("Departments.csv");
             katedras = storage.Load();
+            katedraSubject=new ObserverSubject();
         }
         public int GenerateID()
         {
@@ -26,6 +29,7 @@ namespace CLI
             katedra.Id = GenerateID();
             katedras.Add(katedra);
             storage.Save(katedras);
+            katedraSubject.NotifyObservers();
             return katedra;
         }
         public Katedra? UpdateKatedra(Katedra katedra)
@@ -36,6 +40,7 @@ namespace CLI
             oldKatedra.Head = katedra.Head;
             oldKatedra.Professors = katedra.Professors;
             storage.Save(katedras);
+            katedraSubject.NotifyObservers();
             return oldKatedra;
 
         }
@@ -51,6 +56,7 @@ namespace CLI
 
             katedras.Remove(katedra);
             storage.Save(katedras);
+            katedraSubject.NotifyObservers();
             return katedra;
         }
         public List<Katedra> GetAllKatedras()
