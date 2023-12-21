@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CLI.models;
+using CLI.Observer;
 
 namespace CLI
 {
@@ -11,11 +12,16 @@ namespace CLI
     {
         private readonly List<Student> students;
         private readonly Storage<Student> storage;
+        public ObserverSubject studentSubject;
         public StudentDAO()
         {
             storage = new Storage<Student>("Students.csv");
             students = storage.Load();
+            studentSubject = new ObserverSubject();
         }
+
+        
+
         public int GenerateID()
         {
             if (students.Count == 0) return 0;
@@ -26,6 +32,7 @@ namespace CLI
             stud.Id = GenerateID();
             students.Add(stud);
             storage.Save(students);
+            studentSubject.NotifyObservers();
             return stud;
         }
         public Student? UpdateStudent(Student stud)
@@ -41,7 +48,8 @@ namespace CLI
                 old.ToDoExams = stud.ToDoExams;
                 old.FinishedExams = stud.FinishedExams;
                 storage.Save(students);
-                return old;
+            studentSubject.NotifyObservers();
+            return old;
         }
         public Student? RemoveStudent(int id)
         {
@@ -50,6 +58,7 @@ namespace CLI
 
             students.Remove(student);
             storage.Save(students);
+            studentSubject.NotifyObservers();
             return student;
         }
         public List<Student> GetAllStudents()

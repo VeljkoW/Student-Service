@@ -67,7 +67,7 @@ namespace CLI
             EmailAdress = vals[9];
             IDCardNumber = vals[10];
             Title = vals[11];
-            YearsOfService = int.Parse(vals[1]);
+            YearsOfService = int.Parse(vals[12]);
 
         }
         public override string ToString()

@@ -86,5 +86,20 @@ namespace CLI
             ToDoExams = new List<Subject>();
             FinishedExams = new List<ExamGrade>();
         }
+        //Konstruktor bez id-a
+        public Student(string name, string surname, DateOnly dateOfBirth, Adress adress, string phone, string email, Index studentIndex, int studentYear, Status status)
+        {
+            Name = name;
+            Surname = surname;
+            DateOfBirth = dateOfBirth;
+            Adress = adress;
+            Phone = phone;
+            Email = email;
+            StudentIndex = studentIndex;
+            StudentYear = studentYear;
+            Status = status;
+            ToDoExams = new List<Subject>();
+            FinishedExams = new List<ExamGrade>();
+        }
     }
 }
