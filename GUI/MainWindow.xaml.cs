@@ -92,8 +92,21 @@ namespace GUI
 
         private void OpenNewLayout(object sender, RoutedEventArgs e)
         {
-            New sle = new New();
-            sle.Show();
+            if (Tab.SelectedIndex == 0)
+            {
+               
+                    NewStudent sle = new NewStudent();
+                    sle.Show();
+               
+            }
+            else if (Tab.SelectedIndex == 1)
+            {
+               
+            }
+            else if (Tab.SelectedIndex == 2)
+            {
+                
+            }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
         {
