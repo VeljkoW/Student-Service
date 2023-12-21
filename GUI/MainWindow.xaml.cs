@@ -105,8 +105,12 @@ namespace GUI
 
         private void ClickClose(object sender, RoutedEventArgs e)
         {
-            Close sle = new Close();
-            sle.Show();
+            MessageBoxResult R = MessageBox.Show("Are you sure you want to close the aplication?", "Close Aplication", MessageBoxButton.YesNo,MessageBoxImage.Question);
+            if(R == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
+
         }
         private void OpenEditWindow(object sender, RoutedEventArgs e)
         {
