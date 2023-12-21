@@ -26,9 +26,9 @@
 
 
         <DockPanel Margin="10,38,10,35">
-          
 
-            <TabControl>
+
+            <TabControl x:Name="Tab">
                 <TabItem Header="Students">
                     <DataGrid Height="350"
                       BorderBrush="Black" BorderThickness="2"

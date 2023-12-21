@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace GUI.MenuBar.Edit
 {
     /// <summary>
-    /// Interaction logic for Edit.xaml
+    /// Interaction logic for EditStudent.xaml
     /// </summary>
-    public partial class Edit : Window
+    public partial class EditStudent : Window
     {
-        public Edit()
+        public EditStudent()
         {
             InitializeComponent();
         }
@@ -38,6 +38,24 @@ namespace GUI.MenuBar.Edit
 
             this.Left = (SWidth - WWidth) / 2;
             this.Top = (SHeight - WHeight) / 2;
+        }
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string ime = NameTextBox.Text;
+            string prezime = SurnameTextBox.Text;
+            string adresa = AddressTextBox.Text;
+            string brojTelefona = PhoneNumberTextBox.Text;
+            string email = EmailTextBox.Text;
+            string brojIndexa = IndexNumberTextBox.Text;
+            string trenutnaGodinaStudija = YearTextBox.Text;
+            string nacinFinansiranja = FinancingStatusComboBox.SelectedItem?.ToString();
+
+            Close();
         }
     }
 }

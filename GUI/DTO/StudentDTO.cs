@@ -176,6 +176,17 @@ namespace GUI.DTO
 
         public StudentDTO()
         {
+            Id = 0;
+            name = "";
+            surname = "";
+            dateOfBirth=new DateOnly();
+            adress = new Adress();
+            phone = "";
+            email = "";
+            studentIndex = new CLI.Index();
+            studentYear = 0;
+            status = new Status();
+
         }
         public StudentDTO(Student student)
         {
@@ -193,7 +204,7 @@ namespace GUI.DTO
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

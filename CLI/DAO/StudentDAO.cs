@@ -61,6 +61,16 @@ namespace CLI
             studentSubject.NotifyObservers();
             return student;
         }
+        public Student? RemoveStudentByIndex(Index index)
+        {
+            Student? student = GetStudentByIndex(index);
+            if (student == null) return null;
+
+            students.Remove(student);
+            storage.Save(students);
+            studentSubject.NotifyObservers();
+            return student;
+        }
         public List<Student> GetAllStudents()
         {
             return students;
@@ -68,6 +78,10 @@ namespace CLI
         private Student? GetStudentById(int id)
         {
             return students.Find(v => v.Id == id);
+        }
+        private Student? GetStudentByIndex(Index indeks)
+        {
+            return students.Find(v => v.StudentIndex == indeks);
         }
     }
 }
