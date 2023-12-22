@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditStudent" Height="465" Width="400"
+        Title="EditStudent" Height="550" Width="400"
         Loaded="CenterWindow"
         ResizeMode="NoResize"
         >
@@ -16,6 +16,9 @@
 
             <Label Content="Surname*" />
             <TextBox x:Name="SurnameTextBox" />
+
+            <Label Content="Date of Birth*" />
+            <DatePicker x:Name="DateOfBirthDatePicker"/>
 
             <Label Content="Address*" />
             <TextBox x:Name="AddressTextBox" />
@@ -37,9 +40,10 @@
                 <ComboBoxItem Content="Samofinansiranje" />
                 <ComboBoxItem Content="Budžet" />
             </ComboBox>
-            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="0,5,0,0" Width="70"/>
+            
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="0,5,0,0" Width="70"/>
+            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
         </StackPanel>
     </Grid>
 </Window>

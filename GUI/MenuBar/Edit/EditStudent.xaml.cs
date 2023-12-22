@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CLI.Controller;
+using CLI.models.Enums;
+using CLI;
+using GUI.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace GUI.MenuBar.Edit
 {
@@ -19,9 +24,31 @@ namespace GUI.MenuBar.Edit
     /// </summary>
     public partial class EditStudent : Window
     {
-        public EditStudent()
+        public StudentDTO studentDTO = new StudentDTO();
+        public StudentController studentController = new StudentController();
+        public ObservableCollection<StudentDTO> Students { get; set; }
+        StudentDTO selectedStudent1;
+        public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
         {
+            Students= students;
+            selectedStudent1= selectedStudent;
             InitializeComponent();
+            NameTextBox.Text = selectedStudent.StudentName;
+            SurnameTextBox.Text = selectedStudent.Surname;
+            AddressTextBox.Text = (selectedStudent.Adress).ToString();
+            PhoneNumberTextBox.Text = selectedStudent.Phone;
+            DateOfBirthDatePicker.Text = selectedStudent.DateOfBirth.ToString();
+            EmailTextBox.Text = selectedStudent.Email;
+            IndexNumberTextBox.Text = selectedStudent.StudentIndex.ToString();
+            YearTextBox.Text = selectedStudent.StudentYear.ToString();
+            if(selectedStudent.Status == CLI.models.Enums.Status.SAMOFINANSIRANJE)
+            {
+                FinancingStatusComboBox.Text = "Samofinansiranje";
+            }
+            else
+            {
+                FinancingStatusComboBox.Text = "Budžet";
+            }
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -45,17 +72,40 @@ namespace GUI.MenuBar.Edit
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            string adresa = AddressTextBox.Text;
+            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
-            string brojIndexa = IndexNumberTextBox.Text;
-            string trenutnaGodinaStudija = YearTextBox.Text;
-            string nacinFinansiranja = FinancingStatusComboBox.SelectedItem?.ToString();
+            CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
+            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
+            Status nacinFinansiranja;
+            if (FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
+            {
+                nacinFinansiranja = Status.SAMOFINANSIRANJE;
+            }
+            else
+            {
+                nacinFinansiranja = Status.BUDZET;
+            }
 
+            Student student = new Student(selectedStudent1.Id,ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
+            studentController.Update(student);
+            
+            studentDTO = new StudentDTO(student);
+           
+            for(int i = 0; i < Students.Count; i++)
+            {
+                if(Students[i].Id == student.Id)
+                {
+                    Students[i] = studentDTO;
+                }
+            }
+            
             Close();
+
         }
     }
 }

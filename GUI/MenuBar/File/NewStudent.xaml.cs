@@ -1,7 +1,10 @@
 ﻿using CLI;
+using CLI.Controller;
+using CLI.models.Enums;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +24,14 @@ namespace GUI.MenuBar.File
     /// </summary>
     public partial class NewStudent : Window
     {
-        public StudentDTO studentDTO {  get; set; }
-        public StudentDAO studentDAO { get; set; }
-        public NewStudent()
+        public StudentDTO studentDTO = new StudentDTO();
+        public StudentController studentController = new StudentController();
+        public ObservableCollection<StudentDTO> Students { get; set; }
+       
+
+        public NewStudent(ObservableCollection<StudentDTO> students)
         {
+            Students = students;
             InitializeComponent();
         }
 
@@ -49,16 +56,30 @@ namespace GUI.MenuBar.File
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            string adresa = AddressTextBox.Text;
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthTextBox.Text);
+            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
-            string brojIndexa = IndexNumberTextBox.Text;
-            string trenutnaGodinaStudija = YearTextBox.Text;
-            string nacinFinansiranja = FinancingStatusComboBox.SelectedItem?.ToString();
+            CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
+            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
+            Status nacinFinansiranja;
+            if(FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
+            {
+                nacinFinansiranja = Status.SAMOFINANSIRANJE;
+            }
+            else
+            {
+                nacinFinansiranja = Status.BUDZET;
+            }
 
-            //Student student = studentDTO.ToStudent(ime, prezime, dateofbirth, adresa,brojTelefona,email,brojIndexa,trenutnaGodinaStudija,nacinFinansiranja);
-            //studentDAO.AddStudent(student);
+            Student student = new Student(ime, prezime, dateofbirth, adresa,brojTelefona,email,brojIndexa,trenutnaGodinaStudija,nacinFinansiranja);
+            studentController.Add(student);
+            studentDTO =new StudentDTO(student);
+            Students.Add(studentDTO);
+            Close();
+        }
+        private void Cancel(object sender, EventArgs e)
+        {
             Close();
         }
 
