@@ -13,6 +13,7 @@ namespace GUI.DTO
 {
    public class SubjectDTO : INotifyPropertyChanged
     {
+       
         public int SubjectID { get; set; }
 
         private string subjectName;

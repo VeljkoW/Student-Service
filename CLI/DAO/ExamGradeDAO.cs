@@ -62,6 +62,24 @@ namespace CLI
         {
             return examgrades;
         }
+        public double getAverageGrade(int subjectid)
+        {
+            int sum = 0;
+            int cnt = 0;
+            foreach (ExamGrade e in examgrades)
+            {
+                if (e.Id == subjectid)
+                {
+                    sum += e.Grade;
+                    cnt++;
+                }
+            }
+            if (cnt == 0)
+            {
+                return 5;
+            }
+            return sum / cnt;
+        }
 
     }
 }

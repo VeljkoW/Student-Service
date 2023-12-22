@@ -13,10 +13,12 @@ namespace GUI.DTO
 {
    public class StudentDTO : INotifyPropertyChanged
     {
+        public ExamGradeDAO examGradeDAO = new ExamGradeDAO();
+        
         public int Id { get; set; }
 
         private string name;
-        public string Name
+        public string StudentName
         {
             get
             {
@@ -48,7 +50,7 @@ namespace GUI.DTO
                 }
             }
         }
-
+    
         private DateOnly dateOfBirth;
         public DateOnly DateOfBirth
         {
@@ -61,7 +63,7 @@ namespace GUI.DTO
                 if (value != dateOfBirth)
                 {
                     dateOfBirth = value;
-                    //OnPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -78,11 +80,11 @@ namespace GUI.DTO
                 if (value != adress)
                 {
                     adress = value;
-                    //OnPropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
-
+     
         private string phone;
         public string Phone
         {
@@ -99,7 +101,7 @@ namespace GUI.DTO
                 }
             }
         }
-
+        
         private string email;
         public string Email
         {
@@ -116,7 +118,7 @@ namespace GUI.DTO
                 }
             }
         }
-
+     
         private CLI.Index studentIndex;
         public CLI.Index StudentIndex
         {
@@ -129,7 +131,7 @@ namespace GUI.DTO
                 if (value != studentIndex)
                 {
                     studentIndex = value;
-                   // OnPropertyChanged();
+                   OnPropertyChanged();
                 }
             }
         }
@@ -167,23 +169,36 @@ namespace GUI.DTO
                 }
             }
         }
-
-
-        public Student ToStudent()
+        private double gradeAverage;
+        public double GradeAverage
         {
-            return new Student(name,surname,dateOfBirth,adress,phone,email,studentIndex,studentYear,status);
+            get
+            {
+                return gradeAverage = examGradeDAO.getAverageGrade(Id);
+            }
+            set
+            {
+                if (value != gradeAverage)
+                {
+                    gradeAverage = examGradeDAO.getAverageGrade(Id);
+                    OnPropertyChanged();
+                }
+            }
         }
+
+
+
 
         public StudentDTO()
         {
             Id = 0;
             name = "";
             surname = "";
-            dateOfBirth=new DateOnly();
+            studentIndex = new CLI.Index();
             adress = new Adress();
             phone = "";
             email = "";
-            studentIndex = new CLI.Index();
+            dateOfBirth = new DateOnly();
             studentYear = 0;
             status = new Status();
         }
@@ -192,14 +207,15 @@ namespace GUI.DTO
             Id=student.Id;
             name=student.Name;
             surname=student.Surname;
-            dateOfBirth=student.DateOfBirth;
+            email = student.Email;
+            dateOfBirth = student.DateOfBirth;
+            phone= student.Phone;
             adress=student.Adress;
-            phone=student.Phone;
-            email=student.Email;
             studentIndex=student.StudentIndex;
             studentYear=student.StudentYear;
             status = student.Status;
         }
+       
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

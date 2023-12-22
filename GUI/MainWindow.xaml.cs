@@ -20,6 +20,7 @@ using CLI;
 using GUI.DTO;
 using CLI.Controller;
 using CLI.Observer;
+using System.Windows.Threading;
 
 namespace GUI
 {
@@ -48,7 +49,7 @@ namespace GUI
 
         private KatedraController katedraController { get; set; }
         private ProfessorController professorController { get; set; }
-
+  
         public MainWindow()
         {
             InitializeComponent();
@@ -65,6 +66,8 @@ namespace GUI
             examGradeController.Subscribe(this);
             studentController.Subscribe(this);
             professorController.Subscribe(this);
+           
+
             Update();
         }
 
@@ -72,11 +75,37 @@ namespace GUI
         {
             CenterWindowFunction();
             StatusBarCurrentTimeAndDate();
+            StatusBarCurrentTabShowing();
         }
+
         private void StatusBarCurrentTimeAndDate()
         {
             
             statusBarDateAndTime.Text = $"{DateTime.Now.ToString("HH:mm  dd.MM.yyyy.")}";
+        }
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StatusBarCurrentTabShowing();
+        }
+        private void StatusBarCurrentTabShowing()
+        {
+            if (Tab.SelectedIndex == 0)
+            {
+                StatusBarCurrentTab.Text = "Students";
+
+            }
+            else if (Tab.SelectedIndex == 1)
+            {
+                StatusBarCurrentTab.Text = "Grades";
+            }
+            else if (Tab.SelectedIndex == 2)
+            {
+                StatusBarCurrentTab.Text = "Departments";
+            }
+            else if (Tab.SelectedIndex == 3)
+            {
+                StatusBarCurrentTab.Text = "Professors";
+            }
         }
 
         private void CenterWindowFunction()
@@ -95,7 +124,7 @@ namespace GUI
             if (Tab.SelectedIndex == 0)
             {
                
-                    NewStudent sle = new NewStudent();
+                    NewStudent sle = new NewStudent(Students);
                     sle.Show();
                
             }
@@ -139,7 +168,7 @@ namespace GUI
                 }
                 else
                 {
-                    EditStudent sle = new EditStudent();
+                    EditStudent sle = new EditStudent(SelectedStudent,Students);
                     sle.Show();
                 }
             }

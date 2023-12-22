@@ -47,6 +47,7 @@ namespace CLI
                 old.Adress = stud.Adress;
                 old.ToDoExams = stud.ToDoExams;
                 old.FinishedExams = stud.FinishedExams;
+                old.Status = stud.Status;
                 storage.Save(students);
             studentSubject.NotifyObservers();
             return old;

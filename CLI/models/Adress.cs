@@ -65,5 +65,26 @@ namespace CLI
             City = "";
             State = "";
         }
+        public static Adress Parse(string input)
+        {
+            string pattern = @"^([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)$";
+
+            Match match = Regex.Match(input, pattern);
+
+            if (match.Success)
+            {
+                return new Adress
+                {
+                    Street = match.Groups[1].Value,
+                    StreetNumber = int.Parse(match.Groups[2].Value),
+                    City = match.Groups[3].Value,
+                    State = match.Groups[4].Value
+                };
+            }
+            else
+            {
+                throw new ArgumentException("Invalid input format");
+            }
+        }
     }
 }

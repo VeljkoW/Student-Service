@@ -25,6 +25,10 @@ namespace CLI.Controller
         {
             studentDao.AddStudent(student);
         }
+        public void Update(Student student)
+        {
+            studentDao.UpdateStudent(student);
+        }
 
         public void Delete(int studentId)
         {

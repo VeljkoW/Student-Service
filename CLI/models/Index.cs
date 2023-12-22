@@ -66,5 +66,29 @@ namespace CLI
                 Console.WriteLine("Invalid index");
             }
         }
+        public static Index Parse(string input)
+        {
+            string pattern = @"^(?<Usm>[A-Z]{2})(?<number>\d{1,3})-(?<year>\d{4})$";
+
+            Match match = Regex.Match(input, pattern);
+            if (match.Success)
+            {
+                return new Index
+                {
+                    Usm = match.Groups["Usm"].Value,
+                    Number = int.Parse(match.Groups["number"].Value),
+                    Year = int.Parse(match.Groups["year"].Value)
+                };
+            }
+            else
+            {
+                return new Index
+                {
+                    Usm = "",
+                    Number = 0,
+                    Year = 0
+                };
+            }
+        }
     }
 }
