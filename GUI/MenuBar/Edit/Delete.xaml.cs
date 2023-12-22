@@ -25,17 +25,17 @@ namespace GUI.MenuBar.Edit
     {
         public StudentDTO? SelectedStudent { get; }
         public ExamGradeDTO? SelectedExamGrade { get; }
-        public KatedraDTO? SelectedKatedra { get; }
+        public SubjectDTO? SelectedSubject { get; }
         public ProfessorDTO? SelectedProfessor { get; }
 
         public StudentController studentController = new StudentController();
         public ExamGradeController examGradeController = new ExamGradeController();
-        public KatedraController katedraController = new KatedraController();
+        public SubjectController subjectController = new SubjectController();
         public ProfessorController professorController = new ProfessorController();
 
         public ObservableCollection<StudentDTO>? Students { get; set; }
         public ObservableCollection<ExamGradeDTO>? ExamGrades { get; set; }
-        public ObservableCollection<KatedraDTO>? Katedras { get; set; }
+        public ObservableCollection<SubjectDTO>? Subjects { get; set; }
         public ObservableCollection<ProfessorDTO>? Professors { get; set; }
         public Delete()
         {
@@ -57,10 +57,10 @@ namespace GUI.MenuBar.Edit
             InitializeComponent();
         }
         //konstruktor za delete Katedra
-        public Delete(KatedraDTO katedra, ObservableCollection<KatedraDTO> katedras)
+        public Delete(SubjectDTO subject, ObservableCollection<SubjectDTO> subjects)
         {
-            this.SelectedKatedra = katedra;
-            this.Katedras = katedras;
+            this.SelectedSubject = subject;
+            this.Subjects = subjects;
             InitializeComponent();
         }
         //konstruktor za delete Professor
@@ -103,10 +103,10 @@ namespace GUI.MenuBar.Edit
                 ExamGrades.Remove(SelectedExamGrade);
                 this.Close();
             }
-            else if (SelectedKatedra != null && Katedras != null)
+            else if (SelectedSubject != null && Subjects != null)
             {
-                katedraController.Delete(SelectedKatedra.Id);
-                Katedras.Remove(SelectedKatedra);
+                subjectController.Delete(SelectedSubject.SubjectID);
+                Subjects.Remove(SelectedSubject);
                 this.Close();
             }
             else if (SelectedProfessor != null && Professors!= null)

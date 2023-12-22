@@ -1,6 +1,6 @@
-﻿using CLI;
-using CLI.Controller;
+﻿using CLI.Controller;
 using CLI.models.Enums;
+using CLI;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -19,16 +19,19 @@ using System.Windows.Shapes;
 
 namespace GUI.MenuBar.File
 {
-    public partial class NewStudent : Window
+    /// <summary>
+    /// Interaction logic for NewProfessor.xaml
+    /// </summary>
+    public partial class NewProfessor : Window
     {
-        public StudentDTO studentDTO = new StudentDTO();
-        public StudentController studentController = new StudentController();
-        public ObservableCollection<StudentDTO> Students { get; set; }
-       
+        public ProfessorDTO professorDTO = new ProfessorDTO();
+        public ProfessorController professorController = new ProfessorController();
+        public ObservableCollection<ProfessorDTO> Professors { get; set; }
 
-        public NewStudent(ObservableCollection<StudentDTO> students)
+
+        public NewProfessor(ObservableCollection<ProfessorDTO> proffesors)
         {
-            Students = students;
+            Professors = proffesors;
             InitializeComponent();
         }
 
@@ -54,31 +57,26 @@ namespace GUI.MenuBar.File
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
             Adress adresa = Adress.Parse(AddressTextBox.Text);
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
-            CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
-            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
-            Status nacinFinansiranja;
-            if(FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
-            {
-                nacinFinansiranja = Status.SAMOFINANSIRANJE;
-            }
-            else
-            {
-                nacinFinansiranja = Status.BUDZET;
-            }
-
-            Student student = new Student(ime, prezime, dateofbirth, adresa,brojTelefona,email,brojIndexa,trenutnaGodinaStudija,nacinFinansiranja);
+            string idCard = IDCardNumberTextBox.Text;
+            string title = TitleTextBox.Text;
+            int yearsofservice= int.Parse(YearsOfServiceTextBox.Text);
+            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
+            Professor profesor = new Professor(ime,prezime,dateofbirth,adresa,brojTelefona,email,idCard,title, yearsofservice);
+            professorController.Add(profesor);
+            professorDTO =new ProfessorDTO(profesor);
+            Professors.Add(professorDTO);
+            /*
+            Student student = new Student(ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
             studentController.Add(student);
-            studentDTO =new StudentDTO(student);
-            Students.Add(studentDTO);
+            ProfessorDTO = new ProfessorDTO(student);
+            Students.Add(ProfessorDTO);*/
             Close();
         }
         private void Cancel(object sender, EventArgs e)
         {
             Close();
         }
-
     }
 }

@@ -83,17 +83,20 @@
                 </TabItem>
 
 
-                <TabItem Header="Departments">
+                <TabItem Header="Subjects">
                     <DataGrid Height="350"
                 BorderBrush="Black" BorderThickness="2"
                 AutoGenerateColumns="False"
                 x:Name="DepartmentsDataGrid"
-                ItemsSource="{Binding Katedras, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedKatedra, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Professor" Binding="{Binding Head}"/>
+                            <DataGridTextColumn Header="Id" Binding="{Binding SubjectID}"/>
+                            <DataGridTextColumn Header="Name" Binding="{Binding SubjectName}"/>
+                            <DataGridTextColumn Header="ESPB" Binding="{Binding ESPBPoints}"/>
+                            <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                            <DataGridTextColumn Header="Semester" Binding="{Binding Semestar}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>

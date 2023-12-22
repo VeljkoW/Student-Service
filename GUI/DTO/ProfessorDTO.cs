@@ -30,6 +30,87 @@ namespace GUI.DTO
             }
         }
 
+        private DateOnly birthDate;
+        public DateOnly DateOfBirth
+        {
+            get
+            {
+                return birthDate;
+            }
+            set
+            {
+                if (value != birthDate)
+                {
+                    birthDate = value;
+                    //OnPropertyChanged();
+                }
+            }
+        }
+        private Adress professorAdress;
+        public Adress ProfessorAdress
+        {
+            get
+            {
+                return professorAdress;
+            }
+            set
+            {
+                if (value != professorAdress)
+                {
+                    professorAdress = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string phonenumber;
+        public string PhoneNumber
+        {
+            get
+            {
+                return phonenumber;
+            }
+            set
+            {
+                if (value != phonenumber)
+                {
+                    phonenumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private string idCardNumber;
+        public string IDCardNumber
+        {
+            get
+            {
+                return idCardNumber;
+            }
+            set
+            {
+                if (value != idCardNumber)
+                {
+                    idCardNumber = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int yearsOfService;
+        public int YearsOfService
+        {
+            get
+            {
+                return yearsOfService;
+            }
+            set
+            {
+                if (value != yearsOfService)
+                {
+                    yearsOfService = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private string name;
         public string ProfessorName
         {
@@ -98,15 +179,30 @@ namespace GUI.DTO
         }
         public ProfessorDTO()
         {
-
+            id = 0;
+            name = "";
+            surname = "";
+            birthDate = new DateOnly();
+            professorAdress = new Adress();
+            phonenumber = "";
+            idCardNumber = "";
+            email = "";
+            title = "";
+            yearsOfService = 0;
         }
         public ProfessorDTO(Professor prof)
         {
             id=prof.Id;
             name=prof.Name;
             surname=prof.Surname;
+            birthDate = prof.DateOfBirth;
+            professorAdress = prof.ProfessorAdress;
+            phonenumber = prof.PhoneNumber;
+            idCardNumber = prof.IDCardNumber;
             email = prof.EmailAdress;
             title = prof.Title;
+            yearsOfService=prof.YearsOfService;
+            
         }
         public event PropertyChangedEventHandler? PropertyChanged;
 
