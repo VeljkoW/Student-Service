@@ -24,7 +24,7 @@ namespace GUI.MenuBar.Edit
         public SubjectDTO subjectDTO = new SubjectDTO();
         public SubjectController subjectController = new SubjectController();
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
-        SubjectDTO selectedSubject1;
+        public SubjectDTO selectedSubject1;
         public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects)
         {
             Subjects = subjects;
@@ -108,14 +108,15 @@ namespace GUI.MenuBar.Edit
                     YearStatus = 4;
                     break;
             }
-            Subject subject = new Subject(selectedSubject1.sId,subjectID, subjectName, semestar, YearStatus, EspbPoints);
+            Subject subject = new Subject(selectedSubject1.Id,subjectID, subjectName, semestar, YearStatus, EspbPoints);
+
             subjectController.Update(subject);
 
             subjectDTO = new SubjectDTO(subject);
 
             for (int i = 0; i < Subjects.Count; i++)
             {
-                if (Subjects[i].sId == subject.Id)
+                if (Subjects[i].Id == subject.Id)
                 {
                     Subjects[i] = subjectDTO;
                 }

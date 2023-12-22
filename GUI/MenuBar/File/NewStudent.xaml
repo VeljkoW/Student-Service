@@ -18,7 +18,7 @@
                 <TextBox x:Name="SurnameTextBox"/>
 
                 <Label Content="Date of Birth*" />
-                <DatePicker x:Name="DateOfBirthDatePicker"/>
+            <DatePicker x:Name="DateOfBirthDatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
       
                 <Label Content="Address*" />
                 <TextBox x:Name="AddressTextBox" />

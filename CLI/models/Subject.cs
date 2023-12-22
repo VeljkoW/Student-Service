@@ -12,7 +12,7 @@ namespace CLI
     public class Subject : ISerializable
     {
         public int Id {  get; set; }
-        public String SubjectID { get; set; }
+        public string SubjectID { get; set; }
         public string SubjectName { get; set; }
         public Semester Semester { get; set; }
         public int Year { get; set; }

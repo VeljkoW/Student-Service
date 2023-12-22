@@ -30,6 +30,7 @@ namespace CLI
             subject.Id = GenerateID();
             subjects.Add(subject);
             storage.Save(subjects);
+            subjectSubject.NotifyObservers();
             return subject;
         }
 
@@ -48,6 +49,7 @@ namespace CLI
             oldSubject.StudentsWhoDidntPass= subject.StudentsWhoDidntPass;
 
             storage.Save(subjects);
+            subjectSubject.NotifyObservers();
             return oldSubject;
         }
         public Subject? RemoveSubject(int id)
@@ -57,6 +59,7 @@ namespace CLI
 
             subjects.Remove(subject);
             storage.Save(subjects);
+            subjectSubject.NotifyObservers();
             return subject;
         }
         public Subject? GetSubjectById(int id)

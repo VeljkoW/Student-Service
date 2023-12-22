@@ -5,45 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditStudent" Height="550" Width="400"
+        Title="EditStudent" Height="620" Width="400"
         Loaded="CenterWindow"
         ResizeMode="NoResize"
         >
     <Grid >
-        <StackPanel Margin="10">
-            <Label Content="Name*" />
-            <TextBox x:Name="NameTextBox" />
+        <DockPanel Margin="10,20,10,35">
+            <TabControl x:Name="Tab">
+                <TabItem Header="Informations">
+                    <StackPanel Margin="10">
+                        <Label Content="Name*" />
+                        <TextBox x:Name="NameTextBox" />
 
-            <Label Content="Surname*" />
-            <TextBox x:Name="SurnameTextBox" />
+                        <Label Content="Surname*" />
+                        <TextBox x:Name="SurnameTextBox" />
 
-            <Label Content="Date of Birth*" />
-            <DatePicker x:Name="DateOfBirthDatePicker"/>
+                        <Label Content="Date of Birth*" />
+                        <DatePicker x:Name="DateOfBirthDatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
-            <Label Content="Address*" />
-            <TextBox x:Name="AddressTextBox" />
+                        <Label Content="Address*" />
+                        <TextBox x:Name="AddressTextBox" />
 
-            <Label Content="Phone number*" />
-            <TextBox x:Name="PhoneNumberTextBox" />
+                        <Label Content="Phone number*" />
+                        <TextBox x:Name="PhoneNumberTextBox" />
 
-            <Label Content="E-mail*" />
-            <TextBox x:Name="EmailTextBox" />
+                        <Label Content="E-mail*" />
+                        <TextBox x:Name="EmailTextBox" />
 
-            <Label Content="Index number*" />
-            <TextBox x:Name="IndexNumberTextBox" />
+                        <Label Content="Index number*" />
+                        <TextBox x:Name="IndexNumberTextBox" />
 
-            <Label Content="Year*" />
-            <TextBox x:Name="YearTextBox" />
+                        <Label Content="Year*" />
+                        <TextBox x:Name="YearTextBox" />
 
-            <Label Content="Financing status*" />
-            <ComboBox x:Name="FinancingStatusComboBox">
-                <ComboBoxItem Content="Samofinansiranje" />
-                <ComboBoxItem Content="Budžet" />
-            </ComboBox>
-            
+                        <Label Content="Financing status*" />
+                        <ComboBox x:Name="FinancingStatusComboBox">
+                            <ComboBoxItem Content="Samofinansiranje" />
+                            <ComboBoxItem Content="Budžet" />
+                        </ComboBox>
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
-            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
-        </StackPanel>
+                        <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+                        <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

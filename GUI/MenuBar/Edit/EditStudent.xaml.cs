@@ -107,5 +107,14 @@ namespace GUI.MenuBar.Edit
             Close();
 
         }
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
