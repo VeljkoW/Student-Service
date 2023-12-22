@@ -19,9 +19,15 @@ namespace CLI
             subjects = storage.Load();
             subjectSubject = new ObserverSubject();
         }
+        public int GenerateID()
+        {
+            if (subjects.Count == 0) return 0;
+            return subjects[^1].Id + 1;
+        }
 
         public Subject AddSubject(Subject subject)
         {
+            subject.Id = GenerateID();
             subjects.Add(subject);
             storage.Save(subjects);
             return subject;
@@ -29,9 +35,10 @@ namespace CLI
 
         public Subject? UpdateSubject(Subject subject)
         {
-            Subject? oldSubject = GetSubjectById(subject.SubjectID);
+            Subject? oldSubject = GetSubjectById(subject.Id);
             if (oldSubject is null) return null;
 
+            oldSubject.SubjectID = subject.SubjectID;
             oldSubject.SubjectName = subject.SubjectName;
             oldSubject.Semester = subject.Semester;
             oldSubject.Year = subject.Year;
@@ -43,7 +50,7 @@ namespace CLI
             storage.Save(subjects);
             return oldSubject;
         }
-        public Subject? RemoveSubject(String id)
+        public Subject? RemoveSubject(int id)
         {
             Subject? subject = GetSubjectById(id);
             if (subject == null) return null;
@@ -52,9 +59,9 @@ namespace CLI
             storage.Save(subjects);
             return subject;
         }
-        public Subject? GetSubjectById(String id)
+        public Subject? GetSubjectById(int id)
         {
-            return subjects.Find(v => v.SubjectID == id);
+            return subjects.Find(v => v.Id == id);
         }
 
         public List<Subject> GetAllSubjects()

@@ -128,7 +128,8 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-
+                NewSubject sle = new NewSubject(Subjects);
+                sle.Show();
             }
             else if (Tab.SelectedIndex == 3)
             {

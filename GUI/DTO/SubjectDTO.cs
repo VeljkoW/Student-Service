@@ -13,6 +13,22 @@ namespace GUI.DTO
 {
    public class SubjectDTO : INotifyPropertyChanged
     {
+        private int id;
+        public int sId
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                if (value != id)
+                {
+                    id = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private string subjectID;
         public string SubjectID {
             get 
@@ -112,13 +128,10 @@ namespace GUI.DTO
             }
         }
 
-        public Subject ToSubject()
-        {
-            return new Subject(subjectName,semestar,year,professorId,espbPoints);
-        }
 
         public SubjectDTO()
         {
+            id = 0;
             SubjectID = "";
             subjectName = string.Empty;
             semestar = new Semester();

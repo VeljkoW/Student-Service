@@ -30,7 +30,7 @@ namespace CLI
             subjectDao.UpdateSubject(subject);
         }
 
-        public void Delete(string subjectId)
+        public void Delete(int subjectId)
         {
             subjectDao.RemoveSubject(subjectId);
         }

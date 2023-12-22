@@ -1,6 +1,6 @@
-﻿using CLI;
-using CLI.Controller;
+﻿using CLI.Controller;
 using CLI.models.Enums;
+using CLI;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -17,46 +17,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GUI.MenuBar.Edit
+namespace GUI.MenuBar.File
 {
-    public partial class EditSubject : Window
+    /// <summary>
+    /// Interaction logic for NewSubject.xaml
+    /// </summary>
+    public partial class NewSubject : Window
     {
         public SubjectDTO subjectDTO = new SubjectDTO();
         public SubjectController subjectController = new SubjectController();
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
-        SubjectDTO selectedSubject1;
-        public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects)
+
+
+        public NewSubject(ObservableCollection<SubjectDTO> subjects)
         {
             Subjects = subjects;
-            selectedSubject1 = selectedSubject;
             InitializeComponent();
-            SubjectIDTextBox.Text = selectedSubject.SubjectID;
-            SubjectNameTextBox.Text = selectedSubject.SubjectName;
-            ESPBNameTextBox.Text = selectedSubject.ESPBPoints.ToString();
-            if (selectedSubject.Semestar == Semester.ZIMSKI)
-            {
-                SemesterStatusComboBox.Text = "Zimski";
-            }
-            else
-            {
-                SemesterStatusComboBox.Text = "Letnji";
-            }
-            switch (selectedSubject.Year)
-            {
-                case 1:
-                    YearStatusComboBox.Text = "1";
-                    break;
-                case 2:
-                    YearStatusComboBox.Text = "2";
-                    break;
-                case 3:
-                    YearStatusComboBox.Text = "3";
-                    break;
-                default:
-                    YearStatusComboBox.Text = "4";
-                    break;
-            }
-
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -74,12 +50,10 @@ namespace GUI.MenuBar.Edit
             this.Left = (SWidth - WWidth) / 2;
             this.Top = (SHeight - WHeight) / 2;
         }
-        private void Cancel(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+
             string subjectID = SubjectIDTextBox.Text;
             string subjectName = SubjectNameTextBox.Text;
             int EspbPoints = int.Parse(ESPBNameTextBox.Text);
@@ -93,7 +67,7 @@ namespace GUI.MenuBar.Edit
                 semestar = Semester.ZIMSKI;
             }
             int YearStatus;
-            switch (YearStatusComboBox.Text.ToString())
+            switch(YearStatusComboBox.Text.ToString())
             {
                 case "1":
                     YearStatus = 1;
@@ -106,20 +80,18 @@ namespace GUI.MenuBar.Edit
                     break;
                 default:
                     YearStatus = 4;
-                    break;
+                     break;
             }
-            Subject subject = new Subject(selectedSubject1.sId,subjectID, subjectName, semestar, YearStatus, EspbPoints);
-            subjectController.Update(subject);
-
+            
+            Subject subject = new Subject(subjectID,subjectName,semestar,YearStatus,EspbPoints);
+            subjectController.Add(subject);
             subjectDTO = new SubjectDTO(subject);
-
-            for (int i = 0; i < Subjects.Count; i++)
-            {
-                if (Subjects[i].sId == subject.Id)
-                {
-                    Subjects[i] = subjectDTO;
-                }
-            }
+            Subjects.Add(subjectDTO);
+            
+            Close();
+        }
+        private void Cancel(object sender, EventArgs e)
+        {
             Close();
         }
     }
