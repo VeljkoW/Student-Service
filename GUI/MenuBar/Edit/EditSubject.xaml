@@ -1,0 +1,41 @@
+﻿<Window x:Class="GUI.MenuBar.Edit.EditSubject"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.MenuBar.Edit"
+        mc:Ignorable="d"
+        Title="EditSubject" Height="400" Width="400"
+        Loaded="CenterWindow"
+        ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Margin="10">
+            <Label Content="SubjectID*" />
+            <TextBox x:Name="SubjectIDTextBox" />
+
+            <Label Content="SubjectName*" />
+            <TextBox x:Name="SubjectNameTextBox" />
+
+            <Label Content="ESPB*" />
+            <TextBox x:Name="ESPBNameTextBox" />
+
+            <Label Content="Semester*" />
+            <ComboBox x:Name="SemesterStatusComboBox">
+                <ComboBoxItem Content="Zimski" />
+                <ComboBoxItem Content="Letnji" />
+            </ComboBox>
+
+            <Label Content="Year*" />
+            <ComboBox x:Name="YearStatusComboBox">
+                <ComboBoxItem Content="1" />
+                <ComboBoxItem Content="2" />
+                <ComboBoxItem Content="3" />
+                <ComboBoxItem Content="4" />
+            </ComboBox>
+            
+            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+            
+        </StackPanel>
+    </Grid>
+</Window>

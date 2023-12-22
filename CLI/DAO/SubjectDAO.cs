@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,22 +11,17 @@ namespace CLI
     {
         private readonly List<Subject> subjects;
         private readonly Storage<Subject> storage;
+        public ObserverSubject subjectSubject;
 
         public SubjectDAO()
         {
             storage = new Storage<Subject>("Subject.csv");
             subjects = storage.Load();
-        }
-
-        public int GenerateID()
-        {
-            if(subjects.Count == 0) return 0;
-            return subjects[^1].SubjectID + 1;
+            subjectSubject = new ObserverSubject();
         }
 
         public Subject AddSubject(Subject subject)
         {
-            subject.SubjectID = GenerateID();
             subjects.Add(subject);
             storage.Save(subjects);
             return subject;
@@ -47,7 +43,7 @@ namespace CLI
             storage.Save(subjects);
             return oldSubject;
         }
-        public Subject? RemoveSubject(int id)
+        public Subject? RemoveSubject(String id)
         {
             Subject? subject = GetSubjectById(id);
             if (subject == null) return null;
@@ -56,7 +52,7 @@ namespace CLI
             storage.Save(subjects);
             return subject;
         }
-        public Subject? GetSubjectById(int id)
+        public Subject? GetSubjectById(String id)
         {
             return subjects.Find(v => v.SubjectID == id);
         }

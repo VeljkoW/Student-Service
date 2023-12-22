@@ -22,7 +22,6 @@ namespace CLI
             Head = new Professor();
             Professors= new List<Professor>();
         }
-
         public Katedra(int id, string name, Professor head)
         {
             Id = id;
@@ -30,7 +29,6 @@ namespace CLI
             Head = head;
             Professors = new List<Professor>();
         }
-
         public string[] ToCSV()
         {
             List<string> retString = new List<string>

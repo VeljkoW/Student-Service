@@ -30,6 +30,10 @@ namespace CLI.Controller
         {
             professorDao.RemoveProfessor(professorId);
         }
+        public void Update(Professor professor)
+        {
+            professorDao.UpdateProfessor(professor);
+        }
 
         public void Subscribe(IObserver observer)
         {

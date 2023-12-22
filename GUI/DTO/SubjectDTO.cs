@@ -13,8 +13,19 @@ namespace GUI.DTO
 {
    public class SubjectDTO : INotifyPropertyChanged
     {
-       
-        public int SubjectID { get; set; }
+        private string subjectID;
+        public string SubjectID {
+            get 
+            { 
+                return subjectID; 
+            } set 
+            { 
+                if (value != subjectID) 
+                { subjectID = value;
+                    OnPropertyChanged();
+                } 
+            } 
+        }
 
         private string subjectName;
         public string SubjectName
@@ -108,15 +119,22 @@ namespace GUI.DTO
 
         public SubjectDTO()
         {
-            SubjectID = 0;
+            SubjectID = "";
             subjectName = string.Empty;
             semestar = new Semester();
             year = 0;
             professorId = 0;
             espbPoints = 0;
-
         }
-
+        public SubjectDTO(Subject s)
+        {
+            SubjectID = s.SubjectID;
+            subjectName = s.SubjectName;
+            semestar = s.Semester;
+            year = s.Year;
+            professorId= s.ProfessorId;
+            espbPoints = s.ESPBPoints;
+        }
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = "")

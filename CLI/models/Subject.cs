@@ -11,7 +11,7 @@ namespace CLI
 {
     public class Subject : ISerializable
     {
-        public int SubjectID { get; set; }
+        public String SubjectID { get; set; }
         public string SubjectName { get; set; }
         public Semester Semester { get; set; }
         public int Year { get; set; }
@@ -20,7 +20,7 @@ namespace CLI
         public List<Student> StudentsWhoPassed { get; set; }
         public List<Student> StudentsWhoDidntPass { get; set; }
 
-        public Subject(int subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints)
+        public Subject(string subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints)
         {
             SubjectID = subjectID;
             SubjectName = subjectName;
@@ -32,7 +32,7 @@ namespace CLI
             StudentsWhoDidntPass = new List<Student>();
         }
         //Konstruktor bez Id-eva
-        public Subject( string subjectName, Semester sem, int year, int professor, int eSPBPoints)
+        public Subject(string subjectName, Semester sem, int year, int professor, int eSPBPoints)
         {
          
             SubjectName = subjectName;
@@ -45,7 +45,7 @@ namespace CLI
         }
         public Subject()
         {
-            SubjectID = 1;
+            SubjectID = "";
             SubjectName = "Analiza";
             Semester = Semester.ZIMSKI;
             Year = 2023;
@@ -57,7 +57,7 @@ namespace CLI
 
         public void FromCSV(string[] val)
         {
-            SubjectID = int.Parse(val[0]);
+            SubjectID = val[0];
             SubjectName = val[1];
             if (val[2]=="ZIMSKI")
             {
@@ -76,7 +76,7 @@ namespace CLI
         {
             string[] retString =
             {
-                SubjectID.ToString(), SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString()
+                SubjectID, SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString()
             };
             return retString;
         }

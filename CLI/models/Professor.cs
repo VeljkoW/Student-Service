@@ -34,6 +34,19 @@ namespace CLI
             YearsOfService = years;
             Subjects = new List<Subject>();
         }
+        public Professor( string name, string surname, DateOnly dateofbirth, Adress adresa, string phone, string email, string idcard, string title, int years)
+        {
+            Name = name;
+            Surname = surname;
+            DateOfBirth = dateofbirth;
+            ProfessorAdress = adresa;
+            PhoneNumber = phone;
+            EmailAdress = email;
+            IDCardNumber = idcard;
+            Title = title;
+            YearsOfService = years;
+            Subjects = new List<Subject>();
+        }
         public Professor() {
             Id=0;
             Name = "Petar";

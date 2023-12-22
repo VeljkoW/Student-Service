@@ -32,45 +32,41 @@ namespace GUI
         public ObservableCollection<StudentDTO> Students { get; set; }
 
         public ObservableCollection<ExamGradeDTO> ExamGrades { get; set; }
-
-        public ObservableCollection<KatedraDTO> Katedras { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
+        public ObservableCollection<SubjectDTO> Subjects { get; set; }
 
         public StudentDTO? SelectedStudent { get; set; }
-
         public ExamGradeDTO? SelectedExamGrade {  get; set; }
-
-        public KatedraDTO? SelectedKatedra { get; set; }
+        public SubjectDTO? SelectedSubject { get; set; }
         public ProfessorDTO? SelectedProfessor { get; set; }
-
         private StudentController studentController {  get; set; }
-
         private ExamGradeController examGradeController { get; set; }
-
-        private KatedraController katedraController { get; set; }
         private ProfessorController professorController { get; set; }
-  
+        private SubjectController subjectController { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
+
+
             Students = new ObservableCollection<StudentDTO>();
             ExamGrades = new ObservableCollection<ExamGradeDTO>();
-            Katedras = new ObservableCollection<KatedraDTO>();
             Professors = new ObservableCollection<ProfessorDTO>();
+            Subjects = new ObservableCollection<SubjectDTO>();
+
+
             studentController = new StudentController();
             examGradeController = new ExamGradeController();
-            katedraController = new KatedraController();
             professorController = new ProfessorController();
-            katedraController.Subscribe(this);
+            subjectController = new SubjectController();
+
+
             examGradeController.Subscribe(this);
             studentController.Subscribe(this);
             professorController.Subscribe(this);
-           
-
             Update();
         }
-
         private void LoadFunctions(object sender, RoutedEventArgs e)
         {
             CenterWindowFunction();
@@ -100,7 +96,7 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-                StatusBarCurrentTab.Text = "Departments";
+                StatusBarCurrentTab.Text = "Subjects";
             }
             else if (Tab.SelectedIndex == 3)
             {
@@ -123,18 +119,21 @@ namespace GUI
         {
             if (Tab.SelectedIndex == 0)
             {
-               
-                    NewStudent sle = new NewStudent(Students);
-                    sle.Show();
-               
+                NewStudent sle = new NewStudent(Students);
+                sle.Show();
             }
             else if (Tab.SelectedIndex == 1)
             {
-               
+
             }
             else if (Tab.SelectedIndex == 2)
             {
-                
+
+            }
+            else if (Tab.SelectedIndex == 3)
+            {
+                NewProfessor sle = new NewProfessor(Professors);
+                sle.Show();
             }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
@@ -185,13 +184,26 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-                if (SelectedKatedra == null)
+                if (SelectedSubject == null)
                 {
-                    MessageBox.Show("Please choose a Katedra you want to edit!");
+                    MessageBox.Show("Please choose a subject you want to edit!");
                 }
                 else
                 {
-                   
+                    EditSubject sle = new EditSubject(SelectedSubject, Subjects);
+                    sle.Show();
+                }
+            }
+            else if (Tab.SelectedIndex == 3)
+            {
+                if (SelectedProfessor == null)
+                {
+                    MessageBox.Show("Please choose a professor you want to edit!");
+                }
+                else
+                {
+                    EditProfesor sle = new EditProfesor(SelectedProfessor, Professors);
+                    sle.Show();
                 }
             }
         }
@@ -224,13 +236,13 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-                if (SelectedKatedra == null)
+                if (SelectedSubject == null)
                 {
-                    MessageBox.Show("Please choose a Katedra you want to delete!");
+                    MessageBox.Show("Please choose a subject you want to delete!");
                 }
                 else
                 {
-                    Delete del = new Delete(SelectedKatedra, Katedras);
+                    Delete del = new Delete(SelectedSubject, Subjects);
                     del.Show();
                 }
             }
@@ -238,7 +250,7 @@ namespace GUI
             {
                 if (SelectedProfessor == null)
                 {
-                    MessageBox.Show("Please choose a Professor you want to delete!");
+                    MessageBox.Show("Please choose a professor you want to delete!");
                 }
                 else
                 {
@@ -257,11 +269,11 @@ namespace GUI
         {
             Students.Clear();
             ExamGrades.Clear();
-            Katedras.Clear();
+            Subjects.Clear();
             Professors.Clear();
             foreach (Student student in studentController.GetAllStudents()) Students.Add(new StudentDTO(student));
             foreach (ExamGrade examgrade in examGradeController.GetAllExamGrades()) ExamGrades.Add(new ExamGradeDTO(examgrade));
-            foreach (Katedra katedra in katedraController.GetAllKatedras()) Katedras.Add(new KatedraDTO(katedra));
+            foreach (Subject subject in subjectController.GetAllSubjects()) Subjects.Add(new SubjectDTO(subject));
             foreach (Professor professor in professorController.GetAllProfessors()) Professors.Add(new ProfessorDTO(professor));
         }
     }

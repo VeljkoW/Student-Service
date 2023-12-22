@@ -38,6 +38,8 @@ namespace CLI
 
         private Subject InputSubject()
         {
+            System.Console.WriteLine("Enter subject ID: ");
+            string id = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter subject Name: ");
             string name = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter semester (0 - LETNJI, 1 - ZIMSKI): ");
@@ -61,17 +63,12 @@ namespace CLI
             int professorid = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter ESPB Points: ");
             int espb = ConsoleViewUtils.SafeInputInt();
-            Subject s = new Subject(subjectDao.GenerateID(),name,semester,year,professorid,espb);
+            Subject s = new Subject(id, name,semester,year,professorid,espb);
             return s;
-        }
-        private int InputId()
-        {
-            System.Console.WriteLine("Enter id: ");
-            return ConsoleViewUtils.SafeInputInt();
         }
         private void UpdateSubject()
         {
-            int id = InputId();
+            string id = System.Console.ReadLine() ?? string.Empty;
             Subject subject = InputSubject();
             subject.SubjectID = id;
             Subject? updateSubject = subjectDao.UpdateSubject(subject);
@@ -88,9 +85,9 @@ namespace CLI
             subjectDao.AddSubject(subject);
             System.Console.WriteLine("Subject added");
         }
+        /*
         private void RemoveSubject()
         {
-            int id = InputId();
             Subject? removedSubject = subjectDao.RemoveSubject(id);
             if (removedSubject is null)
             {
@@ -99,7 +96,7 @@ namespace CLI
             }
 
             System.Console.WriteLine("Subject removed");
-        }
+        }*/
         private void ShowAllSubjects()
         {
             PrintSubjects(subjectDao.GetAllSubjects());
@@ -137,7 +134,7 @@ namespace CLI
                     UpdateSubject();
                     break;
                 case "4":
-                    RemoveSubject();
+                    //RemoveSubject();
                     break;
             }
         }
