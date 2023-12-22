@@ -105,7 +105,7 @@ namespace GUI.MenuBar.Edit
             }
             else if (SelectedSubject != null && Subjects != null)
             {
-                subjectController.Delete(SelectedSubject.sId);
+                subjectController.Delete(SelectedSubject.Id);
                 Subjects.Remove(SelectedSubject);
                 this.Close();
             }

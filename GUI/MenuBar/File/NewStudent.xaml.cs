@@ -79,6 +79,9 @@ namespace GUI.MenuBar.File
         {
             Close();
         }
-
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
