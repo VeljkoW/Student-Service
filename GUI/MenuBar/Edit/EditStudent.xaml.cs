@@ -35,7 +35,10 @@ namespace GUI.MenuBar.Edit
             InitializeComponent();
             NameTextBox.Text = selectedStudent.StudentName;
             SurnameTextBox.Text = selectedStudent.Surname;
-            AddressTextBox.Text = (selectedStudent.Adress).ToString();
+            StreetTextBox.Text = selectedStudent.Adress.Street;
+            StreetNumberTextBox.Text = selectedStudent.Adress.StreetNumber.ToString();
+            CityTextBox.Text = selectedStudent.Adress.City;
+            StateTextBox.Text = selectedStudent.Adress.State;
             PhoneNumberTextBox.Text = selectedStudent.Phone;
             DateOfBirthDatePicker.Text = selectedStudent.DateOfBirth.ToString();
             EmailTextBox.Text = selectedStudent.Email;
@@ -75,7 +78,11 @@ namespace GUI.MenuBar.Edit
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            string ulica = StreetTextBox.Text;
+            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+            string grad = CityTextBox.Text;
+            string drzava = StateTextBox.Text;
+            Adress adresa = new Adress(ulica,ulica_broj, grad, drzava);
             DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
