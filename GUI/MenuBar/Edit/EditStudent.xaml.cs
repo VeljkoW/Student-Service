@@ -89,13 +89,13 @@ namespace GUI.MenuBar.Edit
             CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
             int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
             Status nacinFinansiranja;
-            if (FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
+            if (FinancingStatusComboBox.Text.ToString() == "Budžet")
             {
-                nacinFinansiranja = Status.SAMOFINANSIRANJE;
+                nacinFinansiranja = Status.BUDZET;
             }
             else
             {
-                nacinFinansiranja = Status.BUDZET;
+                nacinFinansiranja = Status.SAMOFINANSIRANJE;
             }
 
             Student student = new Student(selectedStudent1.Id,ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
