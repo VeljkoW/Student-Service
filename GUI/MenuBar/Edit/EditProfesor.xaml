@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditProfesor" Height="550" Width="400"
+        Title="EditProfesor" Height="550" Width="490"
         Loaded="CenterWindow">
     <Grid >
         <StackPanel Margin="10">
@@ -16,9 +16,25 @@
             <Label Content="Surname*" />
             <TextBox x:Name="SurnameTextBox"/>
 
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <Label Content="Street*" />
+                <TextBox x:Name="StreetTextBox" Width="100" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
 
-            <Label Content="Address*" />
-            <TextBox x:Name="AddressTextBox" />
+            <StackPanel Orientation="Horizontal" Margin="150,-25.2,0,0">
+                <Label Content="Num*"/>
+                <TextBox x:Name="StreetNumberTextBox" Width="30" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="220,-27,0,0">
+                <Label Content="City*" />
+                <TextBox x:Name="CityTextBox" Width="70" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="330,-27,0,0">
+                <Label Content="State*" />
+                <TextBox x:Name="StateTextBox" Width="52" VerticalAlignment="Center" Height="20" />
+            </StackPanel>
 
             <Label Content="Phone Number*" />
             <TextBox x:Name="PhoneNumberTextBox" />

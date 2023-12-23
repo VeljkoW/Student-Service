@@ -55,8 +55,12 @@ namespace GUI.MenuBar.File
         {
 
             string ime = NameTextBox.Text;
-            string prezime = SurnameTextBox.Text;
-            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            string prezime = SurnameTextBox.Text; 
+            string ulica = StreetTextBox.Text;
+            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+            string grad = CityTextBox.Text;
+            string drzava = StateTextBox.Text;
+            Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             string idCard = IDCardNumberTextBox.Text;
@@ -67,11 +71,6 @@ namespace GUI.MenuBar.File
             professorController.Add(profesor);
             professorDTO =new ProfessorDTO(profesor);
             Professors.Add(professorDTO);
-            /*
-            Student student = new Student(ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
-            studentController.Add(student);
-            ProfessorDTO = new ProfessorDTO(student);
-            Students.Add(ProfessorDTO);*/
             Close();
         }
         private void Cancel(object sender, EventArgs e)

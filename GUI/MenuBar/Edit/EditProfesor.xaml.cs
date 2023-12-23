@@ -34,7 +34,10 @@ namespace GUI.MenuBar.Edit
             InitializeComponent();
             NameTextBox.Text = selectedProfessor.ProfessorName;
             SurnameTextBox.Text = selectedProfessor.ProfessorSurname;
-            AddressTextBox.Text = (selectedProfessor.ProfessorAdress).ToString();
+            StreetTextBox.Text = selectedProfessor.ProfessorAdress.Street;
+            StreetNumberTextBox.Text = selectedProfessor.ProfessorAdress.StreetNumber.ToString();
+            CityTextBox.Text = selectedProfessor.ProfessorAdress.City;
+            StateTextBox.Text = selectedProfessor.ProfessorAdress.State;
             PhoneNumberTextBox.Text = selectedProfessor.PhoneNumber;
             EmailTextBox.Text = selectedProfessor.ProfessorEmail;
             IDCardNumberTextBox.Text = selectedProfessor.IDCardNumber;
@@ -65,8 +68,12 @@ namespace GUI.MenuBar.Edit
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             string ime = NameTextBox.Text;
-            string prezime = SurnameTextBox.Text;
-            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            string prezime = SurnameTextBox.Text; 
+            string ulica = StreetTextBox.Text;
+            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+            string grad = CityTextBox.Text;
+            string drzava = StateTextBox.Text;
+            Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             string idCard = IDCardNumberTextBox.Text;

@@ -53,7 +53,11 @@ namespace GUI.MenuBar.File
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            Adress adresa = Adress.Parse(AddressTextBox.Text);
+            string ulica = StreetTextBox.Text;
+            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+            string grad = CityTextBox.Text;
+            string drzava = StateTextBox.Text;
+            Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
             DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
