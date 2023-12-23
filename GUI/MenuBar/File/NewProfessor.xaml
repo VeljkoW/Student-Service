@@ -27,12 +27,12 @@
                 <TextBox x:Name="StreetNumberTextBox" Width="30" VerticalAlignment="Center" Height="20"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="220,-27,0,0">
+            <StackPanel Orientation="Horizontal" Margin="220,-26,0,0">
                 <Label Content="City*" />
                 <TextBox x:Name="CityTextBox" Width="70" VerticalAlignment="Center" Height="20"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="330,-27,0,0">
+            <StackPanel Orientation="Horizontal" Margin="330,-26,0,0">
                 <Label Content="State*" />
                 <TextBox x:Name="StateTextBox" Width="52" VerticalAlignment="Center" Height="20" />
             </StackPanel>

@@ -57,7 +57,7 @@ namespace CLI
             StudentIndex=new Index(values[10]);
             StudentYear= int.Parse(values[11]);
             GradeAvg= int.Parse(values[12]);
-            if (values[13] == "1")
+            if (values[13] == "SAMOFINANSIRANJE")
             {
                 Status = Status.SAMOFINANSIRANJE;
             }
