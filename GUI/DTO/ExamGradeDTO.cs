@@ -16,6 +16,40 @@ namespace GUI.DTO
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
 
+        private CLI.Index studentIndex {  get; set; }
+        public CLI.Index StudentIndex
+        {
+            get
+            {
+                return studentIndex;
+            }
+            set
+            {
+                if (value != studentIndex)
+                {
+                    studentIndex = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string subjectIDName {  get; set; }
+        public string SubjectIDName
+        {
+            get
+            {
+                return subjectIDName;
+            }
+            set
+            {
+                if (value != subjectIDName)
+                {
+                    subjectIDName = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
         private int grade;
         public int Grade
         {
@@ -50,13 +84,10 @@ namespace GUI.DTO
             }
         }
 
-        public ExamGrade ToExamGrade()
-        {
-            return new ExamGrade(grade,date);
-        }
-
+    
         public ExamGradeDTO()
         {
+            Id = 0;
         }
 
         public ExamGradeDTO(ExamGrade examgrade)
@@ -66,6 +97,8 @@ namespace GUI.DTO
             SubjectId=examgrade.SubjectId;
             grade=examgrade.Grade;
             date=examgrade.Date;
+            studentIndex = examgrade.StudentIndex;
+            subjectIDName = examgrade.SubjectIdName;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

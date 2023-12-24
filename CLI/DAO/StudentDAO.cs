@@ -78,7 +78,7 @@ namespace CLI
         {
             return students;
         }
-        private Student? GetStudentById(int id)
+        public Student? GetStudentById(int id)
         {
             return students.Find(v => v.Id == id);
         }
