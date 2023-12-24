@@ -34,15 +34,18 @@ namespace GUI
         public ObservableCollection<ExamGradeDTO> ExamGrades { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public ObservableCollection<KatedraDTO> Departments { get; set; }
 
         public StudentDTO? SelectedStudent { get; set; }
         public ExamGradeDTO? SelectedExamGrade {  get; set; }
         public SubjectDTO? SelectedSubject { get; set; }
         public ProfessorDTO? SelectedProfessor { get; set; }
+        public KatedraDTO? SelectedDepartment { get; set; }
         private StudentController studentController {  get; set; }
         private ExamGradeController examGradeController { get; set; }
         private ProfessorController professorController { get; set; }
         private SubjectController subjectController { get; set; }
+        private KatedraController departmentController {  get; set; }
 
         public MainWindow()
         {
@@ -54,12 +57,14 @@ namespace GUI
             ExamGrades = new ObservableCollection<ExamGradeDTO>();
             Professors = new ObservableCollection<ProfessorDTO>();
             Subjects = new ObservableCollection<SubjectDTO>();
+            Departments = new ObservableCollection<KatedraDTO>();
 
 
             studentController = new StudentController();
             examGradeController = new ExamGradeController();
             professorController = new ProfessorController();
             subjectController = new SubjectController();
+            departmentController = new KatedraController();
 
 
             examGradeController.Subscribe(this);
@@ -136,6 +141,10 @@ namespace GUI
                 NewProfessor sle = new NewProfessor(Professors);
                 sle.ShowDialog();
             }
+            else if (Tab.SelectedIndex == 4)
+            {
+                
+            }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
         {
@@ -207,6 +216,17 @@ namespace GUI
                     sle.ShowDialog();
                 }
             }
+            else if (Tab.SelectedIndex == 4)
+            {
+                if (SelectedDepartment == null)
+                {
+                    MessageBox.Show("Please choose a department you want to edit!");
+                }
+                else
+                {
+
+                }
+            }
         }
         private void OpenDeleteWindow(object sender, RoutedEventArgs e)
         {
@@ -259,6 +279,18 @@ namespace GUI
                     del.ShowDialog();
                 }
             }
+            else if (Tab.SelectedIndex == 4)
+            {
+                if (SelectedDepartment == null)
+                {
+                    MessageBox.Show("Please choose a department you want to delete!");
+                }
+                else
+                {
+                    Delete del = new Delete(SelectedDepartment, Departments);
+                    del.ShowDialog();
+                }
+            }
         }
         private void OpenAboutWindow(object sender, RoutedEventArgs e)
         {
@@ -272,10 +304,12 @@ namespace GUI
             ExamGrades.Clear();
             Subjects.Clear();
             Professors.Clear();
+            Departments.Clear();
             foreach (Student student in studentController.GetAllStudents()) Students.Add(new StudentDTO(student));
             foreach (ExamGrade examgrade in examGradeController.GetAllExamGrades()) ExamGrades.Add(new ExamGradeDTO(examgrade));
             foreach (Subject subject in subjectController.GetAllSubjects()) Subjects.Add(new SubjectDTO(subject));
             foreach (Professor professor in professorController.GetAllProfessors()) Professors.Add(new ProfessorDTO(professor));
+            foreach (Katedra katedra in departmentController.GetAllKatedras()) Departments.Add(new KatedraDTO(katedra));
         }
     }
 }

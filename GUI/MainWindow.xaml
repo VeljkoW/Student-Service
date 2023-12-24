@@ -74,8 +74,8 @@
                       SelectedItem="{Binding SelectedExamGrade, UpdateSourceTrigger=PropertyChanged}"
                       SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Student Id" Binding="{Binding StudentId}"/>
-                            <DataGridTextColumn Header="Subject Id" Binding="{Binding SubjectId}"/>
+                            <DataGridTextColumn Header="Student Index" Binding="{Binding StudentIndex}"/>
+                            <DataGridTextColumn Header="Subject Id" Binding="{Binding SubjectIDName}"/>
                             <DataGridTextColumn Header="Grade" Binding="{Binding Grade}"/>
                             <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
                         </DataGrid.Columns>
@@ -87,7 +87,7 @@
                     <DataGrid Height="350"
                 BorderBrush="Black" BorderThickness="2"
                 AutoGenerateColumns="False"
-                x:Name="DepartmentsDataGrid"
+                x:Name="SubjectsDataGrid"
                 ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}"
                 SelectionMode="Single" IsReadOnly="True">
@@ -116,9 +116,27 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
+
+                <TabItem Header="Departments">
+                    <DataGrid Height="350"
+                    BorderBrush="Black" BorderThickness="2"
+                    AutoGenerateColumns="False"
+                    x:Name="DepartmentsDataGrid"
+                    ItemsSource="{Binding Departments, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding SelectedDepartment, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionMode="Single" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Name" Binding="{Binding DepartmentName}"/>
+                            <DataGridTextColumn Header="Head professor name" Binding="{Binding ImeProfesora}"/>
+                            <DataGridTextColumn Header="Head professor surname" Binding="{Binding PrezimeProfesora}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+
             </TabControl>
         </DockPanel>
 
+        
 
         <StatusBar VerticalAlignment="Bottom" BorderBrush="Black" BorderThickness="2">
 
