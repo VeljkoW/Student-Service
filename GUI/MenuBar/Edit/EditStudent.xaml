@@ -65,6 +65,14 @@
                         <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
                     </StackPanel>
                 </TabItem>
+                
+                <TabItem Header="Passed">
+                    
+                </TabItem>
+                
+                <TabItem Header="Not passed">
+                   
+                </TabItem>
             </TabControl>
         </DockPanel>
     </Grid>

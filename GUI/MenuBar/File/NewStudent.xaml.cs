@@ -53,16 +53,9 @@ namespace GUI.MenuBar.File
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            string ulica = StreetTextBox.Text;
-            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
-            string grad = CityTextBox.Text;
-            string drzava = StateTextBox.Text;
-            Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
-            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
             Status nacinFinansiranja;
             if(FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
             {
@@ -72,12 +65,26 @@ namespace GUI.MenuBar.File
             {
                 nacinFinansiranja = Status.BUDZET;
             }
+            if (string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(prezime) || string.IsNullOrEmpty(StreetTextBox.Text) || string.IsNullOrEmpty(StreetNumberTextBox.Text) || string.IsNullOrEmpty(CityTextBox.Text) || string.IsNullOrEmpty(StateTextBox.Text) || string.IsNullOrEmpty(DateOfBirthDatePicker.Text) || string.IsNullOrEmpty(brojTelefona) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(IndexNumberTextBox.Text) || string.IsNullOrEmpty(YearTextBox.Text) || string.IsNullOrEmpty(FinancingStatusComboBox.Text))
+            {
+                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
 
-            Student student = new Student(ime, prezime, dateofbirth, adresa,brojTelefona,email,brojIndexa,trenutnaGodinaStudija,nacinFinansiranja);
-            studentController.Add(student);
-            studentDTO =new StudentDTO(student);
-            Students.Add(studentDTO);
-            Close();
+                DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
+                int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+                string ulica = StreetTextBox.Text;
+                string grad = CityTextBox.Text;
+                string drzava = StateTextBox.Text;
+                Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
+                int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
+                Student student = new Student(ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
+                studentController.Add(student);
+                studentDTO = new StudentDTO(student);
+                Students.Add(studentDTO);
+                Close();
+            }
         }
         private void Cancel(object sender, EventArgs e)
         {

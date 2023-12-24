@@ -82,7 +82,6 @@ namespace GUI.MenuBar.Edit
         {
             string subjectID = SubjectIDTextBox.Text;
             string subjectName = SubjectNameTextBox.Text;
-            int EspbPoints = int.Parse(ESPBNameTextBox.Text);
             Semester semestar;
             if (SemesterStatusComboBox.Text.ToString() == "Letnji")
             {
@@ -92,36 +91,48 @@ namespace GUI.MenuBar.Edit
             {
                 semestar = Semester.ZIMSKI;
             }
-            int YearStatus;
-            switch (YearStatusComboBox.Text.ToString())
+           
+            if (string.IsNullOrEmpty(SubjectIDTextBox.Text) || string.IsNullOrEmpty(SubjectNameTextBox.Text) || string.IsNullOrEmpty(ESPBNameTextBox.Text) || string.IsNullOrEmpty(SemesterStatusComboBox.Text) || string.IsNullOrEmpty(YearStatusComboBox.Text))
             {
-                case "1":
-                    YearStatus = 1;
-                    break;
-                case "2":
-                    YearStatus = 2;
-                    break;
-                case "3":
-                    YearStatus = 3;
-                    break;
-                default:
-                    YearStatus = 4;
-                    break;
+                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            Subject subject = new Subject(selectedSubject1.Id,subjectID, subjectName, semestar, YearStatus, EspbPoints);
-
-            subjectController.Update(subject);
-
-            subjectDTO = new SubjectDTO(subject);
-
-            for (int i = 0; i < Subjects.Count; i++)
+            else
             {
-                if (Subjects[i].Id == subject.Id)
+
+                int EspbPoints = int.Parse(ESPBNameTextBox.Text);
+                int YearStatus;
+                switch (YearStatusComboBox.Text.ToString())
                 {
-                    Subjects[i] = subjectDTO;
+                    case "1":
+                        YearStatus = 1;
+                        break;
+                    case "2":
+                        YearStatus = 2;
+                        break;
+                    case "3":
+                        YearStatus = 3;
+                        break;
+                    default:
+                        YearStatus = 4;
+                        break;
                 }
+
+                Subject subject = new Subject(selectedSubject1.Id, subjectID, subjectName, semestar, YearStatus, EspbPoints);
+
+                subjectController.Update(subject);
+
+                subjectDTO = new SubjectDTO(subject);
+
+                for (int i = 0; i < Subjects.Count; i++)
+                {
+                    if (Subjects[i].Id == subject.Id)
+                    {
+                        Subjects[i] = subjectDTO;
+                    }
+                }
+                Close();
+
             }
-            Close();
         }
     }
 }

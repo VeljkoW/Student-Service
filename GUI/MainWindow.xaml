@@ -109,7 +109,6 @@
                     SelectedItem="{Binding SelectedProfessor, UpdateSourceTrigger=PropertyChanged}"
                     SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding ProfessorId}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding ProfessorName}"/>
                             <DataGridTextColumn Header="Surname" Binding="{Binding ProfessorSurname}"/>
                             <DataGridTextColumn Header="E-Mail" Binding="{Binding ProfessorEmail}"/>

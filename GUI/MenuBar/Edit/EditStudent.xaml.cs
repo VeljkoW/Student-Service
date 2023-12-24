@@ -78,16 +78,9 @@ namespace GUI.MenuBar.Edit
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            string ulica = StreetTextBox.Text;
-            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
-            string grad = CityTextBox.Text;
-            string drzava = StateTextBox.Text;
-            Adress adresa = new Adress(ulica,ulica_broj, grad, drzava);
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
-            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
             Status nacinFinansiranja;
             if (FinancingStatusComboBox.Text.ToString() == "Budžet")
             {
@@ -98,20 +91,35 @@ namespace GUI.MenuBar.Edit
                 nacinFinansiranja = Status.SAMOFINANSIRANJE;
             }
 
-            Student student = new Student(selectedStudent1.Id,ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
-            studentController.Update(student);
-            
-            studentDTO = new StudentDTO(student);
-           
-            for(int i = 0; i < Students.Count; i++)
+            if (string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(prezime) || string.IsNullOrEmpty(StreetTextBox.Text) || string.IsNullOrEmpty(StreetNumberTextBox.Text) || string.IsNullOrEmpty(CityTextBox.Text) || string.IsNullOrEmpty(StateTextBox.Text) || string.IsNullOrEmpty(DateOfBirthDatePicker.Text) || string.IsNullOrEmpty(brojTelefona) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(IndexNumberTextBox.Text) || string.IsNullOrEmpty(YearTextBox.Text) || string.IsNullOrEmpty(FinancingStatusComboBox.Text))
             {
-                if(Students[i].Id == student.Id)
-                {
-                    Students[i] = studentDTO;
-                }
+                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
-            
-            Close();
+            else
+            {
+                DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
+                int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+                string ulica = StreetTextBox.Text;
+                string grad = CityTextBox.Text;
+                string drzava = StateTextBox.Text;
+                Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
+                int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
+                Student student = new Student(selectedStudent1.Id, ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
+                studentController.Update(student);
+
+                studentDTO = new StudentDTO(student);
+
+                for (int i = 0; i < Students.Count; i++)
+                {
+                    if (Students[i].Id == student.Id)
+                    {
+                        Students[i] = studentDTO;
+                    }
+                }
+
+                Close();
+
+            }
 
         }
         private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
