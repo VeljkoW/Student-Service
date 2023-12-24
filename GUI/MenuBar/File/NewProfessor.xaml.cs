@@ -56,22 +56,31 @@ namespace GUI.MenuBar.File
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text; 
-            string ulica = StreetTextBox.Text;
-            int ulica_broj = int.Parse(StreetNumberTextBox.Text);
-            string grad = CityTextBox.Text;
-            string drzava = StateTextBox.Text;
-            Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             string idCard = IDCardNumberTextBox.Text;
             string title = TitleTextBox.Text;
-            int yearsofservice= int.Parse(YearsOfServiceTextBox.Text);
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
-            Professor profesor = new Professor(ime,prezime,dateofbirth,adresa,brojTelefona,email,idCard,title, yearsofservice);
-            professorController.Add(profesor);
-            professorDTO =new ProfessorDTO(profesor);
-            Professors.Add(professorDTO);
-            Close();
+
+            if (string.IsNullOrEmpty(NameTextBox.Text) || string.IsNullOrEmpty(SurnameTextBox.Text) || string.IsNullOrEmpty(StreetTextBox.Text) || string.IsNullOrEmpty(StreetNumberTextBox.Text) || string.IsNullOrEmpty(CityTextBox.Text) || string.IsNullOrEmpty(StateTextBox.Text) || string.IsNullOrEmpty(PhoneNumberTextBox.Text) || string.IsNullOrEmpty(EmailTextBox.Text) || string.IsNullOrEmpty(IDCardNumberTextBox.Text) || string.IsNullOrEmpty(TitleTextBox.Text) || string.IsNullOrEmpty(YearsOfServiceTextBox.Text) || string.IsNullOrEmpty(DateOfBirthDatePicker.Text))
+            {
+                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                string ulica = StreetTextBox.Text;
+                int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+                string grad = CityTextBox.Text;
+                string drzava = StateTextBox.Text;
+                Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
+                int yearsofservice = int.Parse(YearsOfServiceTextBox.Text);
+                DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
+
+                Professor profesor = new Professor(ime, prezime, dateofbirth, adresa, brojTelefona, email, idCard, title, yearsofservice);
+                professorController.Add(profesor);
+                professorDTO = new ProfessorDTO(profesor);
+                Professors.Add(professorDTO);
+                Close();
+            }
         }
         private void Cancel(object sender, EventArgs e)
         {

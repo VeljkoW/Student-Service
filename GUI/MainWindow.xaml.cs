@@ -120,7 +120,7 @@ namespace GUI
             if (Tab.SelectedIndex == 0)
             {
                 NewStudent sle = new NewStudent(Students);
-                sle.Show();
+                sle.ShowDialog();
             }
             else if (Tab.SelectedIndex == 1)
             {
@@ -129,24 +129,24 @@ namespace GUI
             else if (Tab.SelectedIndex == 2)
             {
                 NewSubject sle = new NewSubject(Subjects);
-                sle.Show();
+                sle.ShowDialog();
             }
             else if (Tab.SelectedIndex == 3)
             {
                 NewProfessor sle = new NewProfessor(Professors);
-                sle.Show();
+                sle.ShowDialog();
             }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
         {
             Save sle = new Save();
-            sle.Show();
+            sle.ShowDialog();
         }
 
         private void OpenOpenLayout(object sender, RoutedEventArgs e)
         {
             Open sle = new Open();
-            sle.Show();
+            sle.ShowDialog();
         }
 
         private void ClickClose(object sender, RoutedEventArgs e)
@@ -169,7 +169,7 @@ namespace GUI
                 else
                 {
                     EditStudent sle = new EditStudent(SelectedStudent,Students);
-                    sle.Show();
+                    sle.ShowDialog();
                 }
             }
             else if (Tab.SelectedIndex == 1)
@@ -192,7 +192,7 @@ namespace GUI
                 else
                 {
                     EditSubject sle = new EditSubject(SelectedSubject, Subjects);
-                    sle.Show();
+                    sle.ShowDialog();
                 }
             }
             else if (Tab.SelectedIndex == 3)
@@ -204,7 +204,7 @@ namespace GUI
                 else
                 {
                     EditProfesor sle = new EditProfesor(SelectedProfessor, Professors);
-                    sle.Show();
+                    sle.ShowDialog();
                 }
             }
         }
@@ -220,7 +220,7 @@ namespace GUI
                 else
                 {
                     Delete del = new Delete(SelectedStudent,Students);
-                    del.Show();
+                    del.ShowDialog();
                 }
             }
             else if(Tab.SelectedIndex==1)
@@ -232,7 +232,7 @@ namespace GUI
                 else
                 {
                     Delete del = new Delete(SelectedExamGrade,ExamGrades);
-                    del.Show();
+                    del.ShowDialog();
                 }
             }
             else if (Tab.SelectedIndex == 2)
@@ -244,7 +244,7 @@ namespace GUI
                 else
                 {
                     Delete del = new Delete(SelectedSubject, Subjects);
-                    del.Show();
+                    del.ShowDialog();
                 }
             }
             else if (Tab.SelectedIndex == 3)
@@ -256,14 +256,14 @@ namespace GUI
                 else
                 {
                     Delete del = new Delete(SelectedProfessor, Professors);
-                    del.Show();
+                    del.ShowDialog();
                 }
             }
         }
         private void OpenAboutWindow(object sender, RoutedEventArgs e)
         {
             About sle = new About();
-            sle.Show();
+            sle.ShowDialog();
         }
 
         public void Update()
