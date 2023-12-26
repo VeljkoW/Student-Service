@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.File"
         mc:Ignorable="d"
-        Title="NewStudent" Height="550" Width="490"
+        Title="New Student" Height="550" Width="490"
         Loaded="CenterWindow">
    
    
