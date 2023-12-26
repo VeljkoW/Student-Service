@@ -78,6 +78,14 @@ namespace GUI.MenuBar.Edit
             {
                 MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if (!int.TryParse(StreetNumberTextBox.Text, out int result))
+            {
+                MessageBox.Show("Make sure you put a number in the street number texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if (!int.TryParse(YearsOfServiceTextBox.Text, out int result1))
+            {
+                MessageBox.Show("Make sure you put a number in the years of service texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
                 string ulica = StreetTextBox.Text;
@@ -104,6 +112,10 @@ namespace GUI.MenuBar.Edit
                 Close();
 
             }
+        }
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }
