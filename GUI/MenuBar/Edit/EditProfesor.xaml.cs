@@ -1,6 +1,7 @@
 ﻿using CLI;
 using CLI.Controller;
 using GUI.DTO;
+using GUI.MenuBar.File;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -78,6 +79,14 @@ namespace GUI.MenuBar.Edit
             {
                 MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if (!int.TryParse(StreetNumberTextBox.Text, out int result))
+            {
+                MessageBox.Show("Make sure you put a number in the street number texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if (!int.TryParse(YearsOfServiceTextBox.Text, out int result1))
+            {
+                MessageBox.Show("Make sure you put a number in the years of service texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
                 string ulica = StreetTextBox.Text;
@@ -102,6 +111,24 @@ namespace GUI.MenuBar.Edit
                 }
 
                 Close();
+
+            }
+        }
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+        private void AddSubjectFun(object sender, RoutedEventArgs e)
+        {
+            ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor();
+            chooseSubjectToAdd.Owner = this;
+            chooseSubjectToAdd.ShowDialog();
+        }
+        private void RemoveSubjectFun(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (R == MessageBoxResult.Yes)
+            {
 
             }
         }

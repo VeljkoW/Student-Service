@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using GUI.MenuBar.File;
 
 namespace GUI.MenuBar.Edit
 {
@@ -95,6 +96,14 @@ namespace GUI.MenuBar.Edit
             {
                 MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if (!int.TryParse(YearTextBox.Text,out int result))
+                {
+                MessageBox.Show("Make sure you put a number in the Year texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if(!int.TryParse(StreetNumberTextBox.Text,out int result1))
+            {
+                MessageBox.Show("Make sure you put a number in the street number textbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
                 DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
@@ -130,6 +139,42 @@ namespace GUI.MenuBar.Edit
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void DismissGradeFun(object sender, RoutedEventArgs e)
+        {
+            /*
+            if (SelectedPassedSubjects == null)
+            {
+                MessageBox.Show("Please choose a subject which grade you want to dismiss!");
+            }
+            else
+            {  */
+                MessageBoxResult R = MessageBox.Show("Are you sure you want to dismiss this grade?", "Dismiss the grade", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (R == MessageBoxResult.Yes)
+                {
+
+                }
+            //}
+        }
+        private void AddSubjectFun(object sender, RoutedEventArgs e)
+        {
+           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent();
+           chooseSubjectToAdd.Owner = this;
+           chooseSubjectToAdd.ShowDialog();
+        }
+        private void RemoveSubjectFun(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (R == MessageBoxResult.Yes)
+            {
+
+            }
+        }
+        private void NewGradeFun(object sender, RoutedEventArgs e)
+        {
+            NewGrade newGrade = new NewGrade();
+            newGrade.Owner = this;
+            newGrade.ShowDialog();
         }
     }
 }

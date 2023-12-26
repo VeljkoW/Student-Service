@@ -69,6 +69,14 @@ namespace GUI.MenuBar.File
             {
                 MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if (!int.TryParse(YearTextBox.Text, out int result))
+            {
+                MessageBox.Show("Make sure you put a number in the Year texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if (!int.TryParse(StreetNumberTextBox.Text, out int result1))
+            {
+                MessageBox.Show("Make sure you put a number in the street number textbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.File"
         mc:Ignorable="d"
-        Title="NewSubject" Height="400" Width="400"
+        Title="New Subject" Height="425" Width="400"
         Loaded="CenterWindow"
         ResizeMode="NoResize">
     <Grid>
@@ -16,6 +16,9 @@
 
             <Label Content="SubjectName*" />
             <TextBox x:Name="SubjectNameTextBox" />
+
+            <Label Content="Professor*" />
+            <ComboBox x:Name="ProfessorComboBox" />
 
             <Label Content="ESPB*" />
             <TextBox x:Name="ESPBNameTextBox" />

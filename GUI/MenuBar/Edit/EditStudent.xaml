@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditStudent" Height="620" Width="490"
+        Title="Edit Student" Height="620" Width="490"
         Loaded="CenterWindow"
         ResizeMode="NoResize"
         >
@@ -65,13 +65,56 @@
                         <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
                     </StackPanel>
                 </TabItem>
-                
+
                 <TabItem Header="Passed">
-                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" Height="350" Width="350"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="Black" BorderThickness="2"
+                          AutoGenerateColumns="False"
+                          x:Name="PassedSubjectsDataGrid"
+                          ItemsSource="{Binding PassedSubjects, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedPassedSubject, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Dismiss Grade" Click="DismissGradeFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="100" Height="25"/>
+                        <TextBlock Margin="296,470,57,31" >Average grade:</TextBlock>
+                    </Grid>
                 </TabItem>
-                
+
                 <TabItem Header="Not passed">
-                   
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" Height="350" Width="350"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="Black" BorderThickness="2"
+                          AutoGenerateColumns="False"
+                          x:Name="NotPassedSubjectsGrid"
+                          ItemsSource="{Binding NotPassedSubjects, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedNotPassedSubject, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Add" Click="AddSubjectFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="55" Height="25"/>
+                        <Button Content="Remove" Click="RemoveSubjectFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,34,0,0" Width="55" Height="25"/>
+                        <Button Content="Passing" Click="NewGradeFun" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="7,34,0,0" Width="56" Height="25"/>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </DockPanel>

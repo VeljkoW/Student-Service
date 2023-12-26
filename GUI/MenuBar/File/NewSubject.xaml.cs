@@ -70,6 +70,10 @@ namespace GUI.MenuBar.File
             {
                 MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
+            else if(!int.TryParse(ESPBNameTextBox.Text,out int result))
+            {
+                MessageBox.Show("Make sure you put a number in the EspbPoints text box!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
             else
             {
 
