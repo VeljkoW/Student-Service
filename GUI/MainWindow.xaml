@@ -65,7 +65,7 @@
                     </DataGrid>
                 </TabItem>
 
-                <TabItem Header="Grade">
+                <TabItem Header="Grades">
                     <DataGrid Height="350"
                       BorderBrush="Black" BorderThickness="2"
                       AutoGenerateColumns="False"

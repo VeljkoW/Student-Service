@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using CLI.Observer;
 using GUI.MenuBar.File;
 
 namespace GUI.MenuBar.Edit
@@ -23,17 +24,34 @@ namespace GUI.MenuBar.Edit
     /// <summary>
     /// Interaction logic for EditStudent.xaml
     /// </summary>
-    public partial class EditStudent : Window
+    public partial class EditStudent : Window, IObserver
     {
         public StudentDTO studentDTO = new StudentDTO();
         public StudentController studentController = new StudentController();
         public ObservableCollection<StudentDTO> Students { get; set; }
+
+
+        public ExamGradeDTO? SelectedExamGrade { get; set; }
+        public ExamGradeController examGradeController {  get; set; }
+        public ObservableCollection<ExamGradeDTO> ExamGradesStudent { get; set; }
+
+
         StudentDTO selectedStudent1;
         public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
         {
+            DataContext = this;
+
             Students= students;
             selectedStudent1= selectedStudent;
+
+
+            ExamGradesStudent = new ObservableCollection<ExamGradeDTO>();
+            examGradeController = new ExamGradeController();
+
+            examGradeController.Subscribe(this);
+
             InitializeComponent();
+
             NameTextBox.Text = selectedStudent.StudentName;
             SurnameTextBox.Text = selectedStudent.Surname;
             StreetTextBox.Text = selectedStudent.Adress.Street;
@@ -53,6 +71,9 @@ namespace GUI.MenuBar.Edit
             {
                 FinancingStatusComboBox.Text = "Budžet";
             }
+
+
+            Update();
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -175,6 +196,20 @@ namespace GUI.MenuBar.Edit
             NewGrade newGrade = new NewGrade();
             newGrade.Owner = this;
             newGrade.ShowDialog();
+        }
+        public void Update()
+        {
+
+            ExamGradesStudent.Clear();
+            
+            foreach(ExamGrade grade in examGradeController.GetAllExamGrades())
+            {
+                if(grade.StudentId == selectedStudent1.Id)
+                {
+                    ExamGradesStudent.Add(new ExamGradeDTO(grade));
+                }
+            }
+
         }
     }
 }
