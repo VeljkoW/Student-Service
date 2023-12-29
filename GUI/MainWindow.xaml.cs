@@ -81,6 +81,7 @@ namespace GUI
             CenterWindowFunction();
             StatusBarCurrentTimeAndDate();
             StatusBarCurrentTabShowing();
+            Keyboard.Focus(this);
         }
 
         private void StatusBarCurrentTimeAndDate()
@@ -123,6 +124,64 @@ namespace GUI
             this.Left = (SWidth - WWidth) / 2;
             this.Top = (SHeight - WHeight) / 2;
         }
+        private void MainKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.N && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenNewLayout(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                ClickSave(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.Q && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                ClickClose(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.D && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenDeleteWindow(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.E && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenEditWindow(sender, e);
+                e.Handled = true;
+            }
+            else if (e.Key == Key.I && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenAboutWindow(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.D1 || e.Key == Key.NumPad1) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenStudents(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.D2 || e.Key == Key.NumPad2) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenGrades(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.D3 || e.Key == Key.NumPad3) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenSubjects(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.D4 || e.Key == Key.NumPad4) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenProfessors(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.D5 || e.Key == Key.NumPad5) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
+            {
+                OpenDepartments(sender, e);
+                e.Handled = true;
+            }
+        }
 
         private void OpenNewLayout(object sender, RoutedEventArgs e)
         {
@@ -157,12 +216,6 @@ namespace GUI
         {
             Save save = new Save();
             save.ShowDialog();
-        }
-
-        private void OpenOpenLayout(object sender, RoutedEventArgs e)
-        {
-            Open open = new Open();
-            open.ShowDialog();
         }
 
         private void ClickClose(object sender, RoutedEventArgs e)
@@ -312,6 +365,26 @@ namespace GUI
             About about = new About();
             about.Owner = this;
             about.ShowDialog();
+        }
+        private void OpenStudents(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 0;
+        }
+        private void OpenGrades(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 1;
+        }
+        private void OpenSubjects(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 2;
+        }
+        private void OpenProfessors(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 3;
+        }
+        private void OpenDepartments(object sender, RoutedEventArgs e)
+        {
+            Tab.SelectedIndex = 4;
         }
 
         public void Update()

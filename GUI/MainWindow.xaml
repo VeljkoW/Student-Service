@@ -6,21 +6,76 @@
         xmlns:local="clr-namespace:GUI"
         mc:Ignorable="d"
         Title="Studentska služba" Height="510" Width="800" BorderBrush="Black" BorderThickness="2"
-        Loaded="LoadFunctions">
+        Loaded="LoadFunctions"
+        KeyDown="MainKeyDown"
+        >
     <Grid>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File">
-                <MenuItem Header="New" Click="OpenNewLayout" ></MenuItem>
-                <MenuItem Header="Save" Click="ClickSave"></MenuItem>
-                <MenuItem Header="Open" Click="OpenOpenLayout"></MenuItem>
-                <MenuItem Header="Close" Click="ClickClose"></MenuItem>
+            <MenuItem Header="_File">
+                <MenuItem Header="New" Click="OpenNewLayout" InputGestureText="Ctrl+N">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/ADD.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save" Click="ClickSave" InputGestureText="Ctrl+S">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/SAVE.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/OPEN.png"/>
+                    </MenuItem.Icon>
+                    <MenuItem Header="Students" Click="OpenStudents" InputGestureText="Ctrl+1">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/STUDENT.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Grades" Click="OpenGrades" InputGestureText="Ctrl+2">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/GRADE.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Subjects" Click="OpenSubjects" InputGestureText="Ctrl+3">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/SUBJECT.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Professors" Click="OpenProfessors" InputGestureText="Ctrl+4">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/PROFESSOR.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Departments" Click="OpenDepartments" InputGestureText="Ctrl+5">
+                        <MenuItem.Icon>
+                            <Image Source="Resources/Images/DEPARTMENT.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Close" Click="ClickClose" InputGestureText="Ctrl+Q">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/CLOSE.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Edit" Click="OpenEditWindow"></MenuItem>
-                <MenuItem Header="Delete" Click="OpenDeleteWindow"></MenuItem>
+                <MenuItem Header="Edit" Click="OpenEditWindow" InputGestureText="Ctrl+E">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/EDIT.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete" Click="OpenDeleteWindow" InputGestureText="Ctrl+D">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/DELETE.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Help">
-                <MenuItem Header="About" Click="OpenAboutWindow"></MenuItem>
+                <MenuItem Header="About" Click="OpenAboutWindow" InputGestureText="Ctrl+I">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/ABOUT.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
 
