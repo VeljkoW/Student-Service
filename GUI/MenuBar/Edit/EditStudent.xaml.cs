@@ -31,7 +31,6 @@ namespace GUI.MenuBar.Edit
         public SubjectController subjectController = new SubjectController();
         public StudentSubjectController studentSubjectController = new StudentSubjectController();
         public ObservableCollection<StudentDTO> Students { get; set; }
-        
         public ExamGradeDTO? SelectedExamGrade { get; set; }
         public ExamGradeController examGradeController { get; set; }
         public ObservableCollection<ExamGradeDTO> ExamGradesStudent { get; set; }
