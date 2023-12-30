@@ -60,6 +60,7 @@ namespace GUI.MenuBar.Edit
 
             examGradeController.Subscribe(this);
             subjectController.Subscribe(this);
+            studentController.Subscribe(this);
             studentSubjectController.Subscribe(this);
 
             InitializeComponent();
@@ -83,8 +84,6 @@ namespace GUI.MenuBar.Edit
             {
                 FinancingStatusComboBox.Text = "Budžet";
             }
-
-
             Update();
         }
 
@@ -213,24 +212,32 @@ namespace GUI.MenuBar.Edit
         }
         private void NewGradeFun(object sender, RoutedEventArgs e)
         {
-            NewGrade newGrade = new NewGrade();
+            if (SelectedNotPassedSubject == null)
+            {
+                MessageBox.Show("Please slect a subject to add a grade");
+            }
+            else
+            {
+            NewGrade newGrade = new NewGrade(SelectedNotPassedSubject,selectedStudent1, ExamGradesStudent, StudentSubjects);
             newGrade.Owner = this;
             newGrade.ShowDialog();
+            }
         }
         public void Update()
         {
 
             ExamGradesStudent.Clear();
-            
-            foreach(ExamGrade grade in examGradeController.GetAllExamGrades())
+
+            foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
             {
-                if(grade.StudentId == selectedStudent1.Id)
+                if (grade.StudentId == selectedStudent1.Id)
                 {
                     ExamGradesStudent.Add(new ExamGradeDTO(grade));
                 }
             }
 
             StudentSubjects.Clear();
+
             foreach(StudentSubject s in studentSubjectController.GetAllSubjects())
             {
                 foreach(Subject subject in subjectController.GetAllSubjects())
