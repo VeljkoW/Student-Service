@@ -27,12 +27,16 @@ namespace GUI.MenuBar.File
         public SubjectDTO subjectDTO = new SubjectDTO();
         public SubjectController subjectController = new SubjectController();
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public ObservableCollection<ProfessorDTO> Professors {  get; set; }
 
 
-        public NewSubject(ObservableCollection<SubjectDTO> subjects)
+        public NewSubject(ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors)
         {
             Subjects = subjects;
+            Professors = professors;
             InitializeComponent();
+            ProfessorComboBox.ItemsSource = Professors;
+            ProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -56,6 +60,21 @@ namespace GUI.MenuBar.File
 
             string subjectID = SubjectIDTextBox.Text;
             string subjectName = SubjectNameTextBox.Text;
+            string professor = ProfessorComboBox.Text;
+            int professorId = 0;
+          /*  
+            string[] professorSplit = professor.Split(" ");
+            string professorSurname = professorSplit[0];
+            string professorName = professorSplit[1];
+          */
+            foreach(ProfessorDTO prof in Professors)
+            {
+                if(prof.ProfessorNameAndSurname == professor)
+                {
+                    professorId = prof.ProfessorId;
+                }
+            }
+
             Semester semestar;
             if (SemesterStatusComboBox.Text.ToString() == "Letnji")
             {
@@ -95,7 +114,7 @@ namespace GUI.MenuBar.File
                         break;
                 }
 
-                Subject subject = new Subject(subjectID, subjectName, semestar, YearStatus, EspbPoints);
+                Subject subject = new Subject(subjectID, subjectName, semestar, YearStatus, professorId, EspbPoints);
                 subjectController.Add(subject);
                 subjectDTO = new SubjectDTO(subject);
                 Subjects.Add(subjectDTO);

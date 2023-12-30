@@ -182,6 +182,93 @@ namespace GUI
                 e.Handled = true;
             }
         }
+        private void SearchBarKeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                SearchBarButtonClick(sender, e);
+            }
+        }
+        private void SearchBarButtonClick(object sender, RoutedEventArgs e)
+        {
+            string searchBarString = SearchBarTextBox.Text.ToLower();
+            SearchBar(searchBarString);
+        }
+        private void SearchBar(string searchBarString)
+        {
+            if (!string.IsNullOrEmpty(searchBarString))
+            {
+                if (Tab.SelectedIndex == 0)
+                {
+                    Update();
+                    ObservableCollection<StudentDTO> FilteredStudents = new ObservableCollection<StudentDTO>();
+                    string[] searchSplit = searchBarString.Split(",");
+
+                    if(searchSplit.Length == 1)
+                    {
+                        string surname = searchSplit[0].Trim();
+
+                        foreach (StudentDTO student in Students)
+                        {
+
+                            if (student.Surname.ToLower().Contains(surname))
+                            {
+                                FilteredStudents.Add(student);
+                            }
+                        }
+                    }
+                    else if(searchSplit.Length == 2)
+                    {
+                        string surname = searchSplit[0].Trim();
+                        string name = searchSplit[1].Trim();
+
+                        foreach(StudentDTO student in Students)
+                        {
+                            if(student.Surname.ToLower().Contains(surname) && student.StudentName.ToLower().Contains(name)) 
+                            {
+                                FilteredStudents.Add(student);
+                            }
+                        }
+                    }
+                    else if(searchSplit.Length == 3)
+                    {
+                        string index = searchSplit[0].Trim();
+                        string name = searchSplit[1].Trim();
+                        string surname = searchSplit[2].Trim();
+
+                        foreach (StudentDTO student in Students)
+                        {
+                            if (student.Surname.ToLower().Contains(surname) && student.StudentName.ToLower().Contains(name) && student.StudentIndex.ToString().ToLower().Contains(index))
+                            {
+                                FilteredStudents.Add(student);
+                            }
+                        }
+                    }
+
+                    ShowFilteredStudents(FilteredStudents);
+
+                }
+                else if (Tab.SelectedIndex == 1)
+                {
+
+                }
+                else if (Tab.SelectedIndex == 2)
+                {
+
+                }
+                else if (Tab.SelectedIndex == 3)
+                {
+
+                }
+            }
+            else
+            {
+                if(Tab.SelectedIndex == 0)
+                {
+                    Update();
+                }
+            }
+        }
 
         private void OpenNewLayout(object sender, RoutedEventArgs e)
         {
@@ -197,7 +284,7 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-                NewSubject newSubject = new NewSubject(Subjects);
+                NewSubject newSubject = new NewSubject(Subjects,Professors);
                 newSubject.Owner = this;
                 newSubject.ShowDialog();
             }
@@ -233,7 +320,7 @@ namespace GUI
             {
                 if (SelectedStudent == null)
                 {
-                    MessageBox.Show("Please choose a student you want to edit!");
+                    MessageBox.Show("Please choose a student you want to edit!", "Student not selected");
                 }
                 else
                 {
@@ -246,7 +333,7 @@ namespace GUI
             {
                 if (SelectedExamGrade == null)
                 {
-                    MessageBox.Show("Please choose a grade you want to edit!");
+                    MessageBox.Show("Please choose a grade you want to edit!", "Grade not selected");
                 }
                 else
                 {
@@ -257,11 +344,11 @@ namespace GUI
             {
                 if (SelectedSubject == null)
                 {
-                    MessageBox.Show("Please choose a subject you want to edit!");
+                    MessageBox.Show("Please choose a subject you want to edit!", "Subject not selected");
                 }
                 else
                 {
-                    EditSubject editSubject = new EditSubject(SelectedSubject, Subjects);
+                    EditSubject editSubject = new EditSubject(SelectedSubject, Subjects,Professors);
                     editSubject.Owner = this;
                     editSubject.ShowDialog();
                 }
@@ -270,7 +357,7 @@ namespace GUI
             {
                 if (SelectedProfessor == null)
                 {
-                    MessageBox.Show("Please choose a professor you want to edit!");
+                    MessageBox.Show("Please choose a professor you want to edit!", "Professor not selected");
                 }
                 else
                 {
@@ -283,7 +370,7 @@ namespace GUI
             {
                 if (SelectedDepartment == null)
                 {
-                    MessageBox.Show("Please choose a department you want to edit!");
+                    MessageBox.Show("Please choose a department you want to edit!", "Department not selected");
                 }
                 else
                 {
@@ -298,7 +385,7 @@ namespace GUI
             {
                 if(SelectedStudent == null)
                 {
-                    MessageBox.Show("Please choose a student you want to delete!");
+                    MessageBox.Show("Please choose a student you want to delete!", "Student not selected");
                 }
                 else
                 {
@@ -311,7 +398,7 @@ namespace GUI
             {
                 if(SelectedExamGrade == null)
                 {
-                    MessageBox.Show("Please choose a grade you want to delete!");
+                    MessageBox.Show("Please choose a grade you want to delete!", "Grade not selected");
                 }
                 else
                 {
@@ -324,7 +411,7 @@ namespace GUI
             {
                 if (SelectedSubject == null)
                 {
-                    MessageBox.Show("Please choose a subject you want to delete!");
+                    MessageBox.Show("Please choose a subject you want to delete!", "Subject not selected");
                 }
                 else
                 {
@@ -337,7 +424,7 @@ namespace GUI
             {
                 if (SelectedProfessor == null)
                 {
-                    MessageBox.Show("Please choose a professor you want to delete!");
+                    MessageBox.Show("Please choose a professor you want to delete!", "Professor not selected");
                 }
                 else
                 {
@@ -350,7 +437,7 @@ namespace GUI
             {
                 if (SelectedDepartment == null)
                 {
-                    MessageBox.Show("Please choose a department you want to delete!");
+                    MessageBox.Show("Please choose a department you want to delete!","Department not selected");
                 }
                 else
                 {
@@ -387,6 +474,15 @@ namespace GUI
             Tab.SelectedIndex = 4;
         }
 
+        public void ShowFilteredStudents(ObservableCollection<StudentDTO> filteredStudents)
+        {
+            Students.Clear();
+            foreach(StudentDTO student in filteredStudents)
+            {
+                Students.Add(student);
+            }
+
+        }
         public void Update()
         {
             Students.Clear();

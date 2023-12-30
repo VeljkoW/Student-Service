@@ -65,7 +65,7 @@ namespace CLI
             int professorid = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter ESPB Points: ");
             int espb = ConsoleViewUtils.SafeInputInt();
-            Subject s = new Subject(id,subjectId, name,semester,year,espb);
+            Subject s = new Subject(id,subjectId, name,semester,year,professorid,espb);
             return s;
         }
         private void UpdateSubject()

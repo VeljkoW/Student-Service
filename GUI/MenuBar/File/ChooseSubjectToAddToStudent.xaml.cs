@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CLI;
+using GUI.DTO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +22,21 @@ namespace GUI.MenuBar.File
     /// </summary>
     public partial class ChooseSubjectToAddToStudent : Window
     {
-        public ChooseSubjectToAddToStudent()
+        public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public SubjectController subjectController { get; set; }
+        public ChooseSubjectToAddToStudent(StudentDTO student)
         {
             InitializeComponent();
+            subjectController = new SubjectController();
+            Subjects = new ObservableCollection<SubjectDTO>();
+
+            foreach (Subject subject in subjectController.GetAllSubjects())
+            {
+                    Subjects.Add(new SubjectDTO(subject));  //Treba dodati da se prikazuju samo predmeti koji nisu polozeni i koje vec ne slusa
+            }
+
+            SubjectsComboBox.ItemsSource = Subjects;
+            SubjectsComboBox.DisplayMemberPath = "SubjectName";
         }
         private void CenterWindow(object sender, RoutedEventArgs e)
         {

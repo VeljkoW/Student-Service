@@ -24,14 +24,28 @@ namespace GUI.MenuBar.Edit
         public SubjectDTO subjectDTO = new SubjectDTO();
         public SubjectController subjectController = new SubjectController();
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public ObservableCollection<ProfessorDTO> Professors { get; set; }
         public SubjectDTO selectedSubject1;
-        public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects)
+        public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors)
         {
             Subjects = subjects;
+            Professors = professors;
             selectedSubject1 = selectedSubject;
             InitializeComponent();
+
+            ProfessorComboBox.ItemsSource = Professors;
+            ProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
+
             SubjectIDTextBox.Text = selectedSubject.SubjectID;
             SubjectNameTextBox.Text = selectedSubject.SubjectName;
+            foreach(ProfessorDTO prof in Professors)
+            {
+                if(selectedSubject.ProfessorId == prof.ProfessorId)
+                {
+                    ProfessorComboBox.Text = prof.ProfessorNameAndSurname;
+                }
+            }
+
             ESPBNameTextBox.Text = selectedSubject.ESPBPoints.ToString();
             if (selectedSubject.Semestar == Semester.ZIMSKI)
             {
@@ -82,6 +96,17 @@ namespace GUI.MenuBar.Edit
         {
             string subjectID = SubjectIDTextBox.Text;
             string subjectName = SubjectNameTextBox.Text;
+
+            string professor = ProfessorComboBox.Text;
+            int professorId = 0;
+            foreach (ProfessorDTO prof in Professors)
+            {
+                if (prof.ProfessorNameAndSurname == professor)
+                {
+                    professorId = prof.ProfessorId;
+                }
+            }
+
             Semester semestar;
             if (SemesterStatusComboBox.Text.ToString() == "Letnji")
             {
@@ -120,8 +145,7 @@ namespace GUI.MenuBar.Edit
                         YearStatus = 4;
                         break;
                 }
-
-                Subject subject = new Subject(selectedSubject1.Id, subjectID, subjectName, semestar, YearStatus, EspbPoints);
+                Subject subject = new Subject(selectedSubject1.Id, subjectID, subjectName, semestar, YearStatus,professorId, EspbPoints);
 
                 subjectController.Update(subject);
 
