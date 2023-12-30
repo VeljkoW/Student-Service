@@ -5,11 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.File"
         mc:Ignorable="d"
-        Title="Add Grade" Height="250" Width="300"
+        Title="Add Grade" Height="320" Width="300"
         ResizeMode="NoResize"
         Loaded="CenterWindow"
         >
     <Grid>
-        
+        <StackPanel Margin="10">
+
+            <Label Content="SubjectID" />
+            <TextBox x:Name="Subject" IsReadOnly="True" />
+
+            <Label Content="SubjectName" />
+            <TextBox x:Name="SubjectName" IsReadOnly="True" />
+
+            <Label Content="Grade*" />
+            <ComboBox x:Name="GradeComboBox" SelectedIndex="0">
+                <ComboBoxItem Content="6" />
+                <ComboBoxItem Content="7" />
+                <ComboBoxItem Content="8" />
+                <ComboBoxItem Content="9" />
+                <ComboBoxItem Content="10" />
+            </ComboBox>
+
+            <Label Content="Date*" />
+            <DatePicker x:Name="DatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
+
+            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-180,35,0,0" Width="70" Height="30"/>
+            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="180,-30,0,0" Width="70" Height="30"/>
+
+        </StackPanel>
     </Grid>
 </Window>

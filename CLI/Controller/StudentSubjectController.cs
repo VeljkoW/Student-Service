@@ -26,9 +26,9 @@ namespace CLI.Controller
             studentSubjectDAO.AddSubject(studentSubject);
         }
 
-        public void Delete(int studentId,int professorId)
+        public void Delete(int studentId,int subjectId)
         {
-            studentSubjectDAO.RemoveSubject(studentId,professorId);
+            studentSubjectDAO.RemoveSubject(studentId, subjectId);
         }
         public void Update(StudentSubject studentSubject)
         {

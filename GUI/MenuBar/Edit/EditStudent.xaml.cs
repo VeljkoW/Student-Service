@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using CLI.Observer;
 using GUI.MenuBar.File;
+using System.Printing;
 
 namespace GUI.MenuBar.Edit
 {
@@ -27,17 +28,19 @@ namespace GUI.MenuBar.Edit
     public partial class EditStudent : Window, IObserver
     {
         public StudentDTO studentDTO = new StudentDTO();
-        public StudentController studentController = new StudentController();
-        public SubjectController subjectController = new SubjectController();
-        public StudentSubjectController studentSubjectController = new StudentSubjectController();
-        public ObservableCollection<StudentDTO> Students { get; set; }
+        public StudentController studentController { get; set; }
+        public SubjectController subjectController { get; set; }
+        public StudentSubjectController studentSubjectController { get; set; }
+        
         public ExamGradeDTO? SelectedExamGrade { get; set; }
         public ExamGradeController examGradeController { get; set; }
         public ObservableCollection<ExamGradeDTO> ExamGradesStudent { get; set; }
         public ObservableCollection<SubjectDTO> StudentSubjects{ get; set; }
+        public ObservableCollection<StudentDTO> Students { get; set; }
 
 
         StudentDTO selectedStudent1;
+        public SubjectDTO? SelectedNotPassedSubject { get; set; }
         public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
         {
             DataContext = this;
@@ -48,9 +51,17 @@ namespace GUI.MenuBar.Edit
 
             ExamGradesStudent = new ObservableCollection<ExamGradeDTO>();
             StudentSubjects = new ObservableCollection<SubjectDTO>();
+
+
             examGradeController = new ExamGradeController();
+            subjectController = new SubjectController();
+            studentController = new StudentController();
+            studentSubjectController = new StudentSubjectController();
 
             examGradeController.Subscribe(this);
+            subjectController.Subscribe(this);
+            studentController.Subscribe(this);
+            studentSubjectController.Subscribe(this);
 
             InitializeComponent();
 
@@ -73,8 +84,6 @@ namespace GUI.MenuBar.Edit
             {
                 FinancingStatusComboBox.Text = "Budžet";
             }
-
-
             Update();
         }
 
@@ -187,32 +196,48 @@ namespace GUI.MenuBar.Edit
         }
         private void RemoveSubjectFun(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (R == MessageBoxResult.Yes)
+            if (SelectedNotPassedSubject == null)
             {
-
+                MessageBox.Show("Please slect a subject to delete!");
+            }
+            else
+            {
+                MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (R == MessageBoxResult.Yes)
+                {
+                        studentSubjectController.Delete(selectedStudent1.Id, SelectedNotPassedSubject.Id);
+                        StudentSubjects.Remove(SelectedNotPassedSubject);
+                }
             }
         }
         private void NewGradeFun(object sender, RoutedEventArgs e)
         {
-            NewGrade newGrade = new NewGrade();
+            if (SelectedNotPassedSubject == null)
+            {
+                MessageBox.Show("Please slect a subject to add a grade");
+            }
+            else
+            {
+            NewGrade newGrade = new NewGrade(SelectedNotPassedSubject,selectedStudent1, ExamGradesStudent, StudentSubjects);
             newGrade.Owner = this;
             newGrade.ShowDialog();
+            }
         }
         public void Update()
         {
 
             ExamGradesStudent.Clear();
-            
-            foreach(ExamGrade grade in examGradeController.GetAllExamGrades())
+
+            foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
             {
-                if(grade.StudentId == selectedStudent1.Id)
+                if (grade.StudentId == selectedStudent1.Id)
                 {
                     ExamGradesStudent.Add(new ExamGradeDTO(grade));
                 }
             }
 
             StudentSubjects.Clear();
+
             foreach(StudentSubject s in studentSubjectController.GetAllSubjects())
             {
                 foreach(Subject subject in subjectController.GetAllSubjects())
