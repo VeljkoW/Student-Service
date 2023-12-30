@@ -481,7 +481,6 @@ namespace GUI
             {
                 Students.Add(student);
             }
-
         }
         public void Update()
         {

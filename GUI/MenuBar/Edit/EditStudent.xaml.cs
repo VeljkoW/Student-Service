@@ -28,12 +28,13 @@ namespace GUI.MenuBar.Edit
     {
         public StudentDTO studentDTO = new StudentDTO();
         public StudentController studentController = new StudentController();
+        public SubjectController subjectController = new SubjectController();
+        public StudentSubjectController studentSubjectController = new StudentSubjectController();
         public ObservableCollection<StudentDTO> Students { get; set; }
-
-
         public ExamGradeDTO? SelectedExamGrade { get; set; }
-        public ExamGradeController examGradeController {  get; set; }
+        public ExamGradeController examGradeController { get; set; }
         public ObservableCollection<ExamGradeDTO> ExamGradesStudent { get; set; }
+        public ObservableCollection<SubjectDTO> StudentSubjects{ get; set; }
 
 
         StudentDTO selectedStudent1;
@@ -46,6 +47,7 @@ namespace GUI.MenuBar.Edit
 
 
             ExamGradesStudent = new ObservableCollection<ExamGradeDTO>();
+            StudentSubjects = new ObservableCollection<SubjectDTO>();
             examGradeController = new ExamGradeController();
 
             examGradeController.Subscribe(this);
@@ -210,6 +212,17 @@ namespace GUI.MenuBar.Edit
                 }
             }
 
+            StudentSubjects.Clear();
+            foreach(StudentSubject s in studentSubjectController.GetAllSubjects())
+            {
+                foreach(Subject subject in subjectController.GetAllSubjects())
+                {
+                    if (s.subjectId == subject.Id && selectedStudent1.Id ==s.studentId)
+                    {
+                        StudentSubjects.Add(new SubjectDTO(subject));
+                    }
+                }
+            }
         }
     }
 }

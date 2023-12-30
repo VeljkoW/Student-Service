@@ -104,12 +104,15 @@
                           BorderBrush="Black" BorderThickness="2"
                           AutoGenerateColumns="False"
                           x:Name="NotPassedSubjectsGrid"
-                          ItemsSource="{Binding NotPassedSubjects, UpdateSourceTrigger=PropertyChanged}"
+                          ItemsSource="{Binding StudentSubjects, UpdateSourceTrigger=PropertyChanged}"
                           SelectedItem="{Binding SelectedNotPassedSubject, UpdateSourceTrigger=PropertyChanged}"
                           SelectionMode="Single" IsReadOnly="True">
                             <DataGrid.Columns>
-
-
+                                    <DataGridTextColumn Header="Id" Binding="{Binding SubjectID}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding SubjectName}"/>
+                                    <DataGridTextColumn Header="ESPB" Binding="{Binding ESPBPoints}"/>
+                                    <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                                <DataGridTextColumn Header="Semester" Binding="{Binding Semestar}"/>
                             </DataGrid.Columns>
                         </DataGrid>
 

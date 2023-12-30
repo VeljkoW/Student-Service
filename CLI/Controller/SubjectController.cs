@@ -39,5 +39,9 @@ namespace CLI
         {
             subjectDao.subjectSubject.Subscribe(observer);
         }
+        public Subject? GetSubjectById(int id)
+        {
+            return subjectDao.GetSubjectById(id);
+        }
     }
 }
