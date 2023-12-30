@@ -16,8 +16,8 @@ namespace GUI.DTO
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
 
-        private CLI.Index studentIndex {  get; set; }
-        public CLI.Index StudentIndex
+        private string studentIndex {  get; set; }
+        public string StudentIndex
         {
             get
             {
@@ -88,6 +88,12 @@ namespace GUI.DTO
         public ExamGradeDTO()
         {
             Id = 0;
+            StudentId = 0;
+            SubjectId = 0;
+            grade = 5;
+            date = new DateOnly();
+            studentIndex = "";
+            subjectIDName = "";
         }
 
         public ExamGradeDTO(ExamGrade examgrade)
@@ -97,7 +103,7 @@ namespace GUI.DTO
             SubjectId=examgrade.SubjectId;
             grade=examgrade.Grade;
             date=examgrade.Date;
-            studentIndex = examgrade.StudentIndex;
+            studentIndex = examgrade.StudentIndex.ToString();
             subjectIDName = examgrade.SubjectIdName;
         }
 

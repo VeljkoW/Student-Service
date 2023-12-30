@@ -1,5 +1,6 @@
 ﻿using CLI;
 using CLI.Controller;
+using CLI.Observer;
 using GUI.DTO;
 using GUI.MenuBar.File;
 using System;
@@ -22,17 +23,29 @@ namespace GUI.MenuBar.Edit
     /// <summary>
     /// Interaction logic for EditProfesor.xaml
     /// </summary>
-    public partial class EditProfesor : Window
+    public partial class EditProfesor : Window, IObserver
     {
         public ProfessorDTO professorDTO = new ProfessorDTO();
         public ProfessorController professorController = new ProfessorController();
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
+        public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public SubjectController subjectController { get; set; }
+        public SubjectDTO? SelectedSubject {  get; set; }
+
+
         ProfessorDTO selectedProfessor1;
         public EditProfesor(ProfessorDTO selectedProfessor, ObservableCollection<ProfessorDTO> professors)
         {
+            DataContext = this;
+
             this.Professors = professors;
             selectedProfessor1 = selectedProfessor;
+            Subjects = new ObservableCollection<SubjectDTO>();
+            subjectController = new SubjectController();
+            subjectController.Subscribe(this);
+
             InitializeComponent();
+
             NameTextBox.Text = selectedProfessor.ProfessorName;
             SurnameTextBox.Text = selectedProfessor.ProfessorSurname;
             StreetTextBox.Text = selectedProfessor.ProfessorAdress.Street;
@@ -45,6 +58,8 @@ namespace GUI.MenuBar.Edit
             TitleTextBox.Text = selectedProfessor.ProfessorTitle;
             YearsOfServiceTextBox.Text = (selectedProfessor.YearsOfService).ToString();
             DateOfBirthDatePicker.Text = (selectedProfessor.DateOfBirth).ToString();
+
+            Update();
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -120,7 +135,7 @@ namespace GUI.MenuBar.Edit
         }
         private void AddSubjectFun(object sender, RoutedEventArgs e)
         {
-            ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor();
+            ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor(selectedProfessor1);
             chooseSubjectToAdd.Owner = this;
             chooseSubjectToAdd.ShowDialog();
         }
@@ -132,5 +147,19 @@ namespace GUI.MenuBar.Edit
 
             }
         }
+        public void Update()
+        {
+            Subjects.Clear();
+            foreach(Subject subject in  subjectController.GetAllSubjects())
+            {
+                if(subject.ProfessorId == selectedProfessor1.ProfessorId)
+                {
+                    Subjects.Add(new SubjectDTO(subject));
+                }
+            }
+
+
+        }
+
     }
 }

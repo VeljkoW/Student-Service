@@ -1,5 +1,8 @@
-﻿using System;
+﻿using CLI;
+using GUI.DTO;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +22,28 @@ namespace GUI.MenuBar.File
     /// </summary>
     public partial class ChooseSubjectToAddToProfessor : Window
     {
-        public ChooseSubjectToAddToProfessor()
+        public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public SubjectController subjectController { get; set; }
+        public ProfessorDTO Professor;
+        public ChooseSubjectToAddToProfessor(ProfessorDTO profesor)
         {
             InitializeComponent();
+            subjectController = new SubjectController();
+            Subjects = new ObservableCollection<SubjectDTO>();
+            Professor = profesor;
+
+            foreach (Subject subject in subjectController.GetAllSubjects())
+            {
+                if (subject.ProfessorId != Professor.ProfessorId)
+                {
+                    Subjects.Add(new SubjectDTO(subject));
+                }
+            }
+
+            SubjectsComboBox.ItemsSource = Subjects;
+            SubjectsComboBox.DisplayMemberPath = "SubjectName";
+
+
         }
         private void CenterWindow(object sender, RoutedEventArgs e)
         {
@@ -40,6 +62,22 @@ namespace GUI.MenuBar.File
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            string subjectName = SubjectsComboBox.Text;
+            foreach (Subject subject in subjectController.GetAllSubjects())
+            {
+                if (subject.SubjectName == subjectName)
+                {
+                    if (subject.ProfessorId != -1)
+                    {
+                        MessageBoxResult R = MessageBox.Show("Are you sure you want to change the professor for this subject", "Professor already exists", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (R == MessageBoxResult.Yes)
+                        {
+                            subject.ProfessorId = Professor.ProfessorId; // Ne radi trenutno
+                            this.Close();
+                        }
+                    }
+                }
+            }
 
         }
         private void Cancel(object sender, EventArgs e)

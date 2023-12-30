@@ -179,7 +179,7 @@ namespace GUI.MenuBar.Edit
         }
         private void AddSubjectFun(object sender, RoutedEventArgs e)
         {
-           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent();
+           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1);
            chooseSubjectToAdd.Owner = this;
            chooseSubjectToAdd.ShowDialog();
         }

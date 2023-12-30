@@ -15,7 +15,7 @@
             <Label Content="Subjects*" />
             <ComboBox x:Name="SubjectsComboBox" />
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-150,35,0,0" Width="70" Height="30"/>
+            <Button Content="Add" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-150,35,0,0" Width="70" Height="30"/>
             <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="150,-30,0,0" Width="70" Height="30"/>
         </StackPanel>
     </Grid>

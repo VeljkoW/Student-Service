@@ -21,26 +21,26 @@ namespace CLI
         public List<Student> StudentsWhoPassed { get; set; }
         public List<Student> StudentsWhoDidntPass { get; set; }
 
-        public Subject(int id,string subjectID, string subjectName, Semester sem, int year, int eSPBPoints)//izbrisao profesor
+        public Subject(int id,string subjectID, string subjectName, Semester sem, int year,int professorid, int eSPBPoints)
         {
             Id = id;
             SubjectID = subjectID;
             SubjectName = subjectName;
             Semester = sem;
             Year = year;
-            ProfessorId = 0;
+            ProfessorId = professorid;
             ESPBPoints = eSPBPoints;
             StudentsWhoPassed = new List<Student>();
             StudentsWhoDidntPass = new List<Student>();
         }
         //Konstruktor bez Id-eva
-        public Subject(string subjectID,string subjectName, Semester sem, int year, int eSPBPoints) //bez profesor Id
+        public Subject(string subjectID,string subjectName, Semester sem, int year,int professorid, int eSPBPoints) 
         {
             SubjectID = subjectID;
             SubjectName = subjectName;
             Semester = sem;
             Year = year;
-            ProfessorId = 0;
+            ProfessorId = professorid;
             ESPBPoints = eSPBPoints;
             StudentsWhoPassed = new List<Student>();
             StudentsWhoDidntPass = new List<Student>();
