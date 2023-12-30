@@ -5,41 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditProfesor" Height="550" Width="400"
+        Title="Edit Professor" Height="620" Width="490"
         Loaded="CenterWindow">
     <Grid >
-        <StackPanel Margin="10">
+        <DockPanel Margin="10,20,10,35">
+            <TabControl x:Name="Tab">
+                <TabItem Header="Informations">
+                    <StackPanel Margin="10">
 
-            <Label Content="Name*" />
-            <TextBox x:Name="NameTextBox" />
+                        <Label Content="Name*" />
+                        <TextBox x:Name="NameTextBox" />
 
-            <Label Content="Surname*" />
-            <TextBox x:Name="SurnameTextBox"/>
+                        <Label Content="Surname*" />
+                        <TextBox x:Name="SurnameTextBox"/>
 
 
-            <Label Content="Address*" />
-            <TextBox x:Name="AddressTextBox" />
+                        <Label Content="Date of Birth*" />
+                        <DatePicker x:Name="DateOfBirthDatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
-            <Label Content="Phone Number*" />
-            <TextBox x:Name="PhoneNumberTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <Label Content="Street*" />
+                            <TextBox x:Name="StreetTextBox" Width="100" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="E-mail*" />
-            <TextBox x:Name="EmailTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="150,-25.2,0,0">
+                            <Label Content="Num*"/>
+                            <TextBox x:Name="StreetNumberTextBox" Width="30" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="ID Card Number*" />
-            <TextBox x:Name="IDCardNumberTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="220,-26,0,0">
+                            <Label Content="City*" />
+                            <TextBox x:Name="CityTextBox" Width="70" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="Title*" />
-            <TextBox x:Name="TitleTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="330,-26,0,0">
+                            <Label Content="State*" />
+                            <TextBox x:Name="StateTextBox" Width="52" VerticalAlignment="Center" Height="20" />
+                        </StackPanel>
 
-            <Label Content="Years of Service*" />
-            <TextBox x:Name="YearsOfServiceTextBox" />
+                        <Label Content="Phone Number*" />
+                        <TextBox x:Name="PhoneNumberTextBox" />
 
-            <Label Content="Date of Birth*" />
-            <DatePicker x:Name="DateOfBirthDatePicker"/>
+                        <Label Content="E-mail*" />
+                        <TextBox x:Name="EmailTextBox" />
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
-            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
-        </StackPanel>
+                        <Label Content="ID Card Number*" />
+                        <TextBox x:Name="IDCardNumberTextBox" />
+
+                        <Label Content="Title*" />
+                        <TextBox x:Name="TitleTextBox" />
+
+                        <Label Content="Years of Service*" />
+                        <TextBox x:Name="YearsOfServiceTextBox" />
+
+
+                        <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+                        <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Subjects">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" Height="350" Width="350"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="Black" BorderThickness="2"
+                          AutoGenerateColumns="False"
+                          x:Name="SubjectsDataGrid"
+                          ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Id" Binding="{Binding SubjectID}"/>
+                                <DataGridTextColumn Header="Name" Binding="{Binding SubjectName}"/>
+                                <DataGridTextColumn Header="ESPB" Binding="{Binding ESPBPoints}"/>
+                                <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                                <DataGridTextColumn Header="Semester" Binding="{Binding Semestar}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Add Subject" Click="AddSubjectFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="100" Height="25"/>
+                        <Button Content="Remove Subject" Click="RemoveSubjectFun" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,34,0,0" Width="100" Height="25"/>
+                    </Grid>
+
+                </TabItem>
+
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

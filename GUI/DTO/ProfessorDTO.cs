@@ -144,6 +144,7 @@ namespace GUI.DTO
                 }
             }
         }
+        public string ProfessorNameAndSurname => $"{ProfessorSurname} {ProfessorName}";
 
         private string email;
         public string ProfessorEmail

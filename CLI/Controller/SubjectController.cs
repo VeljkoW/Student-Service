@@ -30,7 +30,7 @@ namespace CLI
             subjectDao.UpdateSubject(subject);
         }
 
-        public void Delete(string subjectId)
+        public void Delete(int subjectId)
         {
             subjectDao.RemoveSubject(subjectId);
         }
@@ -38,6 +38,10 @@ namespace CLI
         public void Subscribe(IObserver observer)
         {
             subjectDao.subjectSubject.Subscribe(observer);
+        }
+        public Subject? GetSubjectById(int id)
+        {
+            return subjectDao.GetSubjectById(id);
         }
     }
 }

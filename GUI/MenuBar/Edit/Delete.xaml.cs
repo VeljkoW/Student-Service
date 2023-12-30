@@ -27,16 +27,19 @@ namespace GUI.MenuBar.Edit
         public ExamGradeDTO? SelectedExamGrade { get; }
         public SubjectDTO? SelectedSubject { get; }
         public ProfessorDTO? SelectedProfessor { get; }
+        public KatedraDTO? SelectedDepartment { get; }
 
         public StudentController studentController = new StudentController();
         public ExamGradeController examGradeController = new ExamGradeController();
         public SubjectController subjectController = new SubjectController();
         public ProfessorController professorController = new ProfessorController();
+        public KatedraController departmentController = new KatedraController();
 
         public ObservableCollection<StudentDTO>? Students { get; set; }
         public ObservableCollection<ExamGradeDTO>? ExamGrades { get; set; }
         public ObservableCollection<SubjectDTO>? Subjects { get; set; }
         public ObservableCollection<ProfessorDTO>? Professors { get; set; }
+        public ObservableCollection<KatedraDTO>? Departments { get; set; }
         public Delete()
         {
             InitializeComponent();
@@ -56,7 +59,7 @@ namespace GUI.MenuBar.Edit
             this.ExamGrades = examGrades;
             InitializeComponent();
         }
-        //konstruktor za delete Katedra
+        //konstruktor za delete subject
         public Delete(SubjectDTO subject, ObservableCollection<SubjectDTO> subjects)
         {
             this.SelectedSubject = subject;
@@ -68,6 +71,13 @@ namespace GUI.MenuBar.Edit
         {
             this.SelectedProfessor = professor;
             this.Professors = professors;
+            InitializeComponent();
+        }
+        //konstruktor za delete katedra
+        public Delete(KatedraDTO department, ObservableCollection<KatedraDTO> departments)
+        {
+            this.SelectedDepartment = department;
+            this.Departments = departments;
             InitializeComponent();
         }
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -105,7 +115,7 @@ namespace GUI.MenuBar.Edit
             }
             else if (SelectedSubject != null && Subjects != null)
             {
-                subjectController.Delete(SelectedSubject.SubjectID);
+                subjectController.Delete(SelectedSubject.Id);
                 Subjects.Remove(SelectedSubject);
                 this.Close();
             }
@@ -113,6 +123,12 @@ namespace GUI.MenuBar.Edit
             {
                 professorController.Delete(SelectedProfessor.ProfessorId);
                 Professors.Remove(SelectedProfessor);
+                this.Close();
+            }
+            else if(SelectedDepartment != null && Departments != null)
+            {
+                departmentController.Delete(SelectedDepartment.Id);
+                Departments.Remove(SelectedDepartment);
                 this.Close();
             }
         }

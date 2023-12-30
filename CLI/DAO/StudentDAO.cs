@@ -47,6 +47,8 @@ namespace CLI
                 old.Adress = stud.Adress;
                 old.ToDoExams = stud.ToDoExams;
                 old.FinishedExams = stud.FinishedExams;
+                old.StudentIndex = stud.StudentIndex;
+                old.StudentYear= stud.StudentYear;
                 old.Status = stud.Status;
                 storage.Save(students);
             studentSubject.NotifyObservers();
@@ -76,7 +78,7 @@ namespace CLI
         {
             return students;
         }
-        private Student? GetStudentById(int id)
+        public Student? GetStudentById(int id)
         {
             return students.Find(v => v.Id == id);
         }

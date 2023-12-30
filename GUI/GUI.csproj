@@ -8,10 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\ABOUT.png" />
     <None Remove="Resources\Images\ADD.png" />
+    <None Remove="Resources\Images\CLOSE.png" />
     <None Remove="Resources\Images\DELETE.png" />
+    <None Remove="Resources\Images\DEPARTMENT.png" />
     <None Remove="Resources\Images\EDIT.png" />
+    <None Remove="Resources\Images\GRADE.png" />
+    <None Remove="Resources\Images\OPEN.png" />
+    <None Remove="Resources\Images\PROFESSOR.png" />
+    <None Remove="Resources\Images\SAVE.png" />
     <None Remove="Resources\Images\SEARCH.png" />
+    <None Remove="Resources\Images\STUDENT.png" />
+    <None Remove="Resources\Images\SUBJECT.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,10 +28,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\ABOUT.png" />
     <Resource Include="Resources\Images\ADD.png" />
+    <Resource Include="Resources\Images\CLOSE.png" />
     <Resource Include="Resources\Images\DELETE.png" />
+    <Resource Include="Resources\Images\DEPARTMENT.png" />
     <Resource Include="Resources\Images\EDIT.png" />
+    <Resource Include="Resources\Images\GRADE.png" />
+    <Resource Include="Resources\Images\OPEN.png" />
+    <Resource Include="Resources\Images\PROFESSOR.png" />
+    <Resource Include="Resources\Images\SAVE.png" />
     <Resource Include="Resources\Images\SEARCH.png" />
+    <Resource Include="Resources\Images\STUDENT.png" />
+    <Resource Include="Resources\Images\SUBJECT.png" />
   </ItemGroup>
 
 </Project>

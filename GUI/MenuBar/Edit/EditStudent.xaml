@@ -5,45 +5,123 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Edit"
         mc:Ignorable="d"
-        Title="EditStudent" Height="550" Width="400"
+        Title="Edit Student" Height="620" Width="490"
         Loaded="CenterWindow"
         ResizeMode="NoResize"
         >
     <Grid >
-        <StackPanel Margin="10">
-            <Label Content="Name*" />
-            <TextBox x:Name="NameTextBox" />
+        <DockPanel Margin="10,20,10,35">
+            <TabControl x:Name="Tab">
+                <TabItem Header="Informations">
+                    <StackPanel Margin="10">
+                        <Label Content="Name*" />
+                        <TextBox x:Name="NameTextBox" />
 
-            <Label Content="Surname*" />
-            <TextBox x:Name="SurnameTextBox" />
+                        <Label Content="Surname*" />
+                        <TextBox x:Name="SurnameTextBox" />
 
-            <Label Content="Date of Birth*" />
-            <DatePicker x:Name="DateOfBirthDatePicker"/>
+                        <Label Content="Date of Birth*" />
+                        <DatePicker x:Name="DateOfBirthDatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
-            <Label Content="Address*" />
-            <TextBox x:Name="AddressTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <Label Content="Street*" />
+                            <TextBox x:Name="StreetTextBox" Width="100" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="Phone number*" />
-            <TextBox x:Name="PhoneNumberTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="150,-25.2,0,0">
+                            <Label Content="Num*"/>
+                            <TextBox x:Name="StreetNumberTextBox" Width="30" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="E-mail*" />
-            <TextBox x:Name="EmailTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="220,-26.2,0,0">
+                            <Label Content="City*" />
+                            <TextBox x:Name="CityTextBox" Width="70" VerticalAlignment="Center" Height="20"/>
+                        </StackPanel>
 
-            <Label Content="Index number*" />
-            <TextBox x:Name="IndexNumberTextBox" />
+                        <StackPanel Orientation="Horizontal" Margin="330,-26,0,0">
+                            <Label Content="State*" />
+                            <TextBox x:Name="StateTextBox" Width="52" VerticalAlignment="Center" Height="20" />
+                        </StackPanel>
 
-            <Label Content="Year*" />
-            <TextBox x:Name="YearTextBox" />
+                        <Label Content="Phone number*" />
+                        <TextBox x:Name="PhoneNumberTextBox" />
 
-            <Label Content="Financing status*" />
-            <ComboBox x:Name="FinancingStatusComboBox">
-                <ComboBoxItem Content="Samofinansiranje" />
-                <ComboBoxItem Content="Budžet" />
-            </ComboBox>
-            
+                        <Label Content="E-mail*" />
+                        <TextBox x:Name="EmailTextBox" />
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
-            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
-        </StackPanel>
+                        <Label Content="Index number*" />
+                        <TextBox x:Name="IndexNumberTextBox" />
+
+                        <Label Content="Year*" />
+                        <TextBox x:Name="YearTextBox" />
+
+                        <Label Content="Financing status*" />
+                        <ComboBox x:Name="FinancingStatusComboBox">
+                            <ComboBoxItem Content="Samofinansiranje" />
+                            <ComboBoxItem Content="Budžet" />
+                        </ComboBox>
+
+                        <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+                        <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+                    </StackPanel>
+                </TabItem>
+
+                <TabItem Header="Passed">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" Height="350" Width="350"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="Black" BorderThickness="2"
+                          AutoGenerateColumns="False"
+                          x:Name="PassedSubjectsDataGrid"
+                          ItemsSource="{Binding ExamGradesStudent, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedExamGrade, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Student Index" Binding="{Binding StudentIndex}"/>
+                                <DataGridTextColumn Header="Subject Id" Binding="{Binding SubjectIDName}"/>
+                                <DataGridTextColumn Header="Grade" Binding="{Binding Grade}"/>
+                                <DataGridTextColumn Header="Date" Binding="{Binding Date}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Dismiss Grade" Click="DismissGradeFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="100" Height="25"/>
+                        <TextBlock Margin="296,470,57,31" >Average grade:</TextBlock>
+                    </Grid>
+                </TabItem>
+
+                <TabItem Header="Not passed">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <DataGrid Grid.Row="0" Height="350" Width="350"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="Black" BorderThickness="2"
+                          AutoGenerateColumns="False"
+                          x:Name="NotPassedSubjectsGrid"
+                          ItemsSource="{Binding StudentSubjects, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedNotPassedSubject, UpdateSourceTrigger=PropertyChanged}"
+                          SelectionMode="Single" IsReadOnly="True">
+                            <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Id" Binding="{Binding SubjectID}"/>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding SubjectName}"/>
+                                    <DataGridTextColumn Header="ESPB" Binding="{Binding ESPBPoints}"/>
+                                    <DataGridTextColumn Header="Year" Binding="{Binding Year}"/>
+                                <DataGridTextColumn Header="Semester" Binding="{Binding Semestar}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Add" Click="AddSubjectFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="55" Height="25"/>
+                        <Button Content="Remove" Click="RemoveSubjectFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="129,34,0,0" Width="55" Height="25"/>
+                        <Button Content="Passing" Click="NewGradeFun" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="7,34,0,0" Width="56" Height="25"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
     </Grid>
 </Window>

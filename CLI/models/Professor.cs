@@ -84,7 +84,7 @@ namespace CLI
         }
         public override string ToString()
         {
-            string s = $"ID:{Id,3}| Name: {Name,15} | Surname: {Surname,20} | Date of bitrh: {DateOfBirth,15} | Adress ID:{ProfessorAdress}| Phone: {PhoneNumber,13} | E-mail: {EmailAdress,30} | ID card number: {IDCardNumber,10} | Title: {Title,10} | Years of service: {YearsOfService,2}";
+            string s = $"ID:{Id,3}| Name: {Name,15}| Surname: {Surname,20}| Date of birth: {DateOfBirth,15}| Adress: {ProfessorAdress}| Phone: {PhoneNumber,13}| E-mail: {EmailAdress,30} | ID card number:{IDCardNumber,10} | Title: {Title,10} | Years of service:{YearsOfService,2}";
             return s;
         }
     }

@@ -119,8 +119,8 @@ namespace GUI.DTO
             }
         }
      
-        private CLI.Index studentIndex;
-        public CLI.Index StudentIndex
+        private string studentIndex;
+        public string StudentIndex
         {
             get
             {
@@ -194,7 +194,7 @@ namespace GUI.DTO
             Id = 0;
             name = "";
             surname = "";
-            studentIndex = new CLI.Index();
+            studentIndex = "";
             adress = new Adress();
             phone = "";
             email = "";
@@ -211,7 +211,7 @@ namespace GUI.DTO
             dateOfBirth = student.DateOfBirth;
             phone= student.Phone;
             adress=student.Adress;
-            studentIndex=student.StudentIndex;
+            studentIndex=student.StudentIndex.ToString();
             studentYear=student.StudentYear;
             status = student.Status;
         }

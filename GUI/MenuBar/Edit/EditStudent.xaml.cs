@@ -16,26 +16,51 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using CLI.Observer;
+using GUI.MenuBar.File;
 
 namespace GUI.MenuBar.Edit
 {
     /// <summary>
     /// Interaction logic for EditStudent.xaml
     /// </summary>
-    public partial class EditStudent : Window
+    public partial class EditStudent : Window, IObserver
     {
         public StudentDTO studentDTO = new StudentDTO();
         public StudentController studentController = new StudentController();
+        public SubjectController subjectController = new SubjectController();
+        public StudentSubjectController studentSubjectController = new StudentSubjectController();
         public ObservableCollection<StudentDTO> Students { get; set; }
+        
+        public ExamGradeDTO? SelectedExamGrade { get; set; }
+        public ExamGradeController examGradeController { get; set; }
+        public ObservableCollection<ExamGradeDTO> ExamGradesStudent { get; set; }
+        public ObservableCollection<SubjectDTO> StudentSubjects{ get; set; }
+
+
         StudentDTO selectedStudent1;
         public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
         {
+            DataContext = this;
+
             Students= students;
             selectedStudent1= selectedStudent;
+
+
+            ExamGradesStudent = new ObservableCollection<ExamGradeDTO>();
+            StudentSubjects = new ObservableCollection<SubjectDTO>();
+            examGradeController = new ExamGradeController();
+
+            examGradeController.Subscribe(this);
+
             InitializeComponent();
+
             NameTextBox.Text = selectedStudent.StudentName;
             SurnameTextBox.Text = selectedStudent.Surname;
-            AddressTextBox.Text = (selectedStudent.Adress).ToString();
+            StreetTextBox.Text = selectedStudent.Adress.Street;
+            StreetNumberTextBox.Text = selectedStudent.Adress.StreetNumber.ToString();
+            CityTextBox.Text = selectedStudent.Adress.City;
+            StateTextBox.Text = selectedStudent.Adress.State;
             PhoneNumberTextBox.Text = selectedStudent.Phone;
             DateOfBirthDatePicker.Text = selectedStudent.DateOfBirth.ToString();
             EmailTextBox.Text = selectedStudent.Email;
@@ -49,6 +74,9 @@ namespace GUI.MenuBar.Edit
             {
                 FinancingStatusComboBox.Text = "Budžet";
             }
+
+
+            Update();
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -75,37 +103,127 @@ namespace GUI.MenuBar.Edit
 
             string ime = NameTextBox.Text;
             string prezime = SurnameTextBox.Text;
-            Adress adresa = Adress.Parse(AddressTextBox.Text);
-            DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
             string brojTelefona = PhoneNumberTextBox.Text;
             string email = EmailTextBox.Text;
             CLI.Index brojIndexa = CLI.Index.Parse(IndexNumberTextBox.Text);
-            int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
             Status nacinFinansiranja;
-            if (FinancingStatusComboBox.Text.ToString() == "Samofinansiranje")
-            {
-                nacinFinansiranja = Status.SAMOFINANSIRANJE;
-            }
-            else
+            if (FinancingStatusComboBox.Text.ToString() == "Budžet")
             {
                 nacinFinansiranja = Status.BUDZET;
             }
-
-            Student student = new Student(selectedStudent1.Id,ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
-            studentController.Update(student);
-            
-            studentDTO = new StudentDTO(student);
-           
-            for(int i = 0; i < Students.Count; i++)
+            else
             {
-                if(Students[i].Id == student.Id)
+                nacinFinansiranja = Status.SAMOFINANSIRANJE;
+            }
+
+            if (string.IsNullOrEmpty(ime) || string.IsNullOrEmpty(prezime) || string.IsNullOrEmpty(StreetTextBox.Text) || string.IsNullOrEmpty(StreetNumberTextBox.Text) || string.IsNullOrEmpty(CityTextBox.Text) || string.IsNullOrEmpty(StateTextBox.Text) || string.IsNullOrEmpty(DateOfBirthDatePicker.Text) || string.IsNullOrEmpty(brojTelefona) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(IndexNumberTextBox.Text) || string.IsNullOrEmpty(YearTextBox.Text) || string.IsNullOrEmpty(FinancingStatusComboBox.Text))
+            {
+                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if (!int.TryParse(YearTextBox.Text,out int result))
                 {
-                    Students[i] = studentDTO;
+                MessageBox.Show("Make sure you put a number in the Year texbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else if(!int.TryParse(StreetNumberTextBox.Text,out int result1))
+            {
+                MessageBox.Show("Make sure you put a number in the street number textbox!", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                DateOnly dateofbirth = DateOnly.Parse(DateOfBirthDatePicker.Text);
+                int ulica_broj = int.Parse(StreetNumberTextBox.Text);
+                string ulica = StreetTextBox.Text;
+                string grad = CityTextBox.Text;
+                string drzava = StateTextBox.Text;
+                Adress adresa = new Adress(ulica, ulica_broj, grad, drzava);
+                int trenutnaGodinaStudija = int.Parse(YearTextBox.Text);
+                Student student = new Student(selectedStudent1.Id, ime, prezime, dateofbirth, adresa, brojTelefona, email, brojIndexa, trenutnaGodinaStudija, nacinFinansiranja);
+                studentController.Update(student);
+
+                studentDTO = new StudentDTO(student);
+
+                for (int i = 0; i < Students.Count; i++)
+                {
+                    if (Students[i].Id == student.Id)
+                    {
+                        Students[i] = studentDTO;
+                    }
+                }
+
+                Close();
+
+            }
+
+        }
+        private void DatePicker_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void DismissGradeFun(object sender, RoutedEventArgs e)
+        {
+            /*
+            if (SelectedPassedSubjects == null)
+            {
+                MessageBox.Show("Please choose a subject which grade you want to dismiss!");
+            }
+            else
+            {  */
+                MessageBoxResult R = MessageBox.Show("Are you sure you want to dismiss this grade?", "Dismiss the grade", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (R == MessageBoxResult.Yes)
+                {
+
+                }
+            //}
+        }
+        private void AddSubjectFun(object sender, RoutedEventArgs e)
+        {
+           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1);
+           chooseSubjectToAdd.Owner = this;
+           chooseSubjectToAdd.ShowDialog();
+        }
+        private void RemoveSubjectFun(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (R == MessageBoxResult.Yes)
+            {
+
+            }
+        }
+        private void NewGradeFun(object sender, RoutedEventArgs e)
+        {
+            NewGrade newGrade = new NewGrade();
+            newGrade.Owner = this;
+            newGrade.ShowDialog();
+        }
+        public void Update()
+        {
+
+            ExamGradesStudent.Clear();
+            
+            foreach(ExamGrade grade in examGradeController.GetAllExamGrades())
+            {
+                if(grade.StudentId == selectedStudent1.Id)
+                {
+                    ExamGradesStudent.Add(new ExamGradeDTO(grade));
                 }
             }
-            
-            Close();
 
+            StudentSubjects.Clear();
+            foreach(StudentSubject s in studentSubjectController.GetAllSubjects())
+            {
+                foreach(Subject subject in subjectController.GetAllSubjects())
+                {
+                    if (s.subjectId == subject.Id && selectedStudent1.Id ==s.studentId)
+                    {
+                        StudentSubjects.Add(new SubjectDTO(subject));
+                    }
+                }
+            }
         }
     }
 }

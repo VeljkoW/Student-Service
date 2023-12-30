@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.Help"
         mc:Ignorable="d"
-        Title="About" Height="450" Width="800"
-        Loaded="CenterWindow">
+        Title="About" Height="350" Width="600"
+        Loaded="CenterWindow"
+        ResizeMode="NoResize"
+        >
     <Grid>
-        
+        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="The Student Service Application is a software solution that enables efficient tracking and management of student information at higher education institutions. This application is designed with the aim of streamlining administrative processes and providing users, both students and staff in the student services department, with easy and clear access to relevant data." VerticalAlignment="Top" Height="204" Width="518" TextAlignment="Left" FontSize="20" Margin="0,30,0,0"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,248,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="App version: Beta 0.5.9"  Width="518" TextAlignment="Left" FontSize="20"/>
+
     </Grid>
 </Window>

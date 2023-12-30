@@ -13,6 +13,9 @@ namespace CLI
         public int Id {  get; set; }
         public string Name { get; set; }
         public Professor Head { get; set; }
+        public int IdProfesora {  get; set; }
+        public string ImeProfesora { get; set; }
+        public string PrezimeProfesora { get; set; }
         public List<Professor> Professors { get; set;}
 
         public Katedra() 
@@ -20,6 +23,9 @@ namespace CLI
             Id = 1;
             Name = "Katedra1";
             Head = new Professor();
+            IdProfesora = Head.Id;
+            ImeProfesora = Head.Name;
+            PrezimeProfesora = Head.Surname;
             Professors= new List<Professor>();
         }
         public Katedra(int id, string name, Professor head)
@@ -27,6 +33,9 @@ namespace CLI
             Id = id;
             Name = name;
             Head = head;
+            IdProfesora = head.Id;
+            ImeProfesora = head.Name;
+            PrezimeProfesora = head.Surname;
             Professors = new List<Professor>();
         }
         public string[] ToCSV()
@@ -35,7 +44,9 @@ namespace CLI
              {
               Id.ToString(),
               Name,
-              Head.ToString()
+              IdProfesora.ToString(),
+              ImeProfesora,
+              PrezimeProfesora
 
               };
 
@@ -46,7 +57,9 @@ namespace CLI
         {
             Id = int.Parse(values[0]);
             Name = values[1];
-            Head = new Professor();
+            IdProfesora = int.Parse(values[2]);
+            ImeProfesora = values[3];
+            PrezimeProfesora= values[4];
         }
         public override string ToString()
         {

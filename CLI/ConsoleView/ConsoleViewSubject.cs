@@ -38,8 +38,10 @@ namespace CLI
 
         private Subject InputSubject()
         {
+            System.Console.WriteLine("Enter Id: ");
+            int id = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter subject ID: ");
-            string id = System.Console.ReadLine() ?? string.Empty;
+            string subjectId = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter subject Name: ");
             string name = System.Console.ReadLine() ?? string.Empty;
             System.Console.WriteLine("Enter semester (0 - LETNJI, 1 - ZIMSKI): ");
@@ -63,7 +65,7 @@ namespace CLI
             int professorid = ConsoleViewUtils.SafeInputInt();
             System.Console.WriteLine("Enter ESPB Points: ");
             int espb = ConsoleViewUtils.SafeInputInt();
-            Subject s = new Subject(id, name,semester,year,professorid,espb);
+            Subject s = new Subject(id,subjectId, name,semester,year,professorid,espb);
             return s;
         }
         private void UpdateSubject()

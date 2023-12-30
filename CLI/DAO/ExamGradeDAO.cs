@@ -62,13 +62,13 @@ namespace CLI
         {
             return examgrades;
         }
-        public double getAverageGrade(int subjectid)
+        public double getAverageGrade(int studentid)
         {
             int sum = 0;
             int cnt = 0;
             foreach (ExamGrade e in examgrades)
             {
-                if (e.Id == subjectid)
+                if (e.StudentId == studentid)
                 {
                     sum += e.Grade;
                     cnt++;
@@ -78,7 +78,7 @@ namespace CLI
             {
                 return 5;
             }
-            return sum / cnt;
+            return Math.Round(((float)sum / cnt),2);
         }
 
     }

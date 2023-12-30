@@ -16,7 +16,7 @@ namespace GUI.DTO
 
 
         private string name;
-        public string Name
+        public string DepartmentName
         {
             get
             {
@@ -31,30 +31,11 @@ namespace GUI.DTO
                 }
             }
         }
-        private Professor head;
-        public Professor Head
-        {
-            get
-            {
-             
-                return head;
-            }
-            set
-            {
-                if (value != head)
-                {
-                    head = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        /*
         private string imeProfesora;
         public string ImeProfesora
         {
             get
             {
-                imeProfesora = head.Name;
                 return imeProfesora;
             }
             set
@@ -66,19 +47,36 @@ namespace GUI.DTO
                 }
             }
         }
-        */
+        private string prezimeProfesora;
+        public string PrezimeProfesora
+        {
+            get
+            {
+                return prezimeProfesora;
+            }
+            set
+            {
+                if (value != prezimeProfesora)
+                {
+                    prezimeProfesora = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public KatedraDTO(Katedra katedra)
         {
             Id=katedra.Id;
             name=katedra.Name;
-            head=katedra.Head;
+            imeProfesora=katedra.ImeProfesora;
+            prezimeProfesora = katedra.PrezimeProfesora;
         }
 
         public KatedraDTO() 
         {
             Id = 0;
             name = "";
-            head = new Professor();
+            imeProfesora = "";
+            prezimeProfesora = "";
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

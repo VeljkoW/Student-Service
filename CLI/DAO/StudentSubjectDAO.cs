@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CLI.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,12 @@ namespace CLI
     {
         private readonly List<StudentSubject> studentStubjects;
         private readonly Storage<StudentSubject> storage;
+        public ObserverSubject studentSubjectSubject;
         public StudentSubjectDAO()
         {
             storage = new Storage<StudentSubject>("StudentSubject.csv");
             studentStubjects = storage.Load();
+            studentSubjectSubject = new ObserverSubject();
         }
         public StudentSubject AddSubject(StudentSubject studentSubject)
         {
@@ -23,7 +26,7 @@ namespace CLI
         }
         public StudentSubject? UpdateSubject(StudentSubject studentSubject)
         {
-            StudentSubject? oldObj = GetSubjectById(studentSubject.studentId);
+            StudentSubject? oldObj = GetSubjectById(studentSubject.studentId,studentSubject.subjectId);
             if (oldObj is null) return null;
 
             oldObj.studentId = studentSubject.studentId;
@@ -32,18 +35,22 @@ namespace CLI
             storage.Save(studentStubjects);
             return oldObj;
         }
-        public StudentSubject? RemoveSubject(int id)
+        public List<StudentSubject> GetAllSubjects()
         {
-            StudentSubject? subject = GetSubjectById(id);
+            return studentStubjects;
+        }
+        public StudentSubject? RemoveSubject(int studentId,int subjectId)
+        {
+            StudentSubject? subject = GetSubjectById(studentId, subjectId);
             if (subject == null) return null;
 
             studentStubjects.Remove(subject);
             storage.Save(studentStubjects);
             return subject;
         }
-        public StudentSubject? GetSubjectById(int id)
+        public StudentSubject? GetSubjectById(int studentIdd,int subjectIdd)
         {
-            return studentStubjects.Find(v => v.studentId == id);
+            return studentStubjects.Find(v => v.studentId == studentIdd && v.subjectId==subjectIdd);
         }
     }
 }

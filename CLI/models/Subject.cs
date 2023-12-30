@@ -11,7 +11,8 @@ namespace CLI
 {
     public class Subject : ISerializable
     {
-        public String SubjectID { get; set; }
+        public int Id {  get; set; }
+        public string SubjectID { get; set; }
         public string SubjectName { get; set; }
         public Semester Semester { get; set; }
         public int Year { get; set; }
@@ -20,31 +21,33 @@ namespace CLI
         public List<Student> StudentsWhoPassed { get; set; }
         public List<Student> StudentsWhoDidntPass { get; set; }
 
-        public Subject(string subjectID, string subjectName, Semester sem, int year, int professor, int eSPBPoints)
+        public Subject(int id,string subjectID, string subjectName, Semester sem, int year,int professorid, int eSPBPoints)
         {
+            Id = id;
             SubjectID = subjectID;
             SubjectName = subjectName;
             Semester = sem;
             Year = year;
-            ProfessorId = professor;
+            ProfessorId = professorid;
             ESPBPoints = eSPBPoints;
             StudentsWhoPassed = new List<Student>();
             StudentsWhoDidntPass = new List<Student>();
         }
         //Konstruktor bez Id-eva
-        public Subject(string subjectName, Semester sem, int year, int professor, int eSPBPoints)
+        public Subject(string subjectID,string subjectName, Semester sem, int year,int professorid, int eSPBPoints) 
         {
-         
+            SubjectID = subjectID;
             SubjectName = subjectName;
             Semester = sem;
             Year = year;
-            ProfessorId = professor;
+            ProfessorId = professorid;
             ESPBPoints = eSPBPoints;
             StudentsWhoPassed = new List<Student>();
             StudentsWhoDidntPass = new List<Student>();
         }
         public Subject()
         {
+            Id = 0;
             SubjectID = "";
             SubjectName = "Analiza";
             Semester = Semester.ZIMSKI;
@@ -57,9 +60,10 @@ namespace CLI
 
         public void FromCSV(string[] val)
         {
-            SubjectID = val[0];
-            SubjectName = val[1];
-            if (val[2]=="ZIMSKI")
+            Id = int.Parse(val[0]);
+            SubjectID = val[1];
+            SubjectName = val[2];
+            if (val[3]=="ZIMSKI")
             {
                 Semester = Semester.ZIMSKI;
 
@@ -68,21 +72,21 @@ namespace CLI
             {
                 Semester = Semester.LETNJI;
             }
-            Year = int.Parse(val[3]);
-            ProfessorId = int.Parse(val[4]);
-            ESPBPoints= int.Parse(val[5]);
+            Year = int.Parse(val[4]);
+            ProfessorId = int.Parse(val[5]);
+            ESPBPoints= int.Parse(val[6]);
         }
         public string[] ToCSV()
         {
             string[] retString =
             {
-                SubjectID, SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString()
+                Id.ToString(),SubjectID, SubjectName, Semester.ToString(),Year.ToString(),ProfessorId.ToString(),ESPBPoints.ToString()
             };
             return retString;
         }
         public override string ToString()
         {
-            string s = $"ID:{SubjectID,3}| Name: {SubjectName,20} | Semester: {Semester,6} | Year: {Year,4} | Professor ID:{ProfessorId,3}| ESPB Points: {ESPBPoints,1}";
+            string s = $"ID:{Id,3}|SubjectID:{SubjectID,5}| Name: {SubjectName,20} | Semester: {Semester,6} | Year: {Year,4} | Professor ID:{ProfessorId,3}| ESPB Points: {ESPBPoints,1}";
             return s;
         }
     }

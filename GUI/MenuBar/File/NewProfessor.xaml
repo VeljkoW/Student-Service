@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.File"
         mc:Ignorable="d"
-        Title="NewProfessor" Height="550" Width="400"
+        Title="New Professor" Height="550" Width="490"
         Loaded="CenterWindow">
     <Grid >
         <StackPanel Margin="10">
@@ -16,9 +16,28 @@
             <Label Content="Surname*" />
             <TextBox x:Name="SurnameTextBox"/>
 
+            <Label Content="Date of Birth*" />
+            <DatePicker x:Name="DateOfBirthDatePicker" PreviewKeyDown="DatePicker_PreviewKeyDown"/>
 
-            <Label Content="Address*" />
-            <TextBox x:Name="AddressTextBox" />
+            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                <Label Content="Street*" />
+                <TextBox x:Name="StreetTextBox" Width="100" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="150,-25.2,0,0">
+                <Label Content="Num*"/>
+                <TextBox x:Name="StreetNumberTextBox" Width="30" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="220,-26,0,0">
+                <Label Content="City*" />
+                <TextBox x:Name="CityTextBox" Width="70" VerticalAlignment="Center" Height="20"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="330,-26,0,0">
+                <Label Content="State*" />
+                <TextBox x:Name="StateTextBox" Width="52" VerticalAlignment="Center" Height="20" />
+            </StackPanel>
 
             <Label Content="Phone Number*" />
             <TextBox x:Name="PhoneNumberTextBox" />
@@ -34,9 +53,6 @@
             
             <Label Content="Years of Service*" />
             <TextBox x:Name="YearsOfServiceTextBox" />
-            
-            <Label Content="Date of Birth*" />
-            <DatePicker x:Name="DateOfBirthDatePicker"/>
             
             <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
             <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
