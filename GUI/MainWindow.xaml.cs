@@ -254,11 +254,77 @@ namespace GUI
                 }
                 else if (Tab.SelectedIndex == 2)
                 {
+                    Update();
+                    ObservableCollection<SubjectDTO> FilteredSubjects = new ObservableCollection<SubjectDTO>();
+                    string[] searchSplit = searchBarString.Split(",");
 
+                    if (searchSplit.Length == 1)
+                    {
+                        string name = searchSplit[0].Trim();
+                        name = name.ToLower();
+
+                        foreach (SubjectDTO subject in Subjects)
+                        {
+
+                            if (subject.SubjectName.ToLower().Contains(name))
+                            {
+                                FilteredSubjects.Add(subject);
+                            }
+                        }
+                    }
+                    else if (searchSplit.Length == 2)
+                    {
+                        string name = searchSplit[0].Trim();
+                        name = name.ToLower();
+                        string subjId = searchSplit[1].Trim();
+                        subjId = subjId.ToLower();
+
+                        foreach (SubjectDTO subject in Subjects)
+                        {
+                            if (subject.SubjectName.ToLower().Contains(name) && subject.SubjectID.ToLower().Contains(subjId))
+                            {
+                                FilteredSubjects.Add(subject);
+                            }
+                        }
+                    }
+                    ShowFilteredSubjects(FilteredSubjects);
                 }
                 else if (Tab.SelectedIndex == 3)
                 {
+                    Update();
+                    ObservableCollection<ProfessorDTO> FilteredProfessors = new ObservableCollection<ProfessorDTO>();
+                    string[] searchSplit = searchBarString.Split(",");
 
+                    if (searchSplit.Length == 1)
+                    {
+                        string surname = searchSplit[0].Trim();
+                        surname = surname.ToLower();
+
+                        foreach (ProfessorDTO professor in Professors)
+                        {
+
+                            if (professor.ProfessorSurname.ToLower().Contains(surname))
+                            {
+                                FilteredProfessors.Add(professor);
+                            }
+                        }
+                    }
+                    else if (searchSplit.Length == 2)
+                    {
+                        string surname = searchSplit[0].Trim();
+                        surname = surname.ToLower();
+                        string name = searchSplit[1].Trim();
+                        name=name.ToLower();
+
+                        foreach (ProfessorDTO professor in Professors)
+                        {
+                            if (professor.ProfessorSurname.ToLower().Contains(surname) && professor.ProfessorName.ToLower().Contains(name))
+                            {
+                                FilteredProfessors.Add(professor);
+                            }
+                        }
+                    }
+                    ShowFilteredProfessors(FilteredProfessors);
                 }
             }
             else
@@ -480,6 +546,22 @@ namespace GUI
             foreach(StudentDTO student in filteredStudents)
             {
                 Students.Add(student);
+            }
+        }
+        public void ShowFilteredProfessors(ObservableCollection<ProfessorDTO> filteredProfessors)
+        {
+            Professors.Clear();
+            foreach (ProfessorDTO professor in filteredProfessors)
+            {
+                Professors.Add(professor);
+            }
+        }
+        public void ShowFilteredSubjects(ObservableCollection<SubjectDTO> filteredSubjects)
+        {
+            Subjects.Clear();
+            foreach (SubjectDTO subject in filteredSubjects)
+            {
+                Subjects.Add(subject);
             }
         }
         public void Update()
