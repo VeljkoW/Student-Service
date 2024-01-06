@@ -329,7 +329,11 @@ namespace GUI
             }
             else
             {
-                if(Tab.SelectedIndex == 0)
+                if (Tab.SelectedIndex == 0)
+                {
+                    Update();
+                }
+                if (Tab.SelectedIndex == 3)
                 {
                     Update();
                 }
