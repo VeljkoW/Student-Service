@@ -144,7 +144,16 @@ namespace GUI.MenuBar.Edit
             MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (R == MessageBoxResult.Yes)
             {
-
+                if (SelectedSubject != null && subjectController.GetSubjectById(SelectedSubject.Id) != null)
+                {
+                    Subject? s = subjectController.GetSubjectById(SelectedSubject.Id);
+                    if (s != null)
+                    {
+                        s.ProfessorId = -1;
+                    subjectController.Update(s);
+                    }
+                    Update();
+                }
             }
         }
         public void Update()
@@ -157,9 +166,6 @@ namespace GUI.MenuBar.Edit
                     Subjects.Add(new SubjectDTO(subject));
                 }
             }
-
-
         }
-
     }
 }
