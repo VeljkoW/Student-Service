@@ -333,6 +333,10 @@ namespace GUI
                 {
                     Update();
                 }
+                if (Tab.SelectedIndex == 2)
+                {
+                    Update();
+                }
                 if (Tab.SelectedIndex == 3)
                 {
                     Update();
