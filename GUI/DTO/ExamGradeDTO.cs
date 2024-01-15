@@ -1,4 +1,5 @@
 ﻿using CLI;
+using CLI.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,8 @@ namespace GUI.DTO
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int SubjectId { get; set; }
+        public StudentController studentController = new StudentController();
+        public SubjectController subjectController = new SubjectController();
 
         private string studentIndex {  get; set; }
         public string StudentIndex
@@ -103,8 +106,22 @@ namespace GUI.DTO
             SubjectId=examgrade.SubjectId;
             grade=examgrade.Grade;
             date=examgrade.Date;
-            studentIndex = examgrade.StudentIndex.ToString();
-            subjectIDName = examgrade.SubjectIdName;
+            studentIndex = "";
+            foreach(Student student in studentController.GetAllStudents())
+            {
+                if(student.Id == examgrade.StudentId)
+                {
+                    studentIndex = student.StudentIndex.ToString();
+                }
+            }
+            subjectIDName = "";
+            foreach(Subject subject in subjectController.GetAllSubjects())
+            {
+                if(subject.Id == examgrade.SubjectId)
+                {
+                    subjectIDName = subject.SubjectID;
+                }
+            }
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

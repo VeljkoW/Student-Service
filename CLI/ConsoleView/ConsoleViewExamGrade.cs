@@ -58,10 +58,7 @@ namespace CLI
             System.Console.WriteLine("Enter Date: ");
             DateOnly date = ConsoleViewUtils.SafeInputDate();
 
-            Student student = studentDao.GetStudentById(studentid);
-            Subject subject = subjectDao.GetSubjectById(subjectid);
-
-            ExamGrade eg = new ExamGrade(examgradeDao.GenerateID(),studentid,subjectid,grade,date,student.StudentIndex,subject.SubjectID);
+            ExamGrade eg = new ExamGrade(examgradeDao.GenerateID(),studentid,subjectid,grade,date);
 
             return eg;
         }
