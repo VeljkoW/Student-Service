@@ -174,23 +174,35 @@ namespace GUI.MenuBar.Edit
         }
         private void DismissGradeFun(object sender, RoutedEventArgs e)
         {
-            /*
-            if (SelectedPassedSubjects == null)
+            
+            if (SelectedExamGrade == null)
             {
                 MessageBox.Show("Please choose a subject which grade you want to dismiss!");
             }
             else
-            {  */
+            {  
                 MessageBoxResult R = MessageBox.Show("Are you sure you want to dismiss this grade?", "Dismiss the grade", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (R == MessageBoxResult.Yes)
                 {
+                    StudentSubject subject = new StudentSubject(selectedStudent1.Id, SelectedExamGrade.SubjectId);
+                    studentSubjectController.Add(subject);
+                    foreach(Subject subject1 in subjectController.GetAllSubjects())
+                    {
+                        if(subject1.Id == SelectedExamGrade.SubjectId)
+                        {
+                            StudentSubjects.Add(new SubjectDTO(subject1));
+                        }
+                    }
+                    examGradeController.Delete(SelectedExamGrade.Id);
+                    ExamGradesStudent.Remove(SelectedExamGrade);
+                    Update();
 
                 }
-            //}
+            }
         }
         private void AddSubjectFun(object sender, RoutedEventArgs e)
         {
-           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1);
+           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1,StudentSubjects);
            chooseSubjectToAdd.Owner = this;
            chooseSubjectToAdd.ShowDialog();
         }
@@ -205,8 +217,10 @@ namespace GUI.MenuBar.Edit
                 MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (R == MessageBoxResult.Yes)
                 {
+
                         studentSubjectController.Delete(selectedStudent1.Id, SelectedNotPassedSubject.Id);
                         StudentSubjects.Remove(SelectedNotPassedSubject);
+                        
                 }
             }
         }

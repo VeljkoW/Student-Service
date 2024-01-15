@@ -1,4 +1,5 @@
 ﻿using CLI;
+using CLI.Controller;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
@@ -24,15 +25,47 @@ namespace GUI.MenuBar.File
     {
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
         public SubjectController subjectController { get; set; }
-        public ChooseSubjectToAddToStudent(StudentDTO student)
+        public ExamGradeController examGradeController { get; set; }
+        public StudentSubjectController studentSubjectController { get; set; }
+        public ObservableCollection<SubjectDTO> StudentSubjects { get; set; }
+        public StudentDTO Student;
+        public ChooseSubjectToAddToStudent(StudentDTO student,ObservableCollection<SubjectDTO> studentSubjects)
         {
             InitializeComponent();
             subjectController = new SubjectController();
+            examGradeController = new ExamGradeController();
+            studentSubjectController = new StudentSubjectController();
+            StudentSubjects = studentSubjects;
+            Student = student;
             Subjects = new ObservableCollection<SubjectDTO>();
 
             foreach (Subject subject in subjectController.GetAllSubjects())
             {
-                    Subjects.Add(new SubjectDTO(subject));  //Treba dodati da se prikazuju samo predmeti koji nisu polozeni i koje vec ne slusa
+                bool isSubjectPassed = false;
+                bool isSubjectBeingListened = false;
+
+                foreach (ExamGrade examGrade in examGradeController.GetAllExamGrades())
+                {
+                    if (examGrade.SubjectId == subject.Id && examGrade.StudentId == student.Id)
+                    {
+                        isSubjectPassed = true;
+                        break;
+                    }
+                }
+
+                foreach (StudentSubject studentSubject in studentSubjectController.GetAllSubjects())
+                {
+                    if (studentSubject.subjectId == subject.Id && studentSubject.studentId == student.Id)
+                    {
+                        isSubjectBeingListened = true;
+                        break;
+                    }
+                }
+
+                if (!isSubjectPassed && !isSubjectBeingListened)
+                {
+                    Subjects.Add(new SubjectDTO(subject));
+                }
             }
 
             SubjectsComboBox.ItemsSource = Subjects;
@@ -55,7 +88,15 @@ namespace GUI.MenuBar.File
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-
+            foreach(Subject subject in subjectController.GetAllSubjects())
+            {
+                if(SubjectsComboBox.Text == subject.SubjectName)
+                {
+                    StudentSubjects.Add(new SubjectDTO(subject));
+                    studentSubjectController.Add(new StudentSubject(Student.Id, subject.Id));
+                }
+            }
+            Close();
         }
             private void Cancel(object sender, EventArgs e)
         {
