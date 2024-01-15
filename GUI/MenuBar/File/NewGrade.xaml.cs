@@ -89,9 +89,9 @@ namespace GUI.MenuBar.File
                         break;
                 }
                 DateOnly date = DateOnly.Parse(DatePicker.Text);
-                CLI.Index indeks = new CLI.Index(SelectedStudent.StudentIndex);
-                string subjname = SelectedSubject.SubjectName;
-                ExamGrade exGrade = new ExamGrade(SelectedSubject.Id, SelectedStudent.Id, SelectedSubject.Id, Grade, date, indeks, subjname);
+                //CLI.Index indeks = new CLI.Index(SelectedStudent.StudentIndex);
+                //string subjname = SelectedSubject.SubjectName;
+                ExamGrade exGrade = new ExamGrade(SelectedSubject.Id, SelectedStudent.Id, SelectedSubject.Id, Grade, date);
                 examGradeController.Add(exGrade);
                 ExamGradeDTO examGrade = new ExamGradeDTO(exGrade);
                 ExamGrades.Add(examGrade);
