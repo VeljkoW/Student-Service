@@ -46,7 +46,7 @@ namespace GUI
         private ProfessorController professorController { get; set; }
         private SubjectController subjectController { get; set; }
         private KatedraController departmentController {  get; set; }
-
+        private DispatcherTimer timer;
         public MainWindow()
         {
             InitializeComponent();
@@ -73,17 +73,23 @@ namespace GUI
             subjectController.Subscribe(this);
             departmentController.Subscribe(this);
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += TimerFunction;
+            timer.Start();
 
             Update();
         }
         private void LoadFunctions(object sender, RoutedEventArgs e)
         {
             CenterWindowFunction();
-            StatusBarCurrentTimeAndDate();
             StatusBarCurrentTabShowing();
             Keyboard.Focus(this);
         }
-
+        private void TimerFunction(object? sender,EventArgs e)
+        {
+            StatusBarCurrentTimeAndDate();
+        }
         private void StatusBarCurrentTimeAndDate()
         {
             
@@ -584,6 +590,10 @@ namespace GUI
             foreach (Subject subject in subjectController.GetAllSubjects()) Subjects.Add(new SubjectDTO(subject));
             foreach (Professor professor in professorController.GetAllProfessors()) Professors.Add(new ProfessorDTO(professor));
             foreach (Katedra katedra in departmentController.GetAllKatedras()) Departments.Add(new KatedraDTO(katedra));
+        }
+        private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            timer.Stop();
         }
     }
 }

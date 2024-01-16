@@ -8,6 +8,7 @@
         Title="Studentska služba" Height="510" Width="800" BorderBrush="Black" BorderThickness="2"
         Loaded="LoadFunctions"
         KeyDown="MainKeyDown"
+        Closing="ClosingWindow"
         >
     <Grid>
         <Menu DockPanel.Dock="Top">
