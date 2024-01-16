@@ -43,6 +43,7 @@ namespace GUI.MenuBar.File
             {
                 bool isSubjectPassed = false;
                 bool isSubjectBeingListened = false;
+                bool isSubjectYearCorrect = false;
 
                 foreach (ExamGrade examGrade in examGradeController.GetAllExamGrades())
                 {
@@ -62,7 +63,12 @@ namespace GUI.MenuBar.File
                     }
                 }
 
-                if (!isSubjectPassed && !isSubjectBeingListened)
+                if(Student.StudentYear >= subject.Year)
+                {
+                    isSubjectYearCorrect = true;
+                }
+
+                if (!isSubjectPassed && !isSubjectBeingListened && isSubjectYearCorrect)
                 {
                     Subjects.Add(new SubjectDTO(subject));
                 }
