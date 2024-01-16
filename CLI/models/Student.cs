@@ -101,5 +101,13 @@ namespace CLI
             ToDoExams = new List<Subject>();
             FinishedExams = new List<ExamGrade>();
         }
+
+        public static int Compare(Student x, Student y)
+        {
+            int xNumber = x.StudentIndex.Number;
+            int yNumber = y.StudentIndex.Number;
+
+            return yNumber.CompareTo(xNumber);
+        }
     }
 }
