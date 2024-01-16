@@ -38,6 +38,7 @@ namespace CLI
             if (oldKatedra is null) return null;
             oldKatedra.Name = katedra.Name;
             oldKatedra.Head = katedra.Head;
+            oldKatedra.IdProfesora = katedra.IdProfesora;
             oldKatedra.Professors = katedra.Professors;
             storage.Save(katedras);
             katedraSubject.NotifyObservers();

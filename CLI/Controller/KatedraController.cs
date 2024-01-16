@@ -30,6 +30,10 @@ namespace CLI.Controller
         {
             katedraDao.RemoveKatedra(katedraId);
         }
+        public void Update(Katedra katedra)
+        {
+            katedraDao.UpdateKatedra(katedra);
+        }
 
         public void Subscribe(IObserver observer)
         {

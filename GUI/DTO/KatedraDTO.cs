@@ -1,4 +1,5 @@
 ﻿using CLI;
+using CLI.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +13,9 @@ namespace GUI.DTO
 {
     public class KatedraDTO : INotifyPropertyChanged
     {
+
+        public ProfessorController professorController = new ProfessorController();
         public int Id { get; set; }
-
-
         private string name;
         public string DepartmentName
         {
@@ -31,6 +32,24 @@ namespace GUI.DTO
                 }
             }
         }
+
+        public int idProfessor;
+        public int IdProfessor
+        {
+            get
+            {
+                return idProfessor;
+            }
+            set
+            {
+                if (value != idProfessor)
+                {
+                    idProfessor = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+       
         private string imeProfesora;
         public string ImeProfesora
         {
@@ -67,14 +86,24 @@ namespace GUI.DTO
         {
             Id=katedra.Id;
             name=katedra.Name;
-            imeProfesora=katedra.ImeProfesora;
-            prezimeProfesora = katedra.PrezimeProfesora;
+            imeProfesora = "";
+            prezimeProfesora = "";
+            idProfessor = katedra.IdProfesora;
+            foreach(Professor professor in professorController.GetAllProfessors())
+            {
+                if (professor.Id ==idProfessor)
+                {
+                    imeProfesora=professor.Name;
+                    prezimeProfesora = professor.Surname;
+                }
+            }
         }
 
         public KatedraDTO() 
         {
             Id = 0;
             name = "";
+            idProfessor = 0;
             imeProfesora = "";
             prezimeProfesora = "";
         }
