@@ -1,15 +1,18 @@
 ﻿using CLI;
 using CLI.Controller;
+using CLI.models.comparer;
 using CLI.Observer;
 using GUI.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -30,6 +33,7 @@ namespace GUI.MenuBar.View
         public StudentController studentController { get; set; }
         public StudentSubjectController studentSubjectController { get; set; }
         public SubjectController subjectController {  get; set; }
+        public List<Student> StudentList { get; set; } = new List<Student>();
         public ProfessorStudents(ProfessorDTO selectedProfessor)
         {
             DataContext = this;
@@ -96,6 +100,7 @@ namespace GUI.MenuBar.View
                             }
                             if (!exists)
                             {
+                                StudentList.Add(student);
                                 ProfessorsStudents.Add(new StudentDTO(student));
                             }
                         }
@@ -104,6 +109,53 @@ namespace GUI.MenuBar.View
                 }
             }
             
+        }
+
+        bool ascending = true;
+        private void columnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is DataGridColumnHeader columnHeader)
+            {
+                DataGridColumn column = columnHeader.Column;
+
+                if (ascending)
+                {
+                    column.SortDirection = ListSortDirection.Ascending;
+                    List<Student> allStudents = StudentList;
+                    var sortedStudents = allStudents.OrderBy(student => student, new StudentIndexComparer());
+
+                    this.ProfessorsStudents.Clear();
+                    foreach (Student student in sortedStudents)
+                    {
+                        this.ProfessorsStudents.Add(new StudentDTO(student));
+                    }
+
+                }
+                else
+                {
+                    column.SortDirection = ListSortDirection.Descending;
+                    List<Student> allStudents = StudentList;
+                    var sortedStudents = allStudents.OrderByDescending(student => student, new StudentIndexComparer());
+
+                    this.ProfessorsStudents.Clear();
+                    foreach (Student student in sortedStudents)
+                    {
+                        this.ProfessorsStudents.Add(new StudentDTO(student));
+                    }
+
+                }
+
+                ascending = !ascending;
+            }
+        }
+
+        private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Index")
+            {
+                e.Handled = true;
+            }
+
         }
     }
 }

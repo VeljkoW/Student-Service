@@ -22,6 +22,9 @@ using GUI.DTO;
 using CLI.Controller;
 using CLI.Observer;
 using System.Windows.Threading;
+using System.Windows.Controls.Primitives;
+using System.ComponentModel;
+using CLI.models.comparer;
 
 namespace GUI
 {
@@ -656,5 +659,54 @@ namespace GUI
         {
             timer.Stop();
         }
+
+        bool ascending = true;
+        private void columnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is DataGridColumnHeader columnHeader)
+            {
+          
+                DataGridColumn column = columnHeader.Column;
+
+                if (ascending)
+                {
+                    column.SortDirection = ListSortDirection.Ascending;
+                    List<Student> allStudents = studentController.GetAllStudents();
+                    var sortedStudents = allStudents.OrderBy(student => student, new StudentIndexComparer());
+
+                    this.Students.Clear();
+                    foreach (Student student in sortedStudents)
+                    {
+                        this.Students.Add(new StudentDTO(student));
+                    }
+      
+                }
+                else
+                {
+                    column.SortDirection = ListSortDirection.Descending;
+                    List<Student> allStudents = studentController.GetAllStudents();
+                    var sortedStudents = allStudents.OrderByDescending(student => student, new StudentIndexComparer());
+        
+                    this.Students.Clear();
+                    foreach (Student student in sortedStudents)
+                    {
+                        this.Students.Add(new StudentDTO(student));
+                    }
+
+                }
+
+                ascending = !ascending; 
+            }
+        }
+
+        private void DataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            if (e.Column.Header.ToString() == "Index")
+            {
+               e.Handled = true;
+            }
+          
+        }
+
     }
 }

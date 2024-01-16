@@ -128,9 +128,19 @@
                       x:Name="StudentsDataGrid"
                       ItemsSource="{Binding Students, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
-                      SelectionMode="Single" IsReadOnly="True">
+                      SelectionMode="Single" IsReadOnly="True"
+                      Sorting="DataGrid_Sorting"        
+                              >
+                       
+                       
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Index" Binding="{Binding StudentIndex}"/>
+                            <DataGridTextColumn Header="Index" Binding="{Binding StudentIndex}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <EventSetter Event="Click" Handler="columnHeader_Click"/>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Name" Binding="{Binding StudentName}"/>
                             <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
                             <DataGridTextColumn MaxWidth="80" Header="Student Year" Binding="{Binding StudentYear}"/>
