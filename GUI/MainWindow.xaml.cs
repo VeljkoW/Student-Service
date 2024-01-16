@@ -376,7 +376,9 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 4)
             {
-                
+                NewDepartment newDepartment = new NewDepartment(Departments,Professors);
+                newDepartment.Owner = this;
+                newDepartment.ShowDialog();
             }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
@@ -454,7 +456,9 @@ namespace GUI
                 }
                 else
                 {
-
+                    EditDepartment editDepartment = new EditDepartment(SelectedDepartment, Departments,Professors);
+                    editDepartment.Owner = this;
+                    editDepartment.ShowDialog();
                 }
             }
         }

@@ -38,16 +38,22 @@ namespace CLI
             PrezimeProfesora = head.Surname;
             Professors = new List<Professor>();
         }
+        public Katedra(string name, Professor head) //konstruktor bez id-a
+        {
+            Name = name;
+            Head = head;
+            IdProfesora = head.Id;
+            ImeProfesora = head.Name;
+            PrezimeProfesora = head.Surname;
+            Professors = new List<Professor>();
+        }
         public string[] ToCSV()
         {
             List<string> retString = new List<string>
              {
               Id.ToString(),
               Name,
-              IdProfesora.ToString(),
-              ImeProfesora,
-              PrezimeProfesora
-
+              IdProfesora.ToString()
               };
 
             return retString.ToArray();
@@ -58,8 +64,6 @@ namespace CLI
             Id = int.Parse(values[0]);
             Name = values[1];
             IdProfesora = int.Parse(values[2]);
-            ImeProfesora = values[3];
-            PrezimeProfesora= values[4];
         }
         public override string ToString()
         {
