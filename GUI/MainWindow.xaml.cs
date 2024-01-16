@@ -1,6 +1,7 @@
 ﻿using GUI.MenuBar.File;
 using GUI.MenuBar.Edit;
 using GUI.MenuBar.Help;
+using GUI.MenuBar.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,6 +99,27 @@ namespace GUI
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             StatusBarCurrentTabShowing();
+            if (Tab.SelectedIndex == 2)
+            {
+                StudentConditionButton.Visibility = Visibility.Visible;
+                ViewTab.Visibility = Visibility.Visible;
+                StudentConditionTab.Visibility = Visibility.Visible;
+                ProfessorStudentsTab.Visibility = Visibility.Collapsed;
+            }
+            else if(Tab.SelectedIndex == 3)
+            {
+                StudentConditionButton.Visibility = Visibility.Visible;
+                ViewTab.Visibility= Visibility.Visible;
+                StudentConditionTab.Visibility = Visibility.Collapsed;
+                ProfessorStudentsTab.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                StudentConditionButton.Visibility= Visibility.Collapsed;
+                ViewTab.Visibility =Visibility.Collapsed;
+                StudentConditionTab.Visibility= Visibility.Collapsed;
+                ProfessorStudentsTab.Visibility = Visibility.Collapsed;
+            }
         }
         private void StatusBarCurrentTabShowing()
         {
@@ -160,6 +182,11 @@ namespace GUI
             else if (e.Key == Key.I && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
                 OpenAboutWindow(sender, e);
+                e.Handled = true;
+            }
+            else if ((e.Key == Key.U && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control) && (Tab.SelectedIndex == 2 || Tab.SelectedIndex ==3) )
+            {
+                StudentConditionWindow(sender, e);
                 e.Handled = true;
             }
             else if ((e.Key == Key.D1 || e.Key == Key.NumPad1) && (Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
@@ -536,6 +563,36 @@ namespace GUI
             About about = new About();
             about.Owner = this;
             about.ShowDialog();
+        }
+        public void StudentConditionWindow(object sender,RoutedEventArgs e)
+        {
+            if (Tab.SelectedIndex == 2)
+            {
+                if (SelectedSubject == null)
+                {
+                    MessageBox.Show("Please choose a subject!", "Subject not selected");
+                }
+                else
+                {
+                    StudentCondition studentCondition = new StudentCondition(SelectedSubject);
+                    studentCondition.Owner = this;
+                    studentCondition.ShowDialog();
+                }
+            }
+            else if(Tab.SelectedIndex == 3)
+            {
+                if(SelectedProfessor == null)
+                {
+                    MessageBox.Show("Please select a professor!", "Professor not selected");
+                }
+                else
+                {
+                    ProfessorStudents professorStudents = new ProfessorStudents(SelectedProfessor);
+                    professorStudents.Owner = this;
+                    professorStudents.ShowDialog();
+                }
+            }
+                
         }
         private void OpenStudents(object sender, RoutedEventArgs e)
         {

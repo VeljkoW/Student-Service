@@ -78,6 +78,18 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem x:Name="ViewTab" Header="View" Visibility="Collapsed">
+                <MenuItem x:Name="StudentConditionTab" Visibility="Collapsed" Header="Condition" Click="StudentConditionWindow" InputGestureText="Ctrl+U">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/LIST.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="ProfessorStudentsTab" Visibility="Collapsed" Header="Professor's Students" Click="StudentConditionWindow" InputGestureText="Ctrl+U">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/Images/LIST.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
         </Menu>
 
 
@@ -90,6 +102,9 @@
             </Button>
             <Button Click="OpenDeleteWindow">
                 <Image Source="Resources/Images/DELETE.png" Width="16" Height="16"/>
+            </Button>
+            <Button x:Name="StudentConditionButton" Click="StudentConditionWindow" Visibility="Collapsed">
+                <Image Source="Resources/Images/LIST.png" Width="16" Height="16"/>
             </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,0,0">

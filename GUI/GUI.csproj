@@ -15,6 +15,7 @@
     <None Remove="Resources\Images\DEPARTMENT.png" />
     <None Remove="Resources\Images\EDIT.png" />
     <None Remove="Resources\Images\GRADE.png" />
+    <None Remove="Resources\Images\LIST.png" />
     <None Remove="Resources\Images\OPEN.png" />
     <None Remove="Resources\Images\PROFESSOR.png" />
     <None Remove="Resources\Images\SAVE.png" />
@@ -35,6 +36,7 @@
     <Resource Include="Resources\Images\DEPARTMENT.png" />
     <Resource Include="Resources\Images\EDIT.png" />
     <Resource Include="Resources\Images\GRADE.png" />
+    <Resource Include="Resources\Images\LIST.png" />
     <Resource Include="Resources\Images\OPEN.png" />
     <Resource Include="Resources\Images\PROFESSOR.png" />
     <Resource Include="Resources\Images\SAVE.png" />
