@@ -449,6 +449,7 @@ namespace GUI
                 {
                     EditStudent editStudent = new EditStudent(SelectedStudent,Students,examGradeController,studentSubjectController,studentController,subjectController);
                     editStudent.Owner = this;
+                    editStudent.Closed += WidnowClosed;
                     editStudent.ShowDialog();
                 }
             }
@@ -502,6 +503,10 @@ namespace GUI
                     editDepartment.ShowDialog();
                 }
             }
+        }
+        private void WidnowClosed(object sender, EventArgs e)
+        {
+            Update();
         }
         private void OpenDeleteWindow(object sender, RoutedEventArgs e)
         {
