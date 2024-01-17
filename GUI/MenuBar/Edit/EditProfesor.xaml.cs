@@ -26,7 +26,7 @@ namespace GUI.MenuBar.Edit
     public partial class EditProfesor : Window, IObserver
     {
         public ProfessorDTO professorDTO = new ProfessorDTO();
-        public ProfessorController professorController = new ProfessorController();
+        public ProfessorController professorController { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
         public SubjectController subjectController { get; set; }
@@ -34,14 +34,15 @@ namespace GUI.MenuBar.Edit
 
 
         ProfessorDTO selectedProfessor1;
-        public EditProfesor(ProfessorDTO selectedProfessor, ObservableCollection<ProfessorDTO> professors)
+        public EditProfesor(ProfessorDTO selectedProfessor, ObservableCollection<ProfessorDTO> professors,SubjectController subjectC, ProfessorController professorC)
         {
             DataContext = this;
 
             this.Professors = professors;
             selectedProfessor1 = selectedProfessor;
             Subjects = new ObservableCollection<SubjectDTO>();
-            subjectController = new SubjectController();
+            subjectController = subjectC;
+            professorController = professorC;
             subjectController.Subscribe(this);
 
             InitializeComponent();
@@ -135,24 +136,31 @@ namespace GUI.MenuBar.Edit
         }
         private void AddSubjectFun(object sender, RoutedEventArgs e)
         {
-            ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor(selectedProfessor1);
+            ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor(selectedProfessor1,subjectController,Subjects);
             chooseSubjectToAdd.Owner = this;
             chooseSubjectToAdd.ShowDialog();
         }
         private void RemoveSubjectFun(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (R == MessageBoxResult.Yes)
+            if (SelectedSubject == null)
             {
-                if (SelectedSubject != null && subjectController.GetSubjectById(SelectedSubject.Id) != null)
+                MessageBox.Show("Please choose a subject you want to remove!", "Subject not selected");
+            }
+            else
+            {
+                MessageBoxResult R = MessageBox.Show("Are you sure you want to remove this subject?", "Remove the subject", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (R == MessageBoxResult.Yes)
                 {
-                    Subject? s = subjectController.GetSubjectById(SelectedSubject.Id);
-                    if (s != null)
+                    if (subjectController.GetSubjectById(SelectedSubject.Id) != null)
                     {
-                        s.ProfessorId = -1;
-                    subjectController.Update(s);
+                        Subject? s = subjectController.GetSubjectById(SelectedSubject.Id);
+                        if (s != null)
+                        {
+                            s.ProfessorId = -1;
+                            subjectController.Update(s);
+                        }
+                        Update();
                     }
-                    Update();
                 }
             }
         }

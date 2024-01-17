@@ -485,7 +485,7 @@ namespace GUI
                 }
                 else
                 {
-                    EditProfesor editProfesor = new EditProfesor(SelectedProfessor, Professors);
+                    EditProfesor editProfesor = new EditProfesor(SelectedProfessor, Professors,subjectController,professorController);
                     editProfesor.Owner = this;
                     editProfesor.ShowDialog();
                 }
