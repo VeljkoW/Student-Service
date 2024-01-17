@@ -23,24 +23,28 @@ namespace GUI.MenuBar.File
     public partial class ChooseSubjectToAddToProfessor : Window
     {
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
+        public ObservableCollection<SubjectDTO> SubjectList {  get; set; }
         public SubjectController subjectController { get; set; }
         public ProfessorDTO Professor;
-        public ChooseSubjectToAddToProfessor(ProfessorDTO profesor)
+        public ChooseSubjectToAddToProfessor(ProfessorDTO profesor,SubjectController subjectC,ObservableCollection<SubjectDTO> subjects)
         {
             InitializeComponent();
-            subjectController = new SubjectController();
-            Subjects = new ObservableCollection<SubjectDTO>();
+            subjectController = subjectC;
+            Subjects = subjects;
             Professor = profesor;
+            SubjectList = new ObservableCollection<SubjectDTO>();
+
+            SubjectList.Clear();
 
             foreach (Subject subject in subjectController.GetAllSubjects())
             {
-                if (subject.ProfessorId != Professor.ProfessorId)
+                if (subject.ProfessorId != Professor.ProfessorId && subject.ProfessorId == -1)
                 {
-                    Subjects.Add(new SubjectDTO(subject));
+                    SubjectList.Add(new SubjectDTO(subject));
                 }
             }
 
-            SubjectsComboBox.ItemsSource = Subjects;
+            SubjectsComboBox.ItemsSource = SubjectList;
             SubjectsComboBox.DisplayMemberPath = "SubjectName";
 
 
@@ -67,18 +71,12 @@ namespace GUI.MenuBar.File
             {
                 if (subject.SubjectName == subjectName)
                 {
-                    if (subject.ProfessorId != -1)
-                    {
-                        MessageBoxResult R = MessageBox.Show("Are you sure you want to change the professor for this subject", "Professor already exists", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                        if (R == MessageBoxResult.Yes)
-                        {
-                            subject.ProfessorId = Professor.ProfessorId; // Ne radi trenutno
-                            this.Close();
-                        }
-                    }
+                            subject.ProfessorId = Professor.ProfessorId;
+                            subjectController.Update(subject);
+                            Subjects.Add(new SubjectDTO(subject));
                 }
             }
-
+            Close();
         }
         private void Cancel(object sender, EventArgs e)
         {
