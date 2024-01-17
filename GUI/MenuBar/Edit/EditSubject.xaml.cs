@@ -25,20 +25,29 @@ namespace GUI.MenuBar.Edit
         public SubjectController subjectController = new SubjectController();
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
+        public ObservableCollection<ProfessorDTO> ProfessorsTemp = new ObservableCollection<ProfessorDTO> ();
         public SubjectDTO selectedSubject1;
         public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors)
         {
             Subjects = subjects;
             Professors = professors;
+            Professor profa = new Professor(-1,"", "No professor currently", DateOnly.Parse("12.12.2021"),new Adress(), "", "", "", "",0);
+            ProfessorDTO nullproff = new ProfessorDTO (profa);
+            ProfessorsTemp.Add(nullproff);
+
+            foreach(ProfessorDTO p in Professors )
+            {
+                ProfessorsTemp.Add (p);
+            }
             selectedSubject1 = selectedSubject;
             InitializeComponent();
 
-            ProfessorComboBox.ItemsSource = Professors;
+            ProfessorComboBox.ItemsSource = ProfessorsTemp;
             ProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
 
             SubjectIDTextBox.Text = selectedSubject.SubjectID;
             SubjectNameTextBox.Text = selectedSubject.SubjectName;
-            foreach(ProfessorDTO prof in Professors)
+            foreach(ProfessorDTO prof in ProfessorsTemp)
             {
                 if(selectedSubject.ProfessorId == prof.ProfessorId)
                 {
@@ -99,11 +108,18 @@ namespace GUI.MenuBar.Edit
 
             string professor = ProfessorComboBox.Text;
             int professorId = 0;
-            foreach (ProfessorDTO prof in Professors)
+            if (professor == "No professor currently")
             {
-                if (prof.ProfessorNameAndSurname == professor)
+                professorId = -1;
+            }
+            else
+            {
+                foreach (ProfessorDTO prof in ProfessorsTemp)
                 {
-                    professorId = prof.ProfessorId;
+                    if (prof.ProfessorNameAndSurname == professor)
+                    {
+                        professorId = prof.ProfessorId;
+                    }
                 }
             }
 
