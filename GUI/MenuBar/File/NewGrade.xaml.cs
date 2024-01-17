@@ -95,36 +95,44 @@ namespace GUI.MenuBar.File
                         Grade = 10;
                         break;
                 }
-                DateOnly date = DateOnly.Parse(DatePicker.Text);
-                //CLI.Index indeks = new CLI.Index(SelectedStudent.StudentIndex);
-                //string subjname = SelectedSubject.SubjectName;
-                ExamGrade exGrade = new ExamGrade(SelectedSubject.Id, SelectedStudent.Id, SelectedSubject.Id, Grade, date);
-                examGradeController.Add(exGrade);
-                ExamGradeDTO examGrade = new ExamGradeDTO(exGrade);
-                ExamGrades.Add(examGrade);
-                studentSubjectController.Delete(SelectedStudent.Id, SelectedSubject.Id);
-
-                StudentSubjects.Clear();
-
-                foreach (StudentSubject s in studentSubjectController.GetAllSubjects())
+                DateOnly date;
+                if (!DateOnly.TryParse(DatePicker.Text, out DateOnly result))
                 {
-                    foreach (Subject subject in subjectController.GetAllSubjects())
+                    MessageBox.Show("Make sure you put a grade date!", "Date is empty", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                }
+                else
+                {
+                    date = DateOnly.Parse(DatePicker.Text);
+                    //CLI.Index indeks = new CLI.Index(SelectedStudent.StudentIndex);
+                    //string subjname = SelectedSubject.SubjectName;
+                    ExamGrade exGrade = new ExamGrade(SelectedSubject.Id, SelectedStudent.Id, SelectedSubject.Id, Grade, date);
+                    examGradeController.Add(exGrade);
+                    ExamGradeDTO examGrade = new ExamGradeDTO(exGrade);
+                    ExamGrades.Add(examGrade);
+                    studentSubjectController.Delete(SelectedStudent.Id, SelectedSubject.Id);
+
+                    StudentSubjects.Clear();
+
+                    foreach (StudentSubject s in studentSubjectController.GetAllSubjects())
                     {
-                        if (s.subjectId == subject.Id && SelectedStudent.Id == s.studentId)
+                        foreach (Subject subject in subjectController.GetAllSubjects())
                         {
-                            StudentSubjects.Add(new SubjectDTO(subject));
+                            if (s.subjectId == subject.Id && SelectedStudent.Id == s.studentId)
+                            {
+                                StudentSubjects.Add(new SubjectDTO(subject));
+                            }
                         }
                     }
-                }
-                ExamGrades.Clear();
-                foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
-                {
-                    if (grade.StudentId == SelectedStudent.Id)
+                    ExamGrades.Clear();
+                    foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
                     {
-                        ExamGrades.Add(new ExamGradeDTO(grade));
+                        if (grade.StudentId == SelectedStudent.Id)
+                        {
+                            ExamGrades.Add(new ExamGradeDTO(grade));
+                        }
                     }
+                    Close();
                 }
-                Close();
             }
         }
         private void Cancel(object sender, RoutedEventArgs e)
