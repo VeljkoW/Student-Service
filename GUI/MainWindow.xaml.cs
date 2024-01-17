@@ -498,7 +498,7 @@ namespace GUI
                 }
                 else
                 {
-                    EditDepartment editDepartment = new EditDepartment(SelectedDepartment, Departments,Professors);
+                    EditDepartment editDepartment = new EditDepartment(SelectedDepartment, Departments,Professors,professorController, departmentController);
                     editDepartment.Owner = this;
                     editDepartment.ShowDialog();
                 }
