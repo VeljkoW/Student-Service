@@ -50,6 +50,8 @@ namespace GUI
         private ProfessorController professorController { get; set; }
         private SubjectController subjectController { get; set; }
         private KatedraController departmentController {  get; set; }
+        private StudentSubjectController studentSubjectController { get; set; }
+
         private DispatcherTimer timer;
         public MainWindow()
         {
@@ -69,6 +71,7 @@ namespace GUI
             professorController = new ProfessorController();
             subjectController = new SubjectController();
             departmentController = new KatedraController();
+            studentSubjectController = new StudentSubjectController();
 
 
             examGradeController.Subscribe(this);
@@ -76,6 +79,7 @@ namespace GUI
             professorController.Subscribe(this);
             subjectController.Subscribe(this);
             departmentController.Subscribe(this);
+            studentSubjectController.Subscribe(this);
 
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -102,7 +106,14 @@ namespace GUI
         private void Tab_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             StatusBarCurrentTabShowing();
-            if (Tab.SelectedIndex == 2)
+            if (Tab.SelectedIndex == 0)
+            {
+                StudentConditionButton.Visibility = Visibility.Visible;
+                ViewTab.Visibility = Visibility.Collapsed;
+                StudentConditionTab.Visibility = Visibility.Collapsed;
+                ProfessorStudentsTab.Visibility = Visibility.Collapsed;
+            }
+            else if (Tab.SelectedIndex == 2)
             {
                 StudentConditionButton.Visibility = Visibility.Visible;
                 ViewTab.Visibility = Visibility.Visible;
@@ -436,7 +447,7 @@ namespace GUI
                 }
                 else
                 {
-                    EditStudent editStudent = new EditStudent(SelectedStudent,Students);
+                    EditStudent editStudent = new EditStudent(SelectedStudent,Students,examGradeController,studentSubjectController,studentController,subjectController);
                     editStudent.Owner = this;
                     editStudent.ShowDialog();
                 }
@@ -569,7 +580,20 @@ namespace GUI
         }
         public void StudentConditionWindow(object sender,RoutedEventArgs e)
         {
-            if (Tab.SelectedIndex == 2)
+            if (Tab.SelectedIndex == 0)
+            {
+                if (SelectedStudent == null)
+                {
+                    MessageBox.Show("Please choose a student!", "Student not selected");
+                }
+                else
+                {
+                    StudentProfessors studentProfessors = new StudentProfessors(SelectedStudent, professorController, subjectController);
+                    studentProfessors.Owner = this;
+                    studentProfessors.ShowDialog();
+                }
+            }
+            else if (Tab.SelectedIndex == 2)
             {
                 if (SelectedSubject == null)
                 {

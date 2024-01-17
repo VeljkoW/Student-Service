@@ -24,8 +24,7 @@
               ItemsSource="{Binding ProfessorsStudents, UpdateSourceTrigger=PropertyChanged}"
               SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
               SelectionMode="Single" IsReadOnly="True"
-              Sorting="DataGrid_Sorting"    
-                      >
+              Sorting="DataGrid_Sorting">
                     <DataGrid.Columns>
                     <DataGridTextColumn Header="Index" Binding="{Binding StudentIndex}">
                         <DataGridTextColumn.HeaderStyle>
@@ -37,7 +36,7 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding StudentName}"/>
                         <DataGridTextColumn Header="Surname" Binding="{Binding Surname}"/>
                         <DataGridTextColumn MaxWidth="80" Header="Student Year" Binding="{Binding StudentYear}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                <DataGridTextColumn MinWidth="122" Header="Status" Binding="{Binding Status}"/>
                 <DataGridTextColumn Header="Grade average" Binding="{Binding GradeAverage}"/>
             </DataGrid.Columns>
         </DataGrid>

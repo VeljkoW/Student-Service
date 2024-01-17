@@ -41,7 +41,7 @@ namespace GUI.MenuBar.Edit
 
         StudentDTO selectedStudent1;
         public SubjectDTO? SelectedNotPassedSubject { get; set; }
-        public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
+        public EditStudent(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students,ExamGradeController exController,StudentSubjectController ssController,StudentController sController,SubjectController studController)
         {
             DataContext = this;
 
@@ -53,10 +53,10 @@ namespace GUI.MenuBar.Edit
             StudentSubjects = new ObservableCollection<SubjectDTO>();
 
 
-            examGradeController = new ExamGradeController();
-            subjectController = new SubjectController();
-            studentController = new StudentController();
-            studentSubjectController = new StudentSubjectController();
+            examGradeController = exController;
+            subjectController = studController;
+            studentController = sController;
+            studentSubjectController = ssController;
 
             examGradeController.Subscribe(this);
             subjectController.Subscribe(this);
@@ -196,7 +196,6 @@ namespace GUI.MenuBar.Edit
                     examGradeController.Delete(SelectedExamGrade.Id);
                     ExamGradesStudent.Remove(SelectedExamGrade);
                     Update();
-
                 }
             }
         }
@@ -232,7 +231,7 @@ namespace GUI.MenuBar.Edit
             }
             else
             {
-            NewGrade newGrade = new NewGrade(SelectedNotPassedSubject,selectedStudent1, ExamGradesStudent, StudentSubjects);
+            NewGrade newGrade = new NewGrade(SelectedNotPassedSubject,selectedStudent1, ExamGradesStudent, StudentSubjects,subjectController,studentSubjectController,examGradeController);
             newGrade.Owner = this;
             newGrade.ShowDialog();
             }

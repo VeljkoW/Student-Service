@@ -20,6 +20,10 @@ namespace CLI
         {
             return subjectDao.GetAllSubjects();
         }
+        public Subject? GetSubjectById(int id)
+        {
+            return subjectDao.GetSubjectById(id);
+        }
 
         public void Add(Subject subject)
         {
@@ -38,10 +42,6 @@ namespace CLI
         public void Subscribe(IObserver observer)
         {
             subjectDao.subjectSubject.Subscribe(observer);
-        }
-        public Subject? GetSubjectById(int id)
-        {
-            return subjectDao.GetSubjectById(id);
         }
     }
 }
