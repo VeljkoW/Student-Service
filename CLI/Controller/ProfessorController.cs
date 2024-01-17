@@ -21,6 +21,11 @@ namespace CLI.Controller
             return professorDao.GetAllProfessors();
         }
 
+        public Professor? GetProfessorById(int id)
+        {
+            return professorDao.GetProfessorById(id);
+        }
+
         public void Add(Professor professor)
         {
             professorDao.AddProfessor(professor);

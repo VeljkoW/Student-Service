@@ -31,17 +31,24 @@ namespace GUI.MenuBar.File
         public SubjectController subjectController { get; set; }
         public ObservableCollection<ExamGradeDTO> ExamGrades { get; set; }
         public ObservableCollection<SubjectDTO> StudentSubjects { get; set; }
-        public ExamGradeController examGradeController = new ExamGradeController();
-        public StudentSubjectController studentSubjectController = new StudentSubjectController();
-        public NewGrade(SubjectDTO selectedSubject,StudentDTO selectedStudent,ObservableCollection<ExamGradeDTO>examGrades, ObservableCollection<SubjectDTO> studentSubjects)
+        public ExamGradeController examGradeController { get; set; }
+        public StudentSubjectController studentSubjectController { get; set; }
+        public NewGrade(SubjectDTO selectedSubject,StudentDTO selectedStudent,ObservableCollection<ExamGradeDTO>examGrades, ObservableCollection<SubjectDTO> studentSubjects,SubjectController subjectControll,StudentSubjectController ssController,ExamGradeController exController)
         {
             DataContext = this;
 
             ExamGrades = examGrades;
             StudentSubjects = studentSubjects;
+
+
+
             SelectedSubject =selectedSubject;
             SelectedStudent=selectedStudent;
-            subjectController = new SubjectController();
+
+            subjectController = subjectControll;
+            studentSubjectController = ssController;
+            examGradeController = exController;
+
             InitializeComponent();
             Subject.Text = selectedSubject.Id.ToString();
             SubjectName.Text = selectedSubject.SubjectName.ToString();
@@ -107,6 +114,14 @@ namespace GUI.MenuBar.File
                         {
                             StudentSubjects.Add(new SubjectDTO(subject));
                         }
+                    }
+                }
+                ExamGrades.Clear();
+                foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
+                {
+                    if (grade.StudentId == SelectedStudent.Id)
+                    {
+                        ExamGrades.Add(new ExamGradeDTO(grade));
                     }
                 }
                 Close();

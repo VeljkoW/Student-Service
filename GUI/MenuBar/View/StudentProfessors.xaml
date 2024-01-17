@@ -1,0 +1,33 @@
+﻿<Window x:Class="GUI.MenuBar.View.StudentProfessors"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI.MenuBar.View"
+        mc:Ignorable="d"
+        Title="Student's professors" Height="450" Width="650"
+        Loaded="CenterWindow"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+            <DataGrid Height="430"
+            BorderBrush="Black" BorderThickness="2"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            ColumnWidth="*"
+            AutoGenerateColumns="False"
+            x:Name="ProfessorsDataGrid"
+            ItemsSource="{Binding studentProfessors, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedStudent, UpdateSourceTrigger=PropertyChanged}"
+            SelectionMode="Single" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding ProfessorName}"/>
+                    <DataGridTextColumn Header="Surname" Binding="{Binding ProfessorSurname}"/>
+                    <DataGridTextColumn Header="E-Mail" Binding="{Binding ProfessorEmail}"/>
+                    <DataGridTextColumn Header="Title" Binding="{Binding ProfessorTitle}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+    </Grid>
+</Window>
