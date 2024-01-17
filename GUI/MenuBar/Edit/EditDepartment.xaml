@@ -5,20 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUI.MenuBar.File"
         mc:Ignorable="d"
-        Title="Edit Department" Height="250" Width="350"
+        Title="Edit Department" Height="450" Width="550"
         Loaded="CenterWindow"
         ResizeMode="NoResize">
     <Grid >
-        <StackPanel Margin="20,25,20,10">
+        <StackPanel >
+            <DockPanel Margin="3,15,3,0">
+                <TabControl x:Name="Tab">
+                    <TabItem Header="Informations">
+                        <StackPanel Margin="10">
+                            <Label Content="Name*" />
+                            <TextBox x:Name="NameTextBox" />
 
-            <Label Content="Name*" />
-            <TextBox x:Name="NameTextBox" />
 
-            <Label Content="Head Professor*" />
-            <ComboBox x:Name="HeadProfessorComboBox" />
+                            <Label Content="Head Professor*" />
+                            <ComboBox x:Name="HeadProfessorComboBox" />
 
-            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
-            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+                            <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
+                            <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>
+                        </StackPanel>
+                    </TabItem>
+                    <TabItem Header="Department professors">
+                        <Grid Margin="5,5,5,5">
+                            <Button Content="Add Professor" Click="AddProfessor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="25" Margin="35,0,35,0"/>
+                            <Button Content="Remove Professor" Click="RemoveProfessor" HorizontalAlignment="Right" VerticalAlignment="Top" Width="100" Height="25" Margin="0,0,35,0"/>
+                            <DataGrid Height="300"
+                            Margin="0,40,0,0"
+                            BorderBrush="Black" BorderThickness="2"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            ColumnWidth="*"
+                            AutoGenerateColumns="False"
+                            x:Name="ProfessorsDataGrid"
+                            ItemsSource="{Binding DepartmentProfessors, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding SelectedProfessor, UpdateSourceTrigger=PropertyChanged}"
+                            SelectionMode="Single" IsReadOnly="True">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Name" Binding="{Binding ProfessorName}"/>
+                                    <DataGridTextColumn Header="Surname" Binding="{Binding ProfessorSurname}"/>
+                                    <DataGridTextColumn Header="E-Mail" Binding="{Binding ProfessorEmail}"/>
+                                    <DataGridTextColumn Header="Title" Binding="{Binding ProfessorTitle}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
         </StackPanel>
     </Grid>
 </Window>

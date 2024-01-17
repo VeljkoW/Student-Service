@@ -173,15 +173,15 @@
 
                 <TabItem Header="Subjects">
                     <DataGrid Height="350"
-                BorderBrush="Black" BorderThickness="2"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                ColumnWidth="*"
-                AutoGenerateColumns="False"
-                x:Name="SubjectsDataGrid"
-                ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
-                SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}"
-                SelectionMode="Single" IsReadOnly="True">
+                        BorderBrush="Black" BorderThickness="2"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        ColumnWidth="*"
+                        AutoGenerateColumns="False"
+                        x:Name="SubjectsDataGrid"
+                        ItemsSource="{Binding Subjects, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedSubject, UpdateSourceTrigger=PropertyChanged}"
+                        SelectionMode="Single" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Id" Binding="{Binding SubjectID}"/>
                             <DataGridTextColumn Header="Name" Binding="{Binding SubjectName}"/>

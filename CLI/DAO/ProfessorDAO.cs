@@ -47,6 +47,7 @@ namespace CLI
             oldProfessor.Title = professor.Title;
             oldProfessor.YearsOfService = professor.YearsOfService;
             oldProfessor.Subjects = professor.Subjects;
+            oldProfessor.DepartmentId = professor.DepartmentId;
             storage.Save(professors);
             professorSubject.NotifyObservers();
             return oldProfessor;

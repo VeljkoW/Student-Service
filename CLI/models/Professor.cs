@@ -20,6 +20,7 @@ namespace CLI
         public string Title { get; set; }
         public int YearsOfService { get; set; }
         public List<Subject> Subjects { get; set; }
+        public int DepartmentId {  get; set; }
         public Professor(int id,string name,string surname,DateOnly dateofbirth,Adress adresa,string phone,string email,string idcard,string title,int years)
         {
             Id = id;
@@ -33,6 +34,7 @@ namespace CLI
             Title = title;
             YearsOfService = years;
             Subjects = new List<Subject>();
+            DepartmentId = -1;
         }
         public Professor( string name, string surname, DateOnly dateofbirth, Adress adresa, string phone, string email, string idcard, string title, int years)
         {
@@ -46,6 +48,7 @@ namespace CLI
             Title = title;
             YearsOfService = years;
             Subjects = new List<Subject>();
+            DepartmentId = -1;
         }
         public Professor() {
             Id=0;
@@ -59,11 +62,12 @@ namespace CLI
             Title = "Profesor";
             YearsOfService = 13;
             Subjects = new List<Subject>();
+            DepartmentId = -1;
         }
 
         public string[] ToCSV()
         {
-            string[] retString = {Id.ToString(),Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDCardNumber,Title,YearsOfService.ToString()};
+            string[] retString = {Id.ToString(),Name,Surname,DateOfBirth.ToString(),ProfessorAdress.ToString(),PhoneNumber,EmailAdress,IDCardNumber,Title,YearsOfService.ToString(),DepartmentId.ToString()};
             return retString;
 
 
@@ -80,7 +84,7 @@ namespace CLI
             IDCardNumber = vals[10];
             Title = vals[11];
             YearsOfService = int.Parse(vals[12]);
-
+            DepartmentId = int.Parse(vals[13]);
         }
         public override string ToString()
         {
