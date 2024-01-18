@@ -9,13 +9,10 @@
         Loaded="CenterWindow"
         ResizeMode="NoResize">
     <Grid >
-        <StackPanel Margin="20,25,20,10">
+        <StackPanel Margin="20,50,20,10">
 
             <Label Content="Name*" />
             <TextBox x:Name="NameTextBox" />
-
-            <Label Content="Head Professor*" />
-            <ComboBox x:Name="HeadProfessorComboBox" />
 
             <Button Content="Save" Click="SaveButton_Click" HorizontalAlignment="Center" Margin="-200,35,0,0" Width="70" Height="30"/>
             <Button Content="Cancel" Click="Cancel" HorizontalAlignment="Center" Margin="200,-30,0,0" Width="70" Height="30"/>

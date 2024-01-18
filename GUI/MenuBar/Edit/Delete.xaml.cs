@@ -46,38 +46,43 @@ namespace GUI.MenuBar.Edit
 
         }
         //konstruktor za delete studenta
-        public Delete(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students)
+        public Delete(StudentDTO selectedStudent,ObservableCollection<StudentDTO> students,StudentController studentC)
         {
             this.SelectedStudent = selectedStudent;
             this.Students = students;
+            studentController=studentC;
             InitializeComponent();
         }
         //konstruktor za delete ExamGrade
-        public Delete(ExamGradeDTO examGrade,ObservableCollection<ExamGradeDTO> examGrades)
+        public Delete(ExamGradeDTO examGrade,ObservableCollection<ExamGradeDTO> examGrades,ExamGradeController examGradeC)
         {
             this.SelectedExamGrade = examGrade;
             this.ExamGrades = examGrades;
+            examGradeController = examGradeC;
             InitializeComponent();
         }
         //konstruktor za delete subject
-        public Delete(SubjectDTO subject, ObservableCollection<SubjectDTO> subjects)
+        public Delete(SubjectDTO subject, ObservableCollection<SubjectDTO> subjects,SubjectController subjectC)
         {
             this.SelectedSubject = subject;
             this.Subjects = subjects;
+            subjectController=subjectC;
             InitializeComponent();
         }
         //konstruktor za delete Professor
-        public Delete(ProfessorDTO professor, ObservableCollection<ProfessorDTO> professors)
+        public Delete(ProfessorDTO professor, ObservableCollection<ProfessorDTO> professors,ProfessorController professorC)
         {
             this.SelectedProfessor = professor;
             this.Professors = professors;
+            professorController = professorC;
             InitializeComponent();
         }
         //konstruktor za delete katedra
-        public Delete(KatedraDTO department, ObservableCollection<KatedraDTO> departments)
+        public Delete(KatedraDTO department, ObservableCollection<KatedraDTO> departments,KatedraController katedraC)
         {
             this.SelectedDepartment = department;
             this.Departments = departments;
+            departmentController = katedraC;
             InitializeComponent();
         }
         private void CenterWindow(object sender, RoutedEventArgs e)

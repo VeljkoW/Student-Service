@@ -35,5 +35,10 @@ namespace CLI.Controller
         {
             examgradeDao.examGradeSubject.Subscribe(observer);
         }
+
+        public double GradeAverage(int studentid)
+        {
+            return examgradeDao.getAverageGrade(studentid);
+        }
     }
 }
