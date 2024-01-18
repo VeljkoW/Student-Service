@@ -50,7 +50,6 @@ namespace GUI.MenuBar.File
             examGradeController = exController;
 
             InitializeComponent();
-            Subject.Text = selectedSubject.Id.ToString();
             SubjectName.Text = selectedSubject.SubjectName.ToString();
         }
         private void CenterWindow(object sender, RoutedEventArgs e)

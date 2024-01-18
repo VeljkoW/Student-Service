@@ -12,9 +12,6 @@
     <Grid>
         <StackPanel Margin="10">
 
-            <Label Content="SubjectID" />
-            <TextBox x:Name="Subject" IsReadOnly="True" />
-
             <Label Content="SubjectName" />
             <TextBox x:Name="SubjectName" IsReadOnly="True" />
 
