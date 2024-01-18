@@ -120,10 +120,17 @@ namespace GUI
                 StudentConditionTab.Visibility = Visibility.Visible;
                 ProfessorStudentsTab.Visibility = Visibility.Collapsed;
             }
-            else if(Tab.SelectedIndex == 3)
+            else if (Tab.SelectedIndex == 3)
             {
                 StudentConditionButton.Visibility = Visibility.Visible;
-                ViewTab.Visibility= Visibility.Visible;
+                ViewTab.Visibility = Visibility.Visible;
+                StudentConditionTab.Visibility = Visibility.Collapsed;
+                ProfessorStudentsTab.Visibility = Visibility.Visible;
+            }
+            else if (Tab.SelectedIndex == 4)
+            {
+                StudentConditionButton.Visibility = Visibility.Visible;
+                ViewTab.Visibility = Visibility.Visible;
                 StudentConditionTab.Visibility = Visibility.Collapsed;
                 ProfessorStudentsTab.Visibility = Visibility.Visible;
             }
@@ -611,9 +618,9 @@ namespace GUI
                     studentCondition.ShowDialog();
                 }
             }
-            else if(Tab.SelectedIndex == 3)
+            else if (Tab.SelectedIndex == 3)
             {
-                if(SelectedProfessor == null)
+                if (SelectedProfessor == null)
                 {
                     MessageBox.Show("Please select a professor!", "Professor not selected");
                 }
@@ -624,7 +631,20 @@ namespace GUI
                     professorStudents.ShowDialog();
                 }
             }
-                
+            else if (Tab.SelectedIndex == 4)
+            {
+                if (SelectedDepartment == null)
+                {
+                    MessageBox.Show("Please select a department!", "Department not selected");
+                }
+                else
+                {
+                    DepartmentSubjects ds = new DepartmentSubjects(SelectedDepartment, professorController, subjectController, departmentController, studentSubjectController);
+                    ds.Owner = this;
+                    ds.ShowDialog();
+                }
+            }
+
         }
         private void OpenStudents(object sender, RoutedEventArgs e)
         {
