@@ -33,7 +33,7 @@ namespace GUI.MenuBar.Edit
         public SubjectDTO? SelectedSubject {  get; set; }
 
 
-        ProfessorDTO selectedProfessor1;
+        public ProfessorDTO selectedProfessor1;
         public EditProfesor(ProfessorDTO selectedProfessor, ObservableCollection<ProfessorDTO> professors,SubjectController subjectC, ProfessorController professorC)
         {
             DataContext = this;
@@ -139,6 +139,7 @@ namespace GUI.MenuBar.Edit
             ChooseSubjectToAddToProfessor chooseSubjectToAdd = new ChooseSubjectToAddToProfessor(selectedProfessor1,subjectController,Subjects);
             chooseSubjectToAdd.Owner = this;
             chooseSubjectToAdd.ShowDialog();
+            Update();
         }
         private void RemoveSubjectFun(object sender, RoutedEventArgs e)
         {
