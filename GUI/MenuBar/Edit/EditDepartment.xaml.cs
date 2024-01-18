@@ -32,6 +32,7 @@ namespace GUI.MenuBar.Edit
         public ObservableCollection<KatedraDTO> Departments { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
         public ObservableCollection<ProfessorDTO> DepartmentProfessors { get; set; } = new ObservableCollection<ProfessorDTO>();
+        public ObservableCollection<ProfessorDTO> DepartmentProfessorsList { get; set; } = new ObservableCollection<ProfessorDTO>();
         public KatedraDTO SelectedDepartment { get; set; }
 
         public EditDepartment(KatedraDTO selectedKatedra,ObservableCollection<KatedraDTO> katedras, ObservableCollection<ProfessorDTO> professors,ProfessorController profController,KatedraController kcontroller)
@@ -48,11 +49,10 @@ namespace GUI.MenuBar.Edit
             katedraController.Subscribe(this);
             InitializeComponent();
 
-            HeadProfessorComboBox.ItemsSource = Professors;
+            HeadProfessorComboBox.ItemsSource = DepartmentProfessorsList;
             HeadProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
 
-
-            foreach (ProfessorDTO prof in Professors)
+            foreach (ProfessorDTO prof in DepartmentProfessorsList)
             {
                 if (SelectedDepartment.IdProfessor == prof.ProfessorId)
                 {
@@ -117,12 +117,18 @@ namespace GUI.MenuBar.Edit
             string ime = NameTextBox.Text;
             string professor = HeadProfessorComboBox.Text;
             int professorId = 0;
-
-            foreach (ProfessorDTO prof in Professors)
+            if (professor == "No professor currently ")
             {
-                if (prof.ProfessorNameAndSurname == professor)
+                professorId = -1;
+            }
+            else
+            {
+                foreach (ProfessorDTO prof in Professors)
                 {
-                    professorId = prof.ProfessorId;
+                    if (prof.ProfessorNameAndSurname == professor)
+                    {
+                        professorId = prof.ProfessorId;
+                    }
                 }
             }
 
@@ -132,18 +138,35 @@ namespace GUI.MenuBar.Edit
             }
             else
             {
-                foreach (Professor professor1 in professorController.GetAllProfessors())
+                if (professorId == -1)
                 {
-                    if (professorId == professor1.Id)
+                    Professor profa = new Professor(-1, "", "", DateOnly.Parse("12.12.2021"), new Adress(), "", "", "", "", 0);
+                    Katedra katedra = new Katedra(SelectedDepartment.Id, ime, profa);
+                    katedraController.Update(katedra);
+                    katedraDTO = new KatedraDTO(katedra);
+                    for (int i = 0; i < Departments.Count; i++)
                     {
-                        Katedra katedra = new Katedra(SelectedDepartment.Id,ime, professor1);
-                        katedraController.Update(katedra);
-                        katedraDTO = new KatedraDTO(katedra);
-                        for (int i = 0; i < Departments.Count; i++)
+                        if (Departments[i].Id == katedra.Id)
                         {
-                            if (Departments[i].Id == katedra.Id)
+                            Departments[i] = katedraDTO;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Professor professor1 in professorController.GetAllProfessors())
+                    {
+                        if (professorId == professor1.Id)
+                        {
+                            Katedra katedra = new Katedra(SelectedDepartment.Id, ime, professor1);
+                            katedraController.Update(katedra);
+                            katedraDTO = new KatedraDTO(katedra);
+                            for (int i = 0; i < Departments.Count; i++)
                             {
-                                Departments[i] = katedraDTO;
+                                if (Departments[i].Id == katedra.Id)
+                                {
+                                    Departments[i] = katedraDTO;
+                                }
                             }
                         }
                     }
@@ -159,11 +182,19 @@ namespace GUI.MenuBar.Edit
         public void Update()
         {
             DepartmentProfessors.Clear();
+            DepartmentProfessorsList.Clear();
+
+            Professor profa = new Professor(-1, "", "No professor currently", DateOnly.Parse("12.12.2021"), new Adress(), "", "", "", "", 0);
+            ProfessorDTO nullproff = new ProfessorDTO(profa);
+
+            DepartmentProfessorsList.Add(nullproff);
+
             foreach (Professor prof in professorController.GetAllProfessors())
             {
                 if (prof.DepartmentId == SelectedDepartment.Id)
                 {
                     DepartmentProfessors.Add(new ProfessorDTO(prof));
+                    DepartmentProfessorsList.Add(new ProfessorDTO(prof));
                 }
             }
             foreach (ProfessorDTO prof in Professors)

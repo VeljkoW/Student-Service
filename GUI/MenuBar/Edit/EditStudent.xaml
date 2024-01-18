@@ -89,7 +89,10 @@
                         </DataGrid>
 
                         <Button Content="Dismiss Grade" Click="DismissGradeFun" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="57,34,0,0" Width="100" Height="25"/>
-                        <TextBlock Margin="296,470,57,31" >Average grade:</TextBlock>
+                        <TextBlock Margin="266,435,57,31" >Average grade:</TextBlock>
+                        <TextBlock x:Name="AverageTextBlock" Margin="350,435,57,31" ></TextBlock>
+                        <TextBlock Margin="266,450,57,31" >ESPB points:</TextBlock>
+                        <TextBlock x:Name="EspbTextBlock" Margin="335,450,57,31" ></TextBlock>
                     </Grid>
                 </TabItem>
 

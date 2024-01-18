@@ -24,19 +24,19 @@ namespace GUI.MenuBar.File
     public partial class NewDepartment : Window
     {
         public KatedraDTO katedraDTO = new KatedraDTO();
-        public KatedraController katedraController = new KatedraController();
-        public ProfessorController professorController = new ProfessorController();
+        public KatedraController katedraController;
+        public ProfessorController professorController;
         public ObservableCollection<KatedraDTO> Departments { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
 
-        public NewDepartment(ObservableCollection<KatedraDTO> katedras, ObservableCollection<ProfessorDTO> professors)
+        public NewDepartment(ObservableCollection<KatedraDTO> katedras, ObservableCollection<ProfessorDTO> professors,KatedraController katedraC,ProfessorController professorC)
         {
             Departments = katedras;
             Professors = professors;
+            katedraController = katedraC;
+            professorController = professorC;
             InitializeComponent();
 
-            HeadProfessorComboBox.ItemsSource = Professors;
-            HeadProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
         }
 
         private void CenterWindow(object sender, RoutedEventArgs e)
@@ -59,33 +59,20 @@ namespace GUI.MenuBar.File
         {
             
             string ime = NameTextBox.Text;
-            string professor = HeadProfessorComboBox.Text;
-            int professorId = 0;
+           
 
-            foreach (ProfessorDTO prof in Professors)
+            if (string.IsNullOrEmpty(NameTextBox.Text))
             {
-                if (prof.ProfessorNameAndSurname == professor)
-                {
-                    professorId = prof.ProfessorId;
-                }
-            }
-
-            if (string.IsNullOrEmpty(NameTextBox.Text) || string.IsNullOrEmpty(HeadProfessorComboBox.Text))
-            {
-                MessageBox.Show("Make sure you fill in each text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Make sure you fill in the text box!", "Object missing", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             else
             {
-                foreach(Professor professor1 in professorController.GetAllProfessors())
-                {
-                    if(professorId == professor1.Id)
-                    {
-                        Katedra katedra = new Katedra(ime,professor1);
+                        Professor profa = new Professor(-1, "", "", DateOnly.Parse("12.12.2021"), new Adress(), "", "", "", "", 0);
+                        Katedra katedra = new Katedra(ime,profa);
                         katedraController.Add(katedra);
                         katedraDTO = new KatedraDTO(katedra);
                         Departments.Add(katedraDTO);
-                    }
-                }
+                   
                 Close();
             }
         }

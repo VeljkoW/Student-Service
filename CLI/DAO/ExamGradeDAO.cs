@@ -80,6 +80,6 @@ namespace CLI
             }
             return Math.Round(((float)sum / cnt),2);
         }
-
+       
     }
 }
