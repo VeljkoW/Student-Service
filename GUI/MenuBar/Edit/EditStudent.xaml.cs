@@ -241,13 +241,23 @@ namespace GUI.MenuBar.Edit
 
             ExamGradesStudent.Clear();
 
+            int sum = 0;
+
             foreach (ExamGrade grade in examGradeController.GetAllExamGrades())
             {
                 if (grade.StudentId == selectedStudent1.Id)
                 {
                     ExamGradesStudent.Add(new ExamGradeDTO(grade));
+
+                    Subject? subject = subjectController.GetSubjectById(grade.SubjectId);
+                    if (subject != null)
+                    {
+                        sum += subject.ESPBPoints;
+                    }
+
                 }
             }
+            EspbTextBlock.Text = sum.ToString();
 
             StudentSubjects.Clear();
 
@@ -261,6 +271,11 @@ namespace GUI.MenuBar.Edit
                     }
                 }
             }
+            double avg = examGradeController.GradeAverage(selectedStudent1.Id);
+            AverageTextBlock.Text=avg.ToString();
+
+            
+
         }
     }
 }

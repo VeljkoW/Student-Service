@@ -161,6 +161,10 @@ namespace GUI
             {
                 StatusBarCurrentTab.Text = ":  Professors";
             }
+            else if (Tab.SelectedIndex == 4)
+            {
+                StatusBarCurrentTab.Text = ":  Departments";
+            }
         }
 
         private void CenterWindowFunction()
@@ -424,9 +428,10 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 4)
             {
-                NewDepartment newDepartment = new NewDepartment(Departments,Professors);
+                NewDepartment newDepartment = new NewDepartment(Departments,Professors,departmentController,professorController);
                 newDepartment.Owner = this;
                 newDepartment.ShowDialog();
+                Update();
             }
         }
         private void ClickSave(object sender, RoutedEventArgs e)
@@ -526,7 +531,7 @@ namespace GUI
                 }
                 else
                 {
-                    Delete delete = new Delete(SelectedStudent,Students);
+                    Delete delete = new Delete(SelectedStudent,Students,studentController);
                     delete.Owner = this;
                     delete.ShowDialog();
                 }
@@ -539,7 +544,7 @@ namespace GUI
                 }
                 else
                 {
-                    Delete delete = new Delete(SelectedExamGrade,ExamGrades);
+                    Delete delete = new Delete(SelectedExamGrade,ExamGrades,examGradeController);
                     delete.Owner = this;
                     delete.ShowDialog();
                 }
@@ -552,7 +557,7 @@ namespace GUI
                 }
                 else
                 {
-                    Delete delete = new Delete(SelectedSubject, Subjects);
+                    Delete delete = new Delete(SelectedSubject, Subjects,subjectController);
                     delete.Owner = this;
                     delete.ShowDialog();
                 }
@@ -565,7 +570,7 @@ namespace GUI
                 }
                 else
                 {
-                    Delete delete = new Delete(SelectedProfessor, Professors);
+                    Delete delete = new Delete(SelectedProfessor, Professors,professorController);
                     delete.Owner = this;
                     delete.ShowDialog();
                 }
@@ -578,7 +583,7 @@ namespace GUI
                 }
                 else
                 {
-                    Delete delete = new Delete(SelectedDepartment, Departments);
+                    Delete delete = new Delete(SelectedDepartment, Departments,departmentController);
                     delete.Owner = this;
                     delete.ShowDialog();
                 }
