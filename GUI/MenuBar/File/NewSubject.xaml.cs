@@ -27,16 +27,23 @@ namespace GUI.MenuBar.File
         public SubjectDTO subjectDTO = new SubjectDTO();
         public SubjectController subjectController;
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
-        public ObservableCollection<ProfessorDTO> Professors {  get; set; }
+        public ObservableCollection<ProfessorDTO> Professors { get; set; }
+        public ObservableCollection<ProfessorDTO> ProfessorsList { get; set; }
 
 
         public NewSubject(ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors,SubjectController subjectC)
         {
             Subjects = subjects;
             Professors = professors;
-            subjectController= subjectC;
+            ProfessorsList = new ObservableCollection<ProfessorDTO>();
+            ProfessorsList.Add(new ProfessorDTO(new Professor(-1, "", "No professor currently", DateOnly.Parse("12.12.2021"), new Adress(), "", "", "", "", 0)));
+            foreach(ProfessorDTO p in Professors)
+            {
+                ProfessorsList.Add(p);
+            }
+            subjectController = subjectC;
             InitializeComponent();
-            ProfessorComboBox.ItemsSource = Professors;
+            ProfessorComboBox.ItemsSource = ProfessorsList;
             ProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";
         }
 
@@ -63,19 +70,25 @@ namespace GUI.MenuBar.File
             string subjectName = SubjectNameTextBox.Text;
             string professor = ProfessorComboBox.Text;
             int professorId = 0;
-          /*  
-            string[] professorSplit = professor.Split(" ");
-            string professorSurname = professorSplit[0];
-            string professorName = professorSplit[1];
-          */
-            foreach(ProfessorDTO prof in Professors)
+            /*  
+              string[] professorSplit = professor.Split(" ");
+              string professorSurname = professorSplit[0];
+              string professorName = professorSplit[1];
+            */
+            if (professor == "No professor currently")
             {
-                if(prof.ProfessorNameAndSurname == professor)
+                professorId = -1;
+            }
+            else
+            {
+                foreach (ProfessorDTO prof in Professors)
                 {
-                    professorId = prof.ProfessorId;
+                    if (prof.ProfessorNameAndSurname == professor)
+                    {
+                        professorId = prof.ProfessorId;
+                    }
                 }
             }
-
             Semester semestar;
             if (SemesterStatusComboBox.Text.ToString() == "Letnji")
             {
