@@ -417,14 +417,14 @@ namespace GUI
             }
             else if (Tab.SelectedIndex == 2)
             {
-                NewSubject newSubject = new NewSubject(Subjects,Professors);
+                NewSubject newSubject = new NewSubject(Subjects,Professors,subjectController);
                 newSubject.Owner = this;
                 newSubject.ShowDialog();
                 Update();
             }
             else if (Tab.SelectedIndex == 3)
             {
-                NewProfessor newProfessor = new NewProfessor(Professors);
+                NewProfessor newProfessor = new NewProfessor(Professors,professorController);
                 newProfessor.Owner = this;
                 newProfessor.ShowDialog();
                 Update();
@@ -487,7 +487,7 @@ namespace GUI
                 }
                 else
                 {
-                    EditSubject editSubject = new EditSubject(SelectedSubject, Subjects,Professors);
+                    EditSubject editSubject = new EditSubject(SelectedSubject, Subjects,Professors,subjectController);
                     editSubject.Owner = this;
                     editSubject.ShowDialog();
                 }

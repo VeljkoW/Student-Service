@@ -201,7 +201,7 @@ namespace GUI.MenuBar.Edit
         }
         private void AddSubjectFun(object sender, RoutedEventArgs e)
         {
-           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1,StudentSubjects);
+           ChooseSubjectToAddToStudent chooseSubjectToAdd = new ChooseSubjectToAddToStudent(selectedStudent1,StudentSubjects,subjectController,examGradeController,studentSubjectController);
            chooseSubjectToAdd.Owner = this;
            chooseSubjectToAdd.ShowDialog();
         }

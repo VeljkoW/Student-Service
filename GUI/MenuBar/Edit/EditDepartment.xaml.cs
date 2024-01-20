@@ -194,9 +194,16 @@ namespace GUI.MenuBar.Edit
                 if (prof.DepartmentId == SelectedDepartment.Id)
                 {
                     DepartmentProfessors.Add(new ProfessorDTO(prof));
+                }
+            }
+            foreach (Professor prof in professorController.GetAllProfessors())
+            {
+                if (prof.DepartmentId == SelectedDepartment.Id && (prof.Title == "redovni profesor" || prof.Title == "vanredni profesor") && prof.YearsOfService >= 5)
+                {
                     DepartmentProfessorsList.Add(new ProfessorDTO(prof));
                 }
             }
+            
             foreach (ProfessorDTO prof in Professors)
             {
                 if (SelectedDepartment.IdProfessor == prof.ProfessorId)
