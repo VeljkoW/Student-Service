@@ -25,15 +25,16 @@ namespace GUI.MenuBar.File
     public partial class NewSubject : Window
     {
         public SubjectDTO subjectDTO = new SubjectDTO();
-        public SubjectController subjectController = new SubjectController();
+        public SubjectController subjectController;
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
         public ObservableCollection<ProfessorDTO> Professors {  get; set; }
 
 
-        public NewSubject(ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors)
+        public NewSubject(ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors,SubjectController subjectC)
         {
             Subjects = subjects;
             Professors = professors;
+            subjectController= subjectC;
             InitializeComponent();
             ProfessorComboBox.ItemsSource = Professors;
             ProfessorComboBox.DisplayMemberPath = "ProfessorNameAndSurname";

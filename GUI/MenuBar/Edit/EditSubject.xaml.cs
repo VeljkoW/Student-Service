@@ -22,13 +22,14 @@ namespace GUI.MenuBar.Edit
     public partial class EditSubject : Window
     {
         public SubjectDTO subjectDTO = new SubjectDTO();
-        public SubjectController subjectController = new SubjectController();
+        public SubjectController subjectController;
         public ObservableCollection<SubjectDTO> Subjects { get; set; }
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
         public ObservableCollection<ProfessorDTO> ProfessorsTemp = new ObservableCollection<ProfessorDTO> ();
         public SubjectDTO selectedSubject1;
-        public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors)
+        public EditSubject(SubjectDTO selectedSubject, ObservableCollection<SubjectDTO> subjects,ObservableCollection<ProfessorDTO> professors,SubjectController subjectC)
         {
+            subjectController= subjectC;
             Subjects = subjects;
             Professors = professors;
             Professor profa = new Professor(-1,"", "No professor currently", DateOnly.Parse("12.12.2021"),new Adress(), "", "", "", "",0);

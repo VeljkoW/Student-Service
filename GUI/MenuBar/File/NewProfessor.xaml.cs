@@ -25,13 +25,14 @@ namespace GUI.MenuBar.File
     public partial class NewProfessor : Window
     {
         public ProfessorDTO professorDTO = new ProfessorDTO();
-        public ProfessorController professorController = new ProfessorController();
+        public ProfessorController professorController;
         public ObservableCollection<ProfessorDTO> Professors { get; set; }
 
 
-        public NewProfessor(ObservableCollection<ProfessorDTO> proffesors)
+        public NewProfessor(ObservableCollection<ProfessorDTO> proffesors,ProfessorController professorC)
         {
             Professors = proffesors;
+            professorController= professorC;
             InitializeComponent();
         }
 

@@ -29,12 +29,12 @@ namespace GUI.MenuBar.File
         public StudentSubjectController studentSubjectController { get; set; }
         public ObservableCollection<SubjectDTO> StudentSubjects { get; set; }
         public StudentDTO Student;
-        public ChooseSubjectToAddToStudent(StudentDTO student,ObservableCollection<SubjectDTO> studentSubjects)
+        public ChooseSubjectToAddToStudent(StudentDTO student,ObservableCollection<SubjectDTO> studentSubjects,SubjectController subjectC,ExamGradeController examGradeC,StudentSubjectController studentSubjectC)
         {
             InitializeComponent();
-            subjectController = new SubjectController();
-            examGradeController = new ExamGradeController();
-            studentSubjectController = new StudentSubjectController();
+            subjectController = subjectC;
+            examGradeController = examGradeC;
+            studentSubjectController = studentSubjectC;
             StudentSubjects = studentSubjects;
             Student = student;
             Subjects = new ObservableCollection<SubjectDTO>();
