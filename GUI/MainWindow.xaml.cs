@@ -406,9 +406,10 @@ namespace GUI
         {
             if (Tab.SelectedIndex == 0)
             {
-                NewStudent newStudent = new NewStudent(Students);
+                NewStudent newStudent = new NewStudent(Students,studentController);
                 newStudent.Owner = this;
                 newStudent.ShowDialog();
+                Update();
             }
             else if (Tab.SelectedIndex == 1)
             {
@@ -419,12 +420,14 @@ namespace GUI
                 NewSubject newSubject = new NewSubject(Subjects,Professors);
                 newSubject.Owner = this;
                 newSubject.ShowDialog();
+                Update();
             }
             else if (Tab.SelectedIndex == 3)
             {
                 NewProfessor newProfessor = new NewProfessor(Professors);
                 newProfessor.Owner = this;
                 newProfessor.ShowDialog();
+                Update();
             }
             else if (Tab.SelectedIndex == 4)
             {
